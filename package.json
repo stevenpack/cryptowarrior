@@ -1,0 +1,32 @@
+{
+  "name": "packfinance",
+  "version": "0.0.1",
+  "description": "Text-based crypto dashboard",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "jest",
+    "lint": "tslint tests/*.ts -t verbose"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stevenpack/packfinance.git"
+  },
+  "keywords": [
+    "crypto",
+    "blessed",
+    "terminal",
+    "typescript",
+    "node"
+  ],
+  "author": "Steven Pack <steven.pack.code@gmail.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/stevenpack/packfinance/issues"
+  },
+  "homepage": "https://github.com/stevenpack/packfinance#readme",
+  "dependencies": {
+    "blessed": "^0.1.81",
+    "blessed-contrib": "^4.8.5"
+  }
+}
