@@ -2,6 +2,17 @@
 import * as blessed from 'blessed';
 let contrib = require('blessed-contrib');
 
+export class Testable {
+
+    constructor() {
+        
+    }
+
+    public a() : Number {
+        return 1;
+    }
+}
+
 export class Test {
     constructor() {
         let screen = blessed.screen({            

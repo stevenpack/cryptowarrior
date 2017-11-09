@@ -28,6 +28,7 @@
   "dependencies": {
     "@types/blessed": "^0.1.7",
     "blessed": "^0.1.81",
-    "blessed-contrib": "^4.8.5"
+    "blessed-contrib": "^4.8.5",
+    "jest": "^21.2.1"
   }
 }

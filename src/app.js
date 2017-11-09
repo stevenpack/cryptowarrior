@@ -2,6 +2,15 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var blessed = require("blessed");
 var contrib = require('blessed-contrib');
+var Testable = /** @class */ (function () {
+    function Testable() {
+    }
+    Testable.prototype.a = function () {
+        return 1;
+    };
+    return Testable;
+}());
+exports.Testable = Testable;
 var Test = /** @class */ (function () {
     function Test() {
         var screen = blessed.screen({});
