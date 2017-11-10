@@ -1,4 +1,4 @@
-import * as blessed from 'blessed';
+const blessed = require('blessed');
 const contrib = require('blessed-contrib')
 
 var screen = blessed.screen()
