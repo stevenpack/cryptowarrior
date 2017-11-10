@@ -2,7 +2,7 @@
 
 export class PriceHistory {
 
-    constructor(public Items : Candle[]){
+    constructor(public Items : Array<Candle>){
 
     }
 

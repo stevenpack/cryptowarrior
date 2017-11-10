@@ -1,5 +1,5 @@
-var blessed = require('blessed')
-, contrib = require('blessed-contrib')
+import * as blessed from 'blessed';
+const contrib = require('blessed-contrib')
 
 var screen = blessed.screen()
 

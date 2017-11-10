@@ -4,8 +4,7 @@ const PriceHistory_1 = require("../components/PriceHistory");
 class GdaxPriceHistoryAdapter {
     convert(data) {
         let json = JSON.parse(data);
-        let candles = new Array(10);
-        console.log("length: " + json.length);
+        let candles = new Array(json.length);
         for (let item of json) {
             try {
                 let candle = this.map(item);

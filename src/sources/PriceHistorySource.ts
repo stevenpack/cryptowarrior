@@ -16,8 +16,7 @@ export class GdaxPriceHistoryAdapter implements Adapter<PriceHistory> {
 
         let json = JSON.parse(data);
 
-        let candles = new Array<Candle>(10);
-        console.log("length: " + json.length);
+        let candles = new Array<Candle>(json.length);
         for (let item of json) {
             try {
                 let candle = this.map(item)
