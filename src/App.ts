@@ -1,22 +1,31 @@
 
 import * as blessed from 'blessed';
+import { GdaxApi } from './sources/GdaxApi';
+import { PriceHistorySource, GdaxPriceHistoryAdapter } from './sources/PriceHistorySource';
 let contrib = require('blessed-contrib');
 
-export class Testable {
-
+export class App {
+    public priceHistorySource: PriceHistorySource;
+    
     constructor() {
-        
-    }
+        let rawSource = new GdaxApi();
+        let adapter = new GdaxPriceHistoryAdapter();
+        this.priceHistorySource = new PriceHistorySource(rawSource, adapter);
 
-    public a() : Number {
-        return 1;
+    }   
+    
+    async get() : Promise<any> {
+        let prices = await this.priceHistorySource.getData();
+        console.log(JSON.stringify(prices, null, 2));
     }
 }
+
 
 export class Test {
     constructor() {
         let screen = blessed.screen({            
         })
+    
         
         //create layout and widgets
         

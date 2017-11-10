@@ -1,4 +1,7 @@
-import {Test} from './app';
+import { App } from "./App";
 
-let t = new Test();
-console.log("go ab") 
+
+let app = new App();
+app.get()
+    .then(data => console.log("Done"))
+    .catch(err => console.error(err));
