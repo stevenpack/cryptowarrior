@@ -1,4 +1,5 @@
-import {PriceHistory, Candle} from '../components/PriceHistory';
+import { PriceHistory, Candle } from "../types/PriceHistory";
+
 
 export interface RawSource {
     getData() : Promise<any>

@@ -1,5 +1,6 @@
 import * as blessed from 'blessed';
-import { PriceHistory, Candle } from '../components/PriceHistory';
+import {Component} from '../components/Component';
+import { PriceHistoryComponent } from '../components/PriceHistoryComponent';
 const contrib = require('blessed-contrib')
 
 /**
@@ -7,52 +8,44 @@ const contrib = require('blessed-contrib')
  */
 export class SingleCurrency {
     screen: blessed.Widgets.Screen;
+    components: Array<Component>
     table: any;
 
     constructor() {
-        this.screen = blessed.screen({            
-        })
-    
-        
+        this.screen = blessed.screen({})
+        this.components = [];
         //create layout and widgets
-        
-        let grid = new contrib.grid({rows: 12, cols: 12, screen: this.screen}) 
-        
-        this.table =  grid.set(1, 1, 10, 5, contrib.table, 
-            { keys: true
-            , fg: 'green'
-            , label: 'Price History'
-            , columnSpacing: 1
-            , columnWidth: [12, 8, 8]});
+        //upgrade_todo: ScreenBuilder with components and sources
+        let grid = new contrib.grid({rows: 12, cols: 12, screen: this.screen})         
+        let priceHistory = new PriceHistoryComponent();
+        this.components.push(priceHistory);
 
-            let data = [];
-            data.push([1,2]);
-            this.table.setData({headers: ['Time', 'Low', 'High'], data: data});
+        for (let component of this.components) {
+            
+            //Create
+            let widgetOpts = component.getWidgetOpts();
+            //TODO: store position with the component
+            let widget = grid.set(1,1,8,4, widgetOpts.widgetType, widgetOpts.opts);
 
-        
-        //table.
-        //this.table.focus();
+            //Store reference
+            component.setWidget(widget);
 
+            //Configure
+            component.configure(widget);
+        }
+                    
+        //TODO: base screen with standard shortcuts and per-screen ones
         this.screen.key(['escape', 'q', 'C-c'], function(ch, key) {
-        return process.exit(0);
+            return process.exit(0);
         });
         
         this.screen.render()
     }
 
-    public load(data) {
-        //load the data
-        //console.log(data);
-        //console.log(data.Items);
-        //let candle = data.Items[0] as Candle;
-        //console.log(candle);
-        let table_data = [];
-        data = data as PriceHistory;
-        for (let candle of data.Items) {
-            table_data.push([candle.Time, candle.Low]);
+    public async load() {
+        for (let component of this.components) {
+            await component.load();
         }
-        this.table.setData({headers: ['Time', 'Low', 'High'], data: table_data});
         this.screen.render();
     }
-
 }

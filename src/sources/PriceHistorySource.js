@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const PriceHistory_1 = require("../components/PriceHistory");
+const PriceHistory_1 = require("../types/PriceHistory");
 class GdaxPriceHistoryAdapter {
     convert(data) {
         //console.log(data);
