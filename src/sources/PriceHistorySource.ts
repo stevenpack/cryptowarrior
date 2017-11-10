@@ -13,16 +13,18 @@ interface Adapter<T> {
 
 export class GdaxPriceHistoryAdapter implements Adapter<PriceHistory> {
     public convert(data: any) : PriceHistory {
-
+        //console.log(data);
         let json = JSON.parse(data);
 
-        let candles = new Array<Candle>(json.length);
+        let candles = new Array<Candle>();
         for (let item of json) {
             try {
+                //console.log("About to map: " + item);
                 let candle = this.map(item)
                 candles.push(candle);
             } catch (e) {
                 console.error("Ignored bad candle.");
+                console.error(e);
                 console.error(item);
             }            
         }
@@ -31,11 +33,11 @@ export class GdaxPriceHistoryAdapter implements Adapter<PriceHistory> {
 
     public map(item: any) : Candle {
         let time = parseInt(item[0]);
-        let low = parseInt(item[1]);
-        let high = parseInt(item[2]);
-        let open = parseInt(item[3]);
-        let close = parseInt(item[4]);
-        let volume = parseInt(item[5]);
+        let low = parseFloat(item[1]);
+        let high = parseFloat(item[2]);
+        let open = parseFloat(item[3]);
+        let close = parseFloat(item[4]);
+        let volume = parseFloat(item[5]);
 
         return new Candle(time, low, high, open, close, volume);
     }

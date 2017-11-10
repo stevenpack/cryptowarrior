@@ -7,9 +7,9 @@ const contrib = require('blessed-contrib');
  */
 class SingleCurrency {
     constructor() {
-        let screen = blessed.screen({});
+        this.screen = blessed.screen({});
         //create layout and widgets
-        let grid = new contrib.grid({ rows: 12, cols: 12, screen: screen });
+        let grid = new contrib.grid({ rows: 12, cols: 12, screen: this.screen });
         this.table = grid.set(1, 1, 10, 5, contrib.table, { keys: true,
             fg: 'green',
             label: 'Price History',
@@ -20,25 +20,24 @@ class SingleCurrency {
         this.table.setData({ headers: ['Time', 'Low', 'High'], data: data });
         //table.
         //this.table.focus();
-        screen.key(['escape', 'q', 'C-c'], function (ch, key) {
+        this.screen.key(['escape', 'q', 'C-c'], function (ch, key) {
             return process.exit(0);
         });
-        screen.render();
+        this.screen.render();
     }
     load(data) {
         //load the data
-        console.log(data);
-        console.log(data.Items);
-        let candle = data.Items[0];
-        console.log(candle);
+        //console.log(data);
+        //console.log(data.Items);
+        //let candle = data.Items[0] as Candle;
+        //console.log(candle);
         let table_data = [];
-        // for (let item of data2.Items) {
-        //     console.log(typeof item);
-        //     console.log(typeof item.Candle);
-        //     break;
-        //     //table_data.push([candle.Time, candle.Low]);
-        // }
-        //this.table.setData({headers: ['Time', 'Low', 'High'], data: table_data});
+        data = data;
+        for (let candle of data.Items) {
+            table_data.push([candle.Time, candle.Low]);
+        }
+        this.table.setData({ headers: ['Time', 'Low', 'High'], data: table_data });
+        this.screen.render();
     }
 }
 exports.SingleCurrency = SingleCurrency;
