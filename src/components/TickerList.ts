@@ -5,17 +5,24 @@ import { EventEmitter } from "events";
 import * as blessed from 'blessed';
 
 
-export class TickerListComponent implements Component {   
+export class TickerListComponent extends EventEmitter implements Component {   
+    products: ProductInfo[];
     list: blessed.Widgets.ListElement;
         
     constructor() {
+        super()
     }
       
     getWidgetOpts(opts?: any): WidgetOpts {
         return new WidgetOpts(blessed.list,
             {
                 label: "Ticker",
-                hidden: true
+                selectedBg: 'green',
+                focusable: true,
+                hidden: true,
+                keys: true,
+                mouse: true,
+                vi: true
             })
     }
 
@@ -24,14 +31,24 @@ export class TickerListComponent implements Component {
     }
 
     configure(widget: any, opts?: any) {        
-        
+        this.list.on("select", (item, i) => this.onSelected(item, i));
+    }
+
+    onSelected(item: blessed.Widgets.BlessedElement, index: number) {
+        let ticker = this.products[index];
+        //TODO: broadcast to the screen
+        //TODO: Redefine GDax types... prefer to be platform agnostic
+        //TODO: Enum for event
+        //TODO: This will go to screen, need flag for whether it should rebroadcast to children
+        this.emit("ticker-changed", ticker)
     }
 
     async load(opts?: any) {
         let rawSource = new GdaxApi();
-        let products = await rawSource.getProducts();
-        for (let p of products) {
-            this.list.pushLine(p.id);
+        this.products = await rawSource.getProducts();
+        for (let p of this.products) {
+            //Works (index.d.ts is wrong)
+            this.list.pushItem(p.id);
         }
     }
 
@@ -42,6 +59,9 @@ export class TickerListComponent implements Component {
         } else {
             this.list.hide();
         }
+        this.list.focus();
+        this.list.select(0);
+        this.emit("updated");
     }
 
 }

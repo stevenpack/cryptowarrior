@@ -10,12 +10,12 @@ export class PriceHistory {
 
 export class Candle {
     
-    constructor(public Time: Number, 
-                public Low: Number, 
-                public High : Number, 
-                public Open: Number, 
-                public Close: Number, 
-                public Volume: Number) {
+    constructor(public Time: number, 
+                public Low: number, 
+                public High : number, 
+                public Open: number, 
+                public Close: number, 
+                public Volume: number) {
 
     }
 }

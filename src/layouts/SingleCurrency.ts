@@ -23,8 +23,7 @@ export class SingleCurrency extends LayoutBase {
     bindKeys() {
         super.bindKeys();
         this.screen.key(['t'], (ch, key) => {
-            this.tickerList.toggleVisibility();
-            this.screen.render();
+            this.tickerList.toggleVisibility();            
         })
     }
 }

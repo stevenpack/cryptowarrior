@@ -5,11 +5,11 @@ import { Component } from '../components/Component';
 import { EventEmitter } from 'events';
 
 export class Location {
-    constructor (public x: Number, public y: Number) {}
+    constructor (public x: number, public y: number) {}
 }
 
 export class Size {
-    constructor (public rows: Number, public cols: Number) {}
+    constructor (public rows: number, public cols: number) {}
 }
 
 /**
@@ -26,7 +26,7 @@ export abstract class LayoutBase {
     grid: any;    
     elements: Array<Element>;
 
-    constructor(rows: Number, cols: Number) {
+    constructor(rows: number, cols: number) {
         this.screen = blessed.screen({})
         this.grid = new contrib.grid({rows: rows, cols: cols, screen: this.screen})         
         
