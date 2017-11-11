@@ -12,6 +12,9 @@ class GdaxApi {
     async getPriceHistory() {
         return this.httpClient.getProductHistoricRates(null);
     }
+    async getProducts() {
+        return this.httpClient.getProducts();
+    }
     subscribe(callback) {
         this.websocketClient.on('close', () => { console.log('open'); });
         this.websocketClient.on('message', data => { callback(data); });

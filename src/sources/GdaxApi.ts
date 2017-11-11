@@ -1,4 +1,4 @@
-import {PublicClient, WebsocketClient} from 'gdax';
+import {PublicClient, WebsocketClient, ProductInfo} from 'gdax';
 import * as rp from 'request-promise';
 import { RawSource } from './PriceHistorySource';
 
@@ -17,6 +17,10 @@ export class GdaxApi implements RawSource {
 
     public async getPriceHistory() : Promise<any> {
        return this.httpClient.getProductHistoricRates(null);
+    }
+
+    public async getProducts() : Promise<ProductInfo[]> {
+        return this.httpClient.getProducts();
     }
 
     public subscribe(callback) {

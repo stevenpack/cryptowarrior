@@ -5,6 +5,12 @@ export class WidgetOpts {
     }
 }
 
+/**
+ * A Component is the main building block. It contains the display (using Widgets)
+ * and the logic to get its data.
+ * 
+ * Components with a size and location are `LayoutElements`
+ */
 export interface Component {
     
     /**

@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const blessed = require("blessed");
 const contrib = require('blessed-contrib');
+const events_1 = require("events");
 class Location {
     constructor(x, y) {
         this.x = x;
@@ -16,6 +17,10 @@ class Size {
     }
 }
 exports.Size = Size;
+/**
+ * An `Element` is composed of a `Component`, `Location` and `Size` to make up
+ * part of a `LayoutBase`
+ */
 class Element {
     constructor(component, location, size) {
         this.component = component;
@@ -35,20 +40,20 @@ class LayoutBase {
     init() {
         this.addElements();
         this.build();
+        //Render the elements as soon as they're ready
+        this.screen.render();
         this.listen();
         this.bindKeys();
     }
     build() {
-        for (let i = 0; i < this.elements.length; i++) {
-            let element = this.elements[i];
+        for (let element of this.elements) {
             let component = element.component;
             let loc = element.location;
             let size = element.size;
             //Create
             let widgetOpts = component.getWidgetOpts();
-            //TODO: store position with the component
             let widget = this.grid.set(loc.x, loc.y, size.rows, size.cols, widgetOpts.widgetType, widgetOpts.opts);
-            //Store reference
+            //Store reference (because we are creating the actual instance, not the component)
             component.setWidget(widget);
             //Configure
             component.configure(widget);
@@ -57,7 +62,7 @@ class LayoutBase {
     listen() {
         for (let element of this.elements) {
             //TODO: throttle updates to once per interval e.g. 100ms
-            if (element.component instanceof EventEmitter) {
+            if (element.component instanceof events_1.EventEmitter) {
                 element.component.on("updated", () => this.screen.render());
             }
         }

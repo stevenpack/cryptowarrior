@@ -2,6 +2,7 @@ import * as blessed from 'blessed';
 const contrib = require('blessed-contrib')
 
 import { Component } from '../components/Component';
+import { EventEmitter } from 'events';
 
 export class Location {
     constructor (public x: Number, public y: Number) {}
@@ -11,13 +12,17 @@ export class Size {
     constructor (public rows: Number, public cols: Number) {}
 }
 
+/**
+ * An `Element` is composed of a `Component`, `Location` and `Size` to make up
+ * part of a `LayoutBase`
+ */
 export class Element {
     constructor (public component: Component, public location: Location, public size: Size) {}
 }
 
 export abstract class LayoutBase {
     
-    screen: blessed.Widgets.Screen;
+    protected screen: blessed.Widgets.Screen;
     grid: any;    
     elements: Array<Element>;
 
@@ -36,23 +41,23 @@ export abstract class LayoutBase {
     init() {
         this.addElements();
         this.build();
+        //Render the elements as soon as they're ready
+        this.screen.render();                
         this.listen();
         this.bindKeys();
     }
 
     build() {
-        for (let i=0; i < this.elements.length; i++) {
-            let element = this.elements[i];
+        for (let element of this.elements) {
             let component = element.component;
             let loc = element.location;
             let size = element.size;
-            //Create
-            let widgetOpts = component.getWidgetOpts();
             
-            //TODO: store position with the component
+            //Create
+            let widgetOpts = component.getWidgetOpts();            
             let widget = this.grid.set(loc.x, loc.y, size.rows, size.cols , widgetOpts.widgetType, widgetOpts.opts);
 
-            //Store reference
+            //Store reference (because we are creating the actual instance, not the component)
             component.setWidget(widget);
 
             //Configure
@@ -69,7 +74,7 @@ export abstract class LayoutBase {
         }
     }
 
-    bindKeys() {
+    protected bindKeys() {
         //TODO: base screen with standard shortcuts and per-screen ones
         this.screen.key(['escape', 'q', 'C-c'], function(ch, key) {
             return process.exit(0);
