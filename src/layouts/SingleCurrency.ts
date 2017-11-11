@@ -19,8 +19,8 @@ export class SingleCurrency extends LayoutBase {
         this.logger = new LoggerComponent();
         this.elements.push(new Element(this.logger, new Location(9,0), new Size(3,12)));
         this.elements.push(new Element(this.tickerList, new Location(0,0), new Size(12,2)))
-        this.elements.push(new Element(new PriceHistoryComponent(), new Location(1,1), new Size(8,4)));
-        this.elements.push(new Element(new LivePriceComponent(), new Location(1,6), new Size(2,4)));
+        this.elements.push(new Element(new PriceHistoryComponent(), new Location(2,8), new Size(8,4)));
+        this.elements.push(new Element(new LivePriceComponent(), new Location(0,8), new Size(2,4)));
     }
 
     bindKeys() {
