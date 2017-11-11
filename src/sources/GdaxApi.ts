@@ -1,10 +1,14 @@
+import {PublicClient, WebsocketClient} from 'gdax';
 import * as rp from 'request-promise';
 import { RawSource } from './PriceHistorySource';
 
 export class GdaxApi implements RawSource {
+    websocketClient: WebsocketClient;
+    httpClient: PublicClient;
 
     constructor() {
-
+       this.httpClient = new PublicClient();
+       this.websocketClient = new WebsocketClient(['BTC-USD']);
     }
 
     public async getData() : Promise<any> {
@@ -12,11 +16,15 @@ export class GdaxApi implements RawSource {
     }
 
     public async getPriceHistory() : Promise<any> {
-        return rp('https://api.gdax.com/products/BTC-USD/candles', {
-            headers: {
-                'User-Agent': 'packfinance'
-            }
-        });
+       return this.httpClient.getProductHistoricRates(null);
+    }
+
+    public subscribe(callback) {
+
+        this.websocketClient.on('close', () => { console.log('open') });
+        this.websocketClient.on('message', data => { callback(data) });
+        this.websocketClient.on('error', err => { console.error(err) });
+        this.websocketClient.on('close', () => { console.log('close') });
     }
 
 }

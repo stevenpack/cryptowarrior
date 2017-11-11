@@ -1,18 +1,22 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const rp = require("request-promise");
+const gdax_1 = require("gdax");
 class GdaxApi {
     constructor() {
+        this.httpClient = new gdax_1.PublicClient();
+        this.websocketClient = new gdax_1.WebsocketClient(['BTC-USD']);
     }
     async getData() {
         return this.getPriceHistory();
     }
     async getPriceHistory() {
-        return rp('https://api.gdax.com/products/BTC-USD/candles', {
-            headers: {
-                'User-Agent': 'packfinance'
-            }
-        });
+        return this.httpClient.getProductHistoricRates(null);
+    }
+    subscribe(callback) {
+        this.websocketClient.on('close', () => { console.log('open'); });
+        this.websocketClient.on('message', data => { callback(data); });
+        this.websocketClient.on('error', err => { console.error(err); });
+        this.websocketClient.on('close', () => { console.log('close'); });
     }
 }
 exports.GdaxApi = GdaxApi;

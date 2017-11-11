@@ -2,6 +2,7 @@ import * as blessed from 'blessed';
 import {Component} from '../components/Component';
 import { PriceHistoryComponent } from '../components/PriceHistoryComponent';
 import { LivePriceComponent } from '../components/LivePriceComponent';
+import { EventEmitter } from 'events';
 const contrib = require('blessed-contrib')
 
 /**
@@ -39,6 +40,11 @@ export class SingleCurrency {
 
             //Configure
             component.configure(widget);
+
+            //TODO: throttle updates to once per interval e.g. 100ms
+            if (component instanceof EventEmitter) {
+                component.on("updated", () => this.screen.render())
+            }
         }
                     
         //TODO: base screen with standard shortcuts and per-screen ones

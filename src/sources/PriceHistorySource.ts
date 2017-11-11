@@ -14,22 +14,29 @@ interface Adapter<T> {
 
 export class GdaxPriceHistoryAdapter implements Adapter<PriceHistory> {
     public convert(data: any) : PriceHistory {
-        //console.log(data);
-        let json = JSON.parse(data);
-
-        let candles = new Array<Candle>();
-        for (let item of json) {
-            try {
-                //console.log("About to map: " + item);
-                let candle = this.map(item)
-                candles.push(candle);
-            } catch (e) {
-                console.error("Ignored bad candle.");
-                console.error(e);
-                console.error(item);
-            }            
+        try {
+            // console.log(typeof data);
+            // console.log(JSON.stringify(data).substr(0,20));
+            // let json = JSON.parse(data);
+            
+            let candles = new Array<Candle>();
+            for (let item of data) {
+                try {
+                    //console.log("About to map: " + item);
+                    let candle = this.map(item)
+                    candles.push(candle);
+                } catch (e) {
+                    console.error("Ignored bad candle.");
+                    console.error(e);
+                    console.error(item);
+                }            
+            }
+            return new PriceHistory(candles);
+        } catch (e) {            
+            console.error(e);
+            
         }
-        return new PriceHistory(candles);
+
     }
 
     public map(item: any) : Candle {

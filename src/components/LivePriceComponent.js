@@ -3,9 +3,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const Component_1 = require("./Component");
 const GdaxApi_1 = require("../sources/GdaxApi");
 const PriceHistorySource_1 = require("../sources/PriceHistorySource");
+const events_1 = require("events");
 const contrib = require('blessed-contrib');
-class LivePriceComponent {
+class LivePriceComponent extends events_1.EventEmitter {
     constructor() {
+        super();
     }
     getWidgetOpts(opts) {
         return new Component_1.WidgetOpts(contrib.lcd, {
@@ -32,6 +34,15 @@ class LivePriceComponent {
         this.lcd.setOptions({
             color: 'green',
         });
+        let callback = data => {
+            switch (data.type) {
+                case "open":
+                    this.lcd.setDisplay(data.price);
+                    this.emit("updated");
+                    break;
+            }
+        };
+        rawSource.subscribe(callback);
     }
 }
 exports.LivePriceComponent = LivePriceComponent;

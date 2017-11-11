@@ -3,22 +3,28 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const PriceHistory_1 = require("../types/PriceHistory");
 class GdaxPriceHistoryAdapter {
     convert(data) {
-        //console.log(data);
-        let json = JSON.parse(data);
-        let candles = new Array();
-        for (let item of json) {
-            try {
-                //console.log("About to map: " + item);
-                let candle = this.map(item);
-                candles.push(candle);
+        try {
+            // console.log(typeof data);
+            // console.log(JSON.stringify(data).substr(0,20));
+            // let json = JSON.parse(data);
+            let candles = new Array();
+            for (let item of data) {
+                try {
+                    //console.log("About to map: " + item);
+                    let candle = this.map(item);
+                    candles.push(candle);
+                }
+                catch (e) {
+                    console.error("Ignored bad candle.");
+                    console.error(e);
+                    console.error(item);
+                }
             }
-            catch (e) {
-                console.error("Ignored bad candle.");
-                console.error(e);
-                console.error(item);
-            }
+            return new PriceHistory_1.PriceHistory(candles);
         }
-        return new PriceHistory_1.PriceHistory(candles);
+        catch (e) {
+            console.error(e);
+        }
     }
     map(item) {
         let time = parseInt(item[0]);

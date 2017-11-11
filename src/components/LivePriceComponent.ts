@@ -1,16 +1,17 @@
 import { Component, WidgetOpts } from "./Component";
 import { GdaxApi } from "../sources/GdaxApi";
 import { GdaxPriceHistoryAdapter, PriceHistorySource } from "../sources/PriceHistorySource";
+import { EventEmitter } from "events";
 
 const contrib = require('blessed-contrib');
 
 
-export class LivePriceComponent implements Component {   
+export class LivePriceComponent extends EventEmitter implements Component {   
     
     lcd: any;
     
     constructor() {
-        
+        super();
     }
       
     getWidgetOpts(opts?: any): WidgetOpts {
@@ -49,6 +50,35 @@ export class LivePriceComponent implements Component {
           color: 'green',
           //elementPadding: 4
         });        
+
+        let callback = data => {
+            switch (data.type) {
+                case "open":
+                    this.lcd.setDisplay(data.price);
+                    this.emit("updated");
+                  break;
+              }              
+        }
+        rawSource.subscribe(callback)
     }
+
+
+    /**
+     * FOR LIVE SUBSCRIBE:
+     * 
+     * /**
+* User Defined Type Guard!
+*/
+// function canWalk(arg: Animal): arg is IWalkingAnimal {
+//     return (arg as IWalkingAnimal).walk !== undefined;
+//  }
+ 
+ 
+//  private moveAnimal(animal: Animal) {
+//      if (canWalk(animal)) {
+//          animal.walk();  // compiler knows it can walk now
+//      }
+//  }
+    // */
 
 }

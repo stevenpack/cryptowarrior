@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const blessed = require("blessed");
 const PriceHistoryComponent_1 = require("../components/PriceHistoryComponent");
 const LivePriceComponent_1 = require("../components/LivePriceComponent");
+const events_1 = require("events");
 const contrib = require('blessed-contrib');
 /**
  * Layout optimized for viewing a single currency
@@ -30,6 +31,10 @@ class SingleCurrency {
             component.setWidget(widget);
             //Configure
             component.configure(widget);
+            //TODO: throttle updates to once per interval e.g. 100ms
+            if (component instanceof events_1.EventEmitter) {
+                component.on("updated", () => this.screen.render());
+            }
         }
         //TODO: base screen with standard shortcuts and per-screen ones
         this.screen.key(['escape', 'q', 'C-c'], function (ch, key) {
