@@ -14,11 +14,7 @@ interface Adapter<T> {
 
 export class GdaxPriceHistoryAdapter implements Adapter<PriceHistory> {
     public convert(data: any) : PriceHistory {
-        try {
-            // console.log(typeof data);
-            // console.log(JSON.stringify(data).substr(0,20));
-            // let json = JSON.parse(data);
-            
+        try {          
             let candles = new Array<Candle>();
             for (let item of data) {
                 try {
@@ -36,7 +32,6 @@ export class GdaxPriceHistoryAdapter implements Adapter<PriceHistory> {
             console.error(e);
             
         }
-
     }
 
     public map(item: any) : Candle {
@@ -54,7 +49,6 @@ export class GdaxPriceHistoryAdapter implements Adapter<PriceHistory> {
 export class PriceHistorySource implements Source<PriceHistory> {
 
     constructor(private rawSource: RawSource, private adapter: Adapter<PriceHistory>) {
-
     }
 
     public async getData() : Promise<PriceHistory> {
@@ -63,5 +57,4 @@ export class PriceHistorySource implements Source<PriceHistory> {
         let priceHistory = this.adapter.convert(data);
         return priceHistory
     }
-
 }
