@@ -9,15 +9,15 @@ const LoggerComponent_1 = require("../components/LoggerComponent");
  * Layout optimized for viewing a single currency
  */
 class SingleCurrency extends LayoutBase_1.LayoutBase {
-    constructor() {
-        super(12, 12);
+    constructor(eventHub) {
+        super(12, 12, eventHub);
     }
     addElements() {
-        this.tickerList = new TickerList_1.TickerListComponent();
-        this.logger = new LoggerComponent_1.LoggerComponent();
-        this.elements.push(new LayoutBase_1.Element(this.logger, new LayoutBase_1.Location(9, 0), new LayoutBase_1.Size(3, 12)));
+        this.tickerList = new TickerList_1.TickerListComponent(this.eventHub);
+        this.log = new LoggerComponent_1.LoggerComponent(this.eventHub);
+        this.elements.push(new LayoutBase_1.Element(this.log, new LayoutBase_1.Location(9, 0), new LayoutBase_1.Size(3, 12)));
         this.elements.push(new LayoutBase_1.Element(this.tickerList, new LayoutBase_1.Location(0, 0), new LayoutBase_1.Size(12, 2)));
-        this.elements.push(new LayoutBase_1.Element(new PriceHistoryComponent_1.PriceHistoryComponent(), new LayoutBase_1.Location(2, 8), new LayoutBase_1.Size(8, 4)));
+        this.elements.push(new LayoutBase_1.Element(new PriceHistoryComponent_1.PriceHistoryComponent(this.eventHub), new LayoutBase_1.Location(2, 8), new LayoutBase_1.Size(10, 4)));
         this.elements.push(new LayoutBase_1.Element(new LivePriceComponent_1.LivePriceComponent(), new LayoutBase_1.Location(0, 8), new LayoutBase_1.Size(2, 4)));
     }
     bindKeys() {
@@ -26,7 +26,7 @@ class SingleCurrency extends LayoutBase_1.LayoutBase {
             this.tickerList.toggleVisibility();
         });
         this.screen.key(['l'], (ch, key) => {
-            this.logger.toggleVisibility();
+            this.log.toggleVisibility();
         });
     }
 }

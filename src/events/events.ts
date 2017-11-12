@@ -1,9 +1,9 @@
 
 export enum Events {
     LogEvent    = "log",
-    UIUpdate    = "ui-updated",
+    UIUpdate    = "ui.updated",
 
-    TickerChanged = "ticker-changed"
+    TickerChanged = "ticker.changed"
    
 
 }

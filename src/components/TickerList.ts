@@ -1,4 +1,4 @@
-import { Component, WidgetOpts } from "./Component";
+import { Component, WidgetOpts, ComponentBase } from "./Component";
 import { GdaxApi } from "../sources/GdaxApi";
 import { GdaxPriceHistoryAdapter, PriceHistorySource } from "../sources/PriceHistorySource";
 import { EventEmitter } from "events";
@@ -6,12 +6,12 @@ import * as blessed from 'blessed';
 import { Events } from "../events/events";
 
 
-export class TickerListComponent extends EventEmitter implements Component {   
+export class TickerListComponent extends ComponentBase implements Component {   
     products: ProductInfo[];
     list: blessed.Widgets.ListElement;
         
-    constructor() {
-        super()
+    constructor(eventHub: PubSubJS.Base) {
+        super(eventHub)
     }
       
     getWidgetOpts(opts?: any): WidgetOpts {
@@ -37,12 +37,11 @@ export class TickerListComponent extends EventEmitter implements Component {
 
     onSelected(item: blessed.Widgets.BlessedElement, index: number) {
         let ticker = this.products[index];
-        //TODO: broadcast to the screen
         //TODO: Redefine GDax types... prefer to be platform agnostic
-        //TODO: Enum for event
         //TODO: This will go to screen, need flag for whether it should rebroadcast to children
-        this.emit(Events.TickerChanged, ticker)
-        this.emit(Events.LogEvent, "New ticker: " + ticker.id);
+        this.eventHub.publish(Events.TickerChanged, {ticker: ticker});
+        this.eventHub.publish(Events.LogEvent, "New ticker: " + ticker.id);
+        this.list.hide();
     }
 
     async load(opts?: any) {
@@ -63,7 +62,7 @@ export class TickerListComponent extends EventEmitter implements Component {
         }
         this.list.focus();
         this.list.select(0);
-        this.emit(Events.UIUpdate);
+        this.eventHub.publish(Events.UIUpdate, null);
     }
 
 }

@@ -1,12 +1,17 @@
 
-export class WidgetOpts {
-    constructor(public widgetType: any, public opts: any) {
-
-    }
+export abstract class ComponentBase {
+   
+    constructor(public eventHub: PubSubJS.Base) {}
 }
 
 export interface ILog {
     log(msg: string);
+}
+
+export class WidgetOpts {
+    constructor(public widgetType: any, public opts: any) {
+
+    }
 }
 
 /**

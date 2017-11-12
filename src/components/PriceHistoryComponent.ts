@@ -1,16 +1,17 @@
-import { Component, WidgetOpts } from "./Component";
+import { Component, WidgetOpts, ComponentBase } from "./Component";
 import { GdaxApi } from "../sources/GdaxApi";
 import { PriceHistorySource, GdaxPriceHistoryAdapter } from "../sources/PriceHistorySource";
 
 const contrib = require('blessed-contrib');
 
 
-export class PriceHistoryComponent implements Component {   
+export class PriceHistoryComponent extends ComponentBase implements Component {   
     
     headers: string[];    
     table: any;
     
-    constructor() {
+    constructor(eventHub) {
+        super(eventHub)
         this.headers = ['Time', 'Low', 'High', 'Open', 'Close'];
     }
       
@@ -48,6 +49,8 @@ export class PriceHistoryComponent implements Component {
         }
         console.log("loaded");
         this.table.setData({headers: this.headers, data: table_data});
+
+        this.eventHub.publish("test", "yo");
     }
 
 }

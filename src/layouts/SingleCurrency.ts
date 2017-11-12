@@ -7,19 +7,19 @@ import { LoggerComponent } from '../components/LoggerComponent'
  * Layout optimized for viewing a single currency
  */
 export class SingleCurrency extends LayoutBase {
-    logger: LoggerComponent;
+    log: LoggerComponent;
     tickerList: TickerListComponent;
     
-    constructor() {
-        super(12, 12);
+    constructor(eventHub: PubSubJS.Base) {
+        super(12, 12, eventHub);
     }
 
     addElements() {
-        this.tickerList = new TickerListComponent();
-        this.logger = new LoggerComponent();
-        this.elements.push(new Element(this.logger, new Location(9,0), new Size(3,12)));
+        this.tickerList = new TickerListComponent(this.eventHub);
+        this.log = new LoggerComponent(this.eventHub);
+        this.elements.push(new Element(this.log, new Location(9,0), new Size(3,12)));
         this.elements.push(new Element(this.tickerList, new Location(0,0), new Size(12,2)))
-        this.elements.push(new Element(new PriceHistoryComponent(), new Location(2,8), new Size(8,4)));
+        this.elements.push(new Element(new PriceHistoryComponent(this.eventHub), new Location(2,8), new Size(10,4)));
         this.elements.push(new Element(new LivePriceComponent(), new Location(0,8), new Size(2,4)));
     }
 
@@ -29,7 +29,7 @@ export class SingleCurrency extends LayoutBase {
             this.tickerList.toggleVisibility();            
         })
         this.screen.key(['l'], (ch, key) => {
-            this.logger.toggleVisibility();            
+            this.log.toggleVisibility();            
         })
     }
 }

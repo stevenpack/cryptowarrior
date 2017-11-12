@@ -1,4 +1,3 @@
 - Element messaging passing. Broadcast/Subscribe
-- Movable, togglable logger window
 - Handle network errors on startup
 - Layout builder

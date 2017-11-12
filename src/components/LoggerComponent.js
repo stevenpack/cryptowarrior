@@ -1,13 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const Component_1 = require("./Component");
-const events_1 = require("events");
 const blessed = require("blessed");
-const events_2 = require("../events/events");
+const events_1 = require("../events/events");
 const contrib = require('blessed-contrib');
-class LoggerComponent extends events_1.EventEmitter {
-    constructor() {
-        super();
+class LoggerComponent extends Component_1.ComponentBase {
+    constructor(eventHub) {
+        super(eventHub);
     }
     getWidgetOpts(opts) {
         return new Component_1.WidgetOpts(blessed.log, {
@@ -42,7 +41,7 @@ class LoggerComponent extends events_1.EventEmitter {
         }
         this.logger.focus();
         //this.logger.select(0);q
-        this.emit(events_2.Events.UIUpdate);
+        this.eventHub.publish(events_1.Events.UIUpdate, null);
     }
     log(msg) {
         this.logger.log(msg);

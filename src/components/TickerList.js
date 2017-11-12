@@ -2,12 +2,11 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const Component_1 = require("./Component");
 const GdaxApi_1 = require("../sources/GdaxApi");
-const events_1 = require("events");
 const blessed = require("blessed");
-const events_2 = require("../events/events");
-class TickerListComponent extends events_1.EventEmitter {
-    constructor() {
-        super();
+const events_1 = require("../events/events");
+class TickerListComponent extends Component_1.ComponentBase {
+    constructor(eventHub) {
+        super(eventHub);
     }
     getWidgetOpts(opts) {
         return new Component_1.WidgetOpts(blessed.list, {
@@ -28,12 +27,11 @@ class TickerListComponent extends events_1.EventEmitter {
     }
     onSelected(item, index) {
         let ticker = this.products[index];
-        //TODO: broadcast to the screen
         //TODO: Redefine GDax types... prefer to be platform agnostic
-        //TODO: Enum for event
         //TODO: This will go to screen, need flag for whether it should rebroadcast to children
-        this.emit(events_2.Events.TickerChanged, ticker);
-        this.emit(events_2.Events.LogEvent, "New ticker: " + ticker.id);
+        this.eventHub.publish(events_1.Events.TickerChanged, { ticker: ticker });
+        this.eventHub.publish(events_1.Events.LogEvent, "New ticker: " + ticker.id);
+        this.list.hide();
     }
     async load(opts) {
         let rawSource = new GdaxApi_1.GdaxApi();
@@ -53,7 +51,7 @@ class TickerListComponent extends events_1.EventEmitter {
         }
         this.list.focus();
         this.list.select(0);
-        this.emit(events_2.Events.UIUpdate);
+        this.eventHub.publish(events_1.Events.UIUpdate, null);
     }
 }
 exports.TickerListComponent = TickerListComponent;

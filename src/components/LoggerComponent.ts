@@ -1,4 +1,4 @@
-import { Component, WidgetOpts, ILog } from "./Component";
+import { Component, WidgetOpts, ILog, ComponentBase } from "./Component";
 import { GdaxApi } from "../sources/GdaxApi";
 import { GdaxPriceHistoryAdapter, PriceHistorySource } from "../sources/PriceHistorySource";
 import { EventEmitter } from "events";
@@ -8,12 +8,12 @@ const contrib = require('blessed-contrib');
 
 
 
-export class LoggerComponent extends EventEmitter implements Component, ILog {   
+export class LoggerComponent extends ComponentBase implements Component, ILog {   
     
     logger: blessed.Widgets.Log;
     
-    constructor() {
-        super()
+    constructor(eventHub: PubSubJS.Base) {
+        super(eventHub)
     }
       
     getWidgetOpts(opts?: any): WidgetOpts {
@@ -53,7 +53,7 @@ export class LoggerComponent extends EventEmitter implements Component, ILog {
         }
         this.logger.focus();
         //this.logger.select(0);q
-        this.emit(Events.UIUpdate);
+        this.eventHub.publish(Events.UIUpdate, null);
     }
 
     log(msg: string) {

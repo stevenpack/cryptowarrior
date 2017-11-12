@@ -4,8 +4,9 @@ const Component_1 = require("./Component");
 const GdaxApi_1 = require("../sources/GdaxApi");
 const PriceHistorySource_1 = require("../sources/PriceHistorySource");
 const contrib = require('blessed-contrib');
-class PriceHistoryComponent {
-    constructor() {
+class PriceHistoryComponent extends Component_1.ComponentBase {
+    constructor(eventHub) {
+        super(eventHub);
         this.headers = ['Time', 'Low', 'High', 'Open', 'Close'];
     }
     getWidgetOpts(opts) {
@@ -36,6 +37,7 @@ class PriceHistoryComponent {
         }
         console.log("loaded");
         this.table.setData({ headers: this.headers, data: table_data });
+        this.eventHub.publish("test", "yo");
     }
 }
 exports.PriceHistoryComponent = PriceHistoryComponent;

@@ -1,7 +1,7 @@
 import * as blessed from 'blessed';
 const contrib = require('blessed-contrib')
 
-import { Component, ILog } from '../components/Component';
+import { Component, ILog, ComponentBase } from '../components/Component';
 import { EventEmitter } from 'events';
 import { Events } from '../events/events';
 
@@ -22,16 +22,18 @@ export class Element {
 }
 
 export abstract class LayoutBase {    
+    protected eventHub: PubSubJS.Base;
     private grid: any;
     private logger: ILog;
+    private event
 
     protected screen: blessed.Widgets.Screen;    
     protected elements: Array<Element>;
 
-    constructor(rows: number, cols: number) {
+    constructor(rows: number, cols: number, eventHub) {
         this.screen = blessed.screen({})
         this.grid = new contrib.grid({rows: rows, cols: cols, screen: this.screen})         
-        
+        this.eventHub = eventHub;
         this.elements = [];
 
         //todo: check javascript spec re: calling abstract from constructor
@@ -71,25 +73,31 @@ export abstract class LayoutBase {
     listen() {
         for (let element of this.elements) {
             //TODO: throttle updates to once per interval e.g. 100ms
-            if (element.component instanceof EventEmitter) {
-                element.component.on(Events.UIUpdate, () => this.screen.render())
-                element.component.on(Events.LogEvent, (msg) => {
-                   if (this.logger) {
-                       this.logger.log(msg);
-                   }
-                })
+            if (element.component instanceof ComponentBase) {
+                element.component.eventHub.subscribe(Events.UIUpdate, () => this.screen.render())
+
+                if (this.isLogger(element)) {
+                    element.component.eventHub.subscribe(Events.LogEvent, (msg, data) => {
+                        if (this.logger) {
+                            this.logger.log(data);
+                        }
+                     })     
+                }
             }
         }
     }
 
     setLogger(): any {
         for (let e of this.elements) {
-            if ((e.component as ILog).log != undefined) {
+            if (this.isLogger(e)) {
                 this.logger = e.component;
                 break;
             }
-
         }
+    }
+
+    isLogger(element: Element) : boolean {
+        return (element.component as ILog).log != undefined);
     }
 
     protected bindKeys() {
