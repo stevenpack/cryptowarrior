@@ -18,7 +18,7 @@ class SingleCurrency extends LayoutBase_1.LayoutBase {
         this.elements.push(new LayoutBase_1.Element(this.log, new LayoutBase_1.Location(9, 0), new LayoutBase_1.Size(3, 12)));
         this.elements.push(new LayoutBase_1.Element(this.tickerList, new LayoutBase_1.Location(0, 0), new LayoutBase_1.Size(12, 2)));
         this.elements.push(new LayoutBase_1.Element(new PriceHistoryComponent_1.PriceHistoryComponent(this.eventHub), new LayoutBase_1.Location(2, 8), new LayoutBase_1.Size(10, 4)));
-        this.elements.push(new LayoutBase_1.Element(new LivePriceComponent_1.LivePriceComponent(), new LayoutBase_1.Location(0, 8), new LayoutBase_1.Size(2, 4)));
+        this.elements.push(new LayoutBase_1.Element(new LivePriceComponent_1.LivePriceComponent(this.eventHub), new LayoutBase_1.Location(0, 8), new LayoutBase_1.Size(2, 4)));
     }
     bindKeys() {
         super.bindKeys();

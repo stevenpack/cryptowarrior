@@ -1,4 +1,4 @@
-import { Component, WidgetOpts } from "./Component";
+import { Component, WidgetOpts, ComponentBase } from "./Component";
 import { GdaxApi } from "../sources/GdaxApi";
 import { GdaxPriceHistoryAdapter, PriceHistorySource } from "../sources/PriceHistorySource";
 import { EventEmitter } from "events";
@@ -7,12 +7,12 @@ import { Events } from "../events/events";
 const contrib = require('blessed-contrib');
 
 
-export class LivePriceComponent extends EventEmitter implements Component {   
+export class LivePriceComponent extends ComponentBase implements Component {   
     
     lcd: any;
     
-    constructor() {
-        super();
+    constructor(eventHub) {
+        super(eventHub);
     }
       
     getWidgetOpts(opts?: any): WidgetOpts {
@@ -47,7 +47,7 @@ export class LivePriceComponent extends EventEmitter implements Component {
         switch (data.type) {
             case "open":
                 this.lcd.setDisplay(data.price);
-                this.emit(Events.UIUpdate);
+                this.eventHub.publish(Events.UIUpdate, null);
                 break;
         }              
     

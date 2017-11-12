@@ -47,7 +47,7 @@ export abstract class LayoutBase {
         this.build();
         //Render the elements as soon as they're ready
         this.screen.render();                
-        this.listen();
+        this.subscribeEvents();
         this.bindKeys();
         this.setLogger();
     }
@@ -70,20 +70,25 @@ export abstract class LayoutBase {
         }        
     }
 
-    listen() {
+    subscribeEvents() {
         for (let element of this.elements) {
             //TODO: throttle updates to once per interval e.g. 100ms
             if (element.component instanceof ComponentBase) {
-                element.component.eventHub.subscribe(Events.UIUpdate, () => this.screen.render())
-
+                element.component.eventHub.subscribe(Events.UIUpdate, (msg, data) => this.onUiUpdate(msg, data));
                 if (this.isLogger(element)) {
-                    element.component.eventHub.subscribe(Events.LogEvent, (msg, data) => {
-                        if (this.logger) {
-                            this.logger.log(data);
-                        }
-                     })     
+                    element.component.eventHub.subscribe(Events.LogEvent, (msg, data) => this.onLogEvent(msg, data))   
                 }
             }
+        }
+    }
+
+    onUiUpdate(msg, data) {
+        this.screen.render();
+    }
+
+    onLogEvent(msg, data) {
+        if (this.logger) {
+            this.logger.log(data);
         }
     }
 

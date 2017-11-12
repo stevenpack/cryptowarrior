@@ -2,12 +2,11 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const Component_1 = require("./Component");
 const GdaxApi_1 = require("../sources/GdaxApi");
-const events_1 = require("events");
-const events_2 = require("../events/events");
+const events_1 = require("../events/events");
 const contrib = require('blessed-contrib');
-class LivePriceComponent extends events_1.EventEmitter {
-    constructor() {
-        super();
+class LivePriceComponent extends Component_1.ComponentBase {
+    constructor(eventHub) {
+        super(eventHub);
     }
     getWidgetOpts(opts) {
         return new Component_1.WidgetOpts(contrib.lcd, {
@@ -33,7 +32,7 @@ class LivePriceComponent extends events_1.EventEmitter {
         switch (data.type) {
             case "open":
                 this.lcd.setDisplay(data.price);
-                this.emit(events_2.Events.UIUpdate);
+                this.eventHub.publish(events_1.Events.UIUpdate, null);
                 break;
         }
     }
