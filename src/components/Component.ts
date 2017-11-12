@@ -5,6 +5,10 @@ export class WidgetOpts {
     }
 }
 
+export interface ILog {
+    log(msg: string);
+}
+
 /**
  * A Component is the main building block. It contains the display (using Widgets)
  * and the logic to get its data.

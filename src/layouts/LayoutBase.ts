@@ -1,8 +1,9 @@
 import * as blessed from 'blessed';
 const contrib = require('blessed-contrib')
 
-import { Component } from '../components/Component';
+import { Component, ILog } from '../components/Component';
 import { EventEmitter } from 'events';
+import { Events } from '../events/events';
 
 export class Location {
     constructor (public x: number, public y: number) {}
@@ -20,11 +21,12 @@ export class Element {
     constructor (public component: Component, public location: Location, public size: Size) {}
 }
 
-export abstract class LayoutBase {
-    
-    protected screen: blessed.Widgets.Screen;
-    grid: any;    
-    elements: Array<Element>;
+export abstract class LayoutBase {    
+    private grid: any;
+    private logger: ILog;
+
+    protected screen: blessed.Widgets.Screen;    
+    protected elements: Array<Element>;
 
     constructor(rows: number, cols: number) {
         this.screen = blessed.screen({})
@@ -45,6 +47,7 @@ export abstract class LayoutBase {
         this.screen.render();                
         this.listen();
         this.bindKeys();
+        this.setLogger();
     }
 
     build() {
@@ -69,8 +72,23 @@ export abstract class LayoutBase {
         for (let element of this.elements) {
             //TODO: throttle updates to once per interval e.g. 100ms
             if (element.component instanceof EventEmitter) {
-                element.component.on("updated", () => this.screen.render())
+                element.component.on(Events.UIUpdate, () => this.screen.render())
+                element.component.on(Events.LogEvent, (msg) => {
+                   if (this.logger) {
+                       this.logger.log(msg);
+                   }
+                })
             }
+        }
+    }
+
+    setLogger(): any {
+        for (let e of this.elements) {
+            if ((e.component as ILog).log != undefined) {
+                this.logger = e.component;
+                break;
+            }
+
         }
     }
 

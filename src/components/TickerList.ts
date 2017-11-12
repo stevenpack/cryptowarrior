@@ -3,6 +3,7 @@ import { GdaxApi } from "../sources/GdaxApi";
 import { GdaxPriceHistoryAdapter, PriceHistorySource } from "../sources/PriceHistorySource";
 import { EventEmitter } from "events";
 import * as blessed from 'blessed';
+import { Events } from "../events/events";
 
 
 export class TickerListComponent extends EventEmitter implements Component {   
@@ -40,7 +41,8 @@ export class TickerListComponent extends EventEmitter implements Component {
         //TODO: Redefine GDax types... prefer to be platform agnostic
         //TODO: Enum for event
         //TODO: This will go to screen, need flag for whether it should rebroadcast to children
-        this.emit("ticker-changed", ticker)
+        this.emit(Events.TickerChanged, ticker)
+        this.emit(Events.LogEvent, "New ticker: " + ticker.id);
     }
 
     async load(opts?: any) {
@@ -61,7 +63,7 @@ export class TickerListComponent extends EventEmitter implements Component {
         }
         this.list.focus();
         this.list.select(0);
-        this.emit("updated");
+        this.emit(Events.UIUpdate);
     }
 
 }

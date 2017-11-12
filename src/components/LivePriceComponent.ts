@@ -2,6 +2,7 @@ import { Component, WidgetOpts } from "./Component";
 import { GdaxApi } from "../sources/GdaxApi";
 import { GdaxPriceHistoryAdapter, PriceHistorySource } from "../sources/PriceHistorySource";
 import { EventEmitter } from "events";
+import { Events } from "../events/events";
 
 const contrib = require('blessed-contrib');
 
@@ -46,7 +47,7 @@ export class LivePriceComponent extends EventEmitter implements Component {
         switch (data.type) {
             case "open":
                 this.lcd.setDisplay(data.price);
-                this.emit("updated");
+                this.emit(Events.UIUpdate);
                 break;
         }              
     

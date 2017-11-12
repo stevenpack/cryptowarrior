@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const blessed = require("blessed");
 const contrib = require('blessed-contrib');
 const events_1 = require("events");
+const events_2 = require("../events/events");
 class Location {
     constructor(x, y) {
         this.x = x;
@@ -44,6 +45,7 @@ class LayoutBase {
         this.screen.render();
         this.listen();
         this.bindKeys();
+        this.setLogger();
     }
     build() {
         for (let element of this.elements) {
@@ -63,7 +65,20 @@ class LayoutBase {
         for (let element of this.elements) {
             //TODO: throttle updates to once per interval e.g. 100ms
             if (element.component instanceof events_1.EventEmitter) {
-                element.component.on("updated", () => this.screen.render());
+                element.component.on(events_2.Events.UIUpdate, () => this.screen.render());
+                element.component.on(events_2.Events.LogEvent, (msg) => {
+                    if (this.logger) {
+                        this.logger.log(msg);
+                    }
+                });
+            }
+        }
+    }
+    setLogger() {
+        for (let e of this.elements) {
+            if (e.component.log != undefined) {
+                this.logger = e.component;
+                break;
             }
         }
     }

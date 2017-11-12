@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const Component_1 = require("./Component");
 const events_1 = require("events");
 const blessed = require("blessed");
+const events_2 = require("../events/events");
 const contrib = require('blessed-contrib');
 class LoggerComponent extends events_1.EventEmitter {
     constructor() {
@@ -41,7 +42,10 @@ class LoggerComponent extends events_1.EventEmitter {
         }
         this.logger.focus();
         //this.logger.select(0);q
-        this.emit("updated");
+        this.emit(events_2.Events.UIUpdate);
+    }
+    log(msg) {
+        this.logger.log(msg);
     }
 }
 exports.LoggerComponent = LoggerComponent;

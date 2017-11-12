@@ -4,6 +4,7 @@ const Component_1 = require("./Component");
 const GdaxApi_1 = require("../sources/GdaxApi");
 const events_1 = require("events");
 const blessed = require("blessed");
+const events_2 = require("../events/events");
 class TickerListComponent extends events_1.EventEmitter {
     constructor() {
         super();
@@ -31,7 +32,8 @@ class TickerListComponent extends events_1.EventEmitter {
         //TODO: Redefine GDax types... prefer to be platform agnostic
         //TODO: Enum for event
         //TODO: This will go to screen, need flag for whether it should rebroadcast to children
-        this.emit("ticker-changed", ticker);
+        this.emit(events_2.Events.TickerChanged, ticker);
+        this.emit(events_2.Events.LogEvent, "New ticker: " + ticker.id);
     }
     async load(opts) {
         let rawSource = new GdaxApi_1.GdaxApi();
@@ -51,7 +53,7 @@ class TickerListComponent extends events_1.EventEmitter {
         }
         this.list.focus();
         this.list.select(0);
-        this.emit("updated");
+        this.emit(events_2.Events.UIUpdate);
     }
 }
 exports.TickerListComponent = TickerListComponent;
