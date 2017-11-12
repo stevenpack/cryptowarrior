@@ -11,12 +11,21 @@ class LoggerComponent extends events_1.EventEmitter {
     getWidgetOpts(opts) {
         return new Component_1.WidgetOpts(blessed.log, {
             label: "Log",
+            hidden: true
         });
     }
     setWidget(widget) {
         this.logger = widget;
     }
     configure(widget, opts) {
+        this.logger.key('up', (ch, key) => {
+            this.logger.top -= 1;
+            this.logger.height += +1;
+        });
+        this.logger.key('down', (ch, key) => {
+            this.logger.top += 1;
+            this.logger.height -= +1;
+        });
     }
     async load(opts) {
         this.logger.log("Logger created");
@@ -31,7 +40,7 @@ class LoggerComponent extends events_1.EventEmitter {
             this.logger.hide();
         }
         this.logger.focus();
-        //this.logger.select(0);
+        //this.logger.select(0);q
         this.emit("updated");
     }
 }

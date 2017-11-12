@@ -18,7 +18,7 @@ export class LoggerComponent extends EventEmitter implements Component {
         return new WidgetOpts(blessed.log,  
             {
                 label: "Log",
-                
+                hidden: true
             })
     }
 
@@ -27,7 +27,14 @@ export class LoggerComponent extends EventEmitter implements Component {
     }
 
     configure(widget: any, opts?: any) {        
-        
+        this.logger.key('up', (ch,key) => {
+            this.logger.top -= 1
+            this.logger.height += + 1;
+        })
+        this.logger.key('down', (ch,key) => {
+            this.logger.top += 1
+            this.logger.height -= + 1;
+        })
     }
 
     async load(opts?: any) {
@@ -43,7 +50,7 @@ export class LoggerComponent extends EventEmitter implements Component {
             this.logger.hide();
         }
         this.logger.focus();
-        //this.logger.select(0);
+        //this.logger.select(0);q
         this.emit("updated");
     }
 }
