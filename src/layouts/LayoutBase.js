@@ -1,9 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const blessed = require("blessed");
-const contrib = require('blessed-contrib');
+const contrib = require("blessed-contrib");
 const Component_1 = require("../components/Component");
 const events_1 = require("../events/events");
+const Throttle_1 = require("../events/Throttle");
 class Location {
     constructor(x, y) {
         this.x = x;
@@ -32,50 +33,49 @@ class Element {
 exports.Element = Element;
 class LayoutBase {
     constructor(rows, cols, eventHub) {
-        this.lastRender = Date.now();
         this.renderCount = 0;
         this.screen = blessed.screen({});
-        this.grid = new contrib.grid({ rows: rows, cols: cols, screen: this.screen });
+        this.grid = new contrib.grid({ rows, cols, screen: this.screen });
         this.eventHub = eventHub;
         this.elements = [];
-        //todo: check javascript spec re: calling abstract from constructor
+        this.uiThrottle = new Throttle_1.Throttle(200);
+        // todo: check javascript spec re: calling abstract from constructor
         this.init();
     }
     init() {
         this.addElements();
         this.build();
-        //Render the elements as soon as they're ready
+        // Render the elements as soon as they're ready
         this.screen.render();
         this.subscribeEvents();
         this.bindKeys();
         this.setLogger();
     }
     build() {
-        for (let element of this.elements) {
-            let component = element.component;
-            let loc = element.location;
-            let size = element.size;
-            //Create
-            let widgetOpts = component.getWidgetOpts();
-            let widget = this.grid.set(loc.x, loc.y, size.rows, size.cols, widgetOpts.widgetType, widgetOpts.opts);
-            //Store reference (because we are creating the actual instance, not the component)
+        for (const element of this.elements) {
+            const component = element.component;
+            const loc = element.location;
+            const size = element.size;
+            // Create
+            const widgetOpts = component.getWidgetOpts();
+            const widget = this.grid.set(loc.x, loc.y, size.rows, size.cols, widgetOpts.widgetType, widgetOpts.opts);
+            // Store reference (because we are creating the actual instance, not the component)
             component.setWidget(widget);
-            //Configure
+            // Configure
             component.configure(widget);
         }
     }
     subscribeEvents() {
-        for (let element of this.elements) {
-            //TODO: throttle updates to once per interval e.g. 100ms
+        for (const element of this.elements) {
+            // TODO: throttle updates to once per interval e.g. 100ms
             if (element.component instanceof Component_1.ComponentBase) {
                 element.component.eventHub.subscribe(events_1.Events.UIUpdate, (msg, data) => {
-                    if (this.shouldRender()) {
+                    if (this.uiThrottle.tryRemoveToken()) {
                         this.renderCount++;
-                        if (this.renderCount % 100 == 0) {
+                        if (this.renderCount % 100 === 0) {
                             this.onLogEvent(null, "100 renders");
                         }
                         this.screen.render();
-                        this.lastRender = Date.now();
                     }
                 });
                 if (this.isLogger(element)) {
@@ -84,16 +84,13 @@ class LayoutBase {
             }
         }
     }
-    shouldRender() {
-        return (Date.now() - this.lastRender) > 200;
-    }
     onLogEvent(msg, data) {
         if (this.logger) {
             this.logger.log(data);
         }
     }
     setLogger() {
-        for (let e of this.elements) {
+        for (const e of this.elements) {
             if (this.isLogger(e)) {
                 this.logger = e.component;
                 break;
@@ -104,13 +101,13 @@ class LayoutBase {
         return element.component.log != undefined;
     }
     bindKeys() {
-        //TODO: base screen with standard shortcuts and per-screen ones
-        this.screen.key(['escape', 'q', 'C-c'], function (ch, key) {
+        // TODO: base screen with standard shortcuts and per-screen ones
+        this.screen.key(["escape", "q", "C-c"], (ch, key) => {
             return process.exit(0);
         });
     }
     async load() {
-        for (let element of this.elements) {
+        for (const element of this.elements) {
             await element.component.load();
         }
         this.screen.render();

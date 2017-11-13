@@ -1,5 +1,4 @@
 import {ProductInfo, PublicClient, WebsocketClient} from "gdax";
-import * as rp from "request-promise";
 import { RawSource } from "./PriceHistorySource";
 
 export class GdaxApi implements RawSource {

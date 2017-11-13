@@ -1,16 +1,16 @@
-import * as blessed from 'blessed';
-const contrib = require('blessed-contrib')
+import * as blessed from "blessed";
+const contrib = require("blessed-contrib");
 
-import { Component, ILog, ComponentBase } from '../components/Component';
-import { EventEmitter } from 'events';
-import { Events } from '../events/events';
+import { Component, ILog, ComponentBase } from "../components/Component";
+import { Events } from "../events/events";
+import {Throttle} from "../events/Throttle";
 
 export class Location {
-    constructor (public x: number, public y: number) {}
+    constructor(public x: number, public y: number) {}
 }
 
 export class Size {
-    constructor (public rows: number, public cols: number) {}
+    constructor(public rows: number, public cols: number) {}
 }
 
 /**
@@ -18,95 +18,87 @@ export class Size {
  * part of a `LayoutBase`
  */
 export class Element {
-    constructor (public component: Component, public location: Location, public size: Size) {}
+    constructor(public component: Component, public location: Location, public size: Size) {}
 }
 
-export abstract class LayoutBase {    
-    private grid: any;
-    private logger: ILog;
-    private lastRender: number = Date.now();
-
+export abstract class LayoutBase {
     protected eventHub: PubSubJS.Base;
     protected screen: blessed.Widgets.Screen;
-    protected elements: Array<Element>;
+    protected elements: Element[];
+
+    private grid: any;
+    private logger: ILog;
+    private uiThrottle: Throttle;
+    private renderCount = 0;
 
     constructor(rows: number, cols: number, eventHub) {
         this.screen = blessed.screen({});
-        this.grid = new contrib.grid({rows: rows, cols: cols, screen: this.screen})     ;
+        this.grid = new contrib.grid({rows, cols, screen: this.screen})     ;
         this.eventHub = eventHub;
         this.elements = [];
-
-        //todo: check javascript spec re: calling abstract from constructor
+        this.uiThrottle = new Throttle(200);
+        // todo: check javascript spec re: calling abstract from constructor
         this.init();
     }
 
-    abstract addElements();
+    public abstract addElements();
 
-    init() {
+    public init() {
         this.addElements();
         this.build();
-        //Render the elements as soon as they're ready
-        this.screen.render();                
+        // Render the elements as soon as they're ready
+        this.screen.render();
         this.subscribeEvents();
         this.bindKeys();
         this.setLogger();
     }
 
-    build() {
-        for (let element of this.elements) {
-            let component = element.component;
-            let loc = element.location;
-            let size = element.size;
-            
-            //Create
-            let widgetOpts = component.getWidgetOpts();            
-            let widget = this.grid.set(loc.x, loc.y, size.rows, size.cols , widgetOpts.widgetType, widgetOpts.opts);
+    public build() {
+        for (const element of this.elements) {
+            const component = element.component;
+            const loc = element.location;
+            const size = element.size;
 
-            //Store reference (because we are creating the actual instance, not the component)
+            // Create
+            const widgetOpts = component.getWidgetOpts();
+            const widget = this.grid.set(loc.x, loc.y, size.rows, size.cols , widgetOpts.widgetType, widgetOpts.opts);
+
+            // Store reference (because we are creating the actual instance, not the component)
             component.setWidget(widget);
 
-            //Configure
+            // Configure
             component.configure(widget);
-        }        
+        }
     }
 
-    private renderCount = 0;
-    subscribeEvents() {
-        for (let element of this.elements) {
-            //TODO: throttle updates to once per interval e.g. 100ms
+    public subscribeEvents() {
+        for (const element of this.elements) {
+            // TODO: throttle updates to once per interval e.g. 100ms
             if (element.component instanceof ComponentBase) {
                 element.component.eventHub.subscribe(Events.UIUpdate, (msg, data) => {
-                    if (this.shouldRender()) {
+                    if (this.uiThrottle.tryRemoveToken()) {
                         this.renderCount++;
-                        if (this.renderCount % 100 == 0) {
+                        if (this.renderCount % 100 === 0) {
                             this.onLogEvent(null, "100 renders");
-                        }                        
+                        }
                         this.screen.render();
-                        this.lastRender = Date.now();
                     }
                 });
                 if (this.isLogger(element)) {
-                    element.component.eventHub.subscribe(Events.LogEvent, (msg, data) => this.onLogEvent(msg, data))   
+                    element.component.eventHub.subscribe(Events.LogEvent, (msg, data) => this.onLogEvent(msg, data));
                 }
             }
         }
     }
 
-
-
-
-    shouldRender() : boolean {
-        return (Date.now() - this.lastRender) > 200;
-    }
-
-    onLogEvent(msg, data) {
+    public onLogEvent(msg, data) {
         if (this.logger) {
             this.logger.log(data);
         }
     }
 
-    setLogger(): any {
-        for (let e of this.elements) {
+    public setLogger(): any {
+        for (const e of this.elements) {
             if (this.isLogger(e)) {
                 this.logger = e.component;
                 break;
@@ -114,19 +106,19 @@ export abstract class LayoutBase {
         }
     }
 
-    isLogger(element: Element) : boolean {
+    public isLogger(element: Element): boolean {
         return (element.component as ILog).log != undefined;
     }
 
     protected bindKeys() {
-        //TODO: base screen with standard shortcuts and per-screen ones
-        this.screen.key(['escape', 'q', 'C-c'], function(ch, key) {
+        // TODO: base screen with standard shortcuts and per-screen ones
+        this.screen.key(["escape", "q", "C-c"], (ch, key) => {
             return process.exit(0);
-        });        
+        });
     }
 
     public async load() {
-        for (let element of this.elements) {
+        for (const element of this.elements) {
             await element.component.load();
         }
         this.screen.render();
