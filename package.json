@@ -6,6 +6,8 @@
   "scripts": {
     "start": "node src/index.js",
     "test": "jest",
+    "unit": "jest unit",
+    "int": "jest integration",
     "lint": "tslint tests/*.ts -t verbose"
   },
   "repository": {
@@ -35,10 +37,12 @@
     "gdax": "github:coinbase/gdax-node",
     "install": "^0.10.1",
     "jest": "^21.2.1",
+    "limiter": "^1.1.2",
     "npm": "^5.5.1",
     "pubsub-js": "^1.5.7",
     "request": "^2.83.0",
     "request-promise": "^4.2.2",
+    "tslint": "^5.8.0",
     "typescript": "^2.6.1"
   },
   "devDependencies": {
@@ -49,7 +53,7 @@
     "transform": {
       "^.+\\.tsx?$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
     },
-    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(tsx?)$",
     "moduleFileExtensions": [
       "ts",
       "tsx",

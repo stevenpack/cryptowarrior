@@ -32,6 +32,8 @@ class Element {
 exports.Element = Element;
 class LayoutBase {
     constructor(rows, cols, eventHub) {
+        this.lastRender = Date.now();
+        this.renderCount = 0;
         this.screen = blessed.screen({});
         this.grid = new contrib.grid({ rows: rows, cols: cols, screen: this.screen });
         this.eventHub = eventHub;
@@ -66,15 +68,24 @@ class LayoutBase {
         for (let element of this.elements) {
             //TODO: throttle updates to once per interval e.g. 100ms
             if (element.component instanceof Component_1.ComponentBase) {
-                element.component.eventHub.subscribe(events_1.Events.UIUpdate, (msg, data) => this.onUiUpdate(msg, data));
+                element.component.eventHub.subscribe(events_1.Events.UIUpdate, (msg, data) => {
+                    if (this.shouldRender()) {
+                        this.renderCount++;
+                        if (this.renderCount % 100 == 0) {
+                            this.onLogEvent(null, "100 renders");
+                        }
+                        this.screen.render();
+                        this.lastRender = Date.now();
+                    }
+                });
                 if (this.isLogger(element)) {
                     element.component.eventHub.subscribe(events_1.Events.LogEvent, (msg, data) => this.onLogEvent(msg, data));
                 }
             }
         }
     }
-    onUiUpdate(msg, data) {
-        this.screen.render();
+    shouldRender() {
+        return (Date.now() - this.lastRender) > 200;
     }
     onLogEvent(msg, data) {
         if (this.logger) {
@@ -91,7 +102,6 @@ class LayoutBase {
     }
     isLogger(element) {
         return element.component.log != undefined;
-        ;
     }
     bindKeys() {
         //TODO: base screen with standard shortcuts and per-screen ones

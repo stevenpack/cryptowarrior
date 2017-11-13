@@ -21,6 +21,9 @@ class GdaxApi {
         this.websocketClient.on('error', err => { console.error(err); });
         this.websocketClient.on('close', () => { console.log('close'); });
     }
+    unsubscribe() {
+        this.websocketClient.disconnect();
+    }
 }
 exports.GdaxApi = GdaxApi;
 //# sourceMappingURL=GdaxApi.js.map

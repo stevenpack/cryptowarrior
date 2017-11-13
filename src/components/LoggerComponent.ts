@@ -1,7 +1,4 @@
 import { Component, WidgetOpts, ILog, ComponentBase } from "./Component";
-import { GdaxApi } from "../sources/GdaxApi";
-import { GdaxPriceHistoryAdapter, PriceHistorySource } from "../sources/PriceHistorySource";
-import { EventEmitter } from "events";
 import * as blessed from 'blessed';
 import { Events } from "../events/events";
 const contrib = require('blessed-contrib');
@@ -30,11 +27,11 @@ export class LoggerComponent extends ComponentBase implements Component, ILog {
 
     configure(widget: any, opts?: any) {        
         this.logger.key('up', (ch,key) => {
-            this.logger.top -= 1
+            this.logger.top -= 1;
             this.logger.height += + 1;
-        })
+        });
         this.logger.key('down', (ch,key) => {
-            this.logger.top += 1
+            this.logger.top += 1;
             this.logger.height -= + 1;
         })
     }

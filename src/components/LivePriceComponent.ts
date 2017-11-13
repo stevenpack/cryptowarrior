@@ -43,11 +43,20 @@ export class LivePriceComponent extends ComponentBase implements Component {
         rawSource.subscribe(callback)
     }
 
+    private lastRender = Date.now();
+    
     onPriceChanged(data: any) {
+
+        if ((Date.now() - this.lastRender) < 200) {
+            return;
+        }
+
         switch (data.type) {
             case "open":
                 this.lcd.setDisplay(data.price);
+                //too heavy-weight? just mark component as dirty?
                 this.eventHub.publish(Events.UIUpdate, null);
+                this.lastRender = Date.now();
                 break;
         }              
     

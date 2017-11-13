@@ -22,17 +22,17 @@ export class Element {
 }
 
 export abstract class LayoutBase {    
-    protected eventHub: PubSubJS.Base;
     private grid: any;
     private logger: ILog;
-    private event
+    private lastRender: number = Date.now();
 
-    protected screen: blessed.Widgets.Screen;    
+    protected eventHub: PubSubJS.Base;
+    protected screen: blessed.Widgets.Screen;
     protected elements: Array<Element>;
 
     constructor(rows: number, cols: number, eventHub) {
-        this.screen = blessed.screen({})
-        this.grid = new contrib.grid({rows: rows, cols: cols, screen: this.screen})         
+        this.screen = blessed.screen({});
+        this.grid = new contrib.grid({rows: rows, cols: cols, screen: this.screen})     ;
         this.eventHub = eventHub;
         this.elements = [];
 
@@ -70,11 +70,21 @@ export abstract class LayoutBase {
         }        
     }
 
+    private renderCount = 0;
     subscribeEvents() {
         for (let element of this.elements) {
             //TODO: throttle updates to once per interval e.g. 100ms
             if (element.component instanceof ComponentBase) {
-                element.component.eventHub.subscribe(Events.UIUpdate, (msg, data) => this.onUiUpdate(msg, data));
+                element.component.eventHub.subscribe(Events.UIUpdate, (msg, data) => {
+                    if (this.shouldRender()) {
+                        this.renderCount++;
+                        if (this.renderCount % 100 == 0) {
+                            this.onLogEvent(null, "100 renders");
+                        }                        
+                        this.screen.render();
+                        this.lastRender = Date.now();
+                    }
+                });
                 if (this.isLogger(element)) {
                     element.component.eventHub.subscribe(Events.LogEvent, (msg, data) => this.onLogEvent(msg, data))   
                 }
@@ -82,8 +92,11 @@ export abstract class LayoutBase {
         }
     }
 
-    onUiUpdate(msg, data) {
-        this.screen.render();
+
+
+
+    shouldRender() : boolean {
+        return (Date.now() - this.lastRender) > 200;
     }
 
     onLogEvent(msg, data) {
@@ -102,7 +115,7 @@ export abstract class LayoutBase {
     }
 
     isLogger(element: Element) : boolean {
-        return (element.component as ILog).log != undefined);
+        return (element.component as ILog).log != undefined;
     }
 
     protected bindKeys() {

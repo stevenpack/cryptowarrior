@@ -31,4 +31,8 @@ export class GdaxApi implements RawSource {
         this.websocketClient.on('close', () => { console.log('close') });
     }
 
+    public unsubscribe() {
+        this.websocketClient.disconnect();
+    }
+
 }
