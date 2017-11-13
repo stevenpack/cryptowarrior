@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const PriceHistoryComponent_1 = require("../components/PriceHistoryComponent");
 const LivePriceComponent_1 = require("../components/LivePriceComponent");
-const LayoutBase_1 = require("./LayoutBase");
-const TickerList_1 = require("../components/TickerList");
 const LoggerComponent_1 = require("../components/LoggerComponent");
+const PriceHistoryComponent_1 = require("../components/PriceHistoryComponent");
+const TickerList_1 = require("../components/TickerList");
+const LayoutBase_1 = require("./LayoutBase");
 /**
  * Layout optimized for viewing a single currency
  */
@@ -22,10 +22,10 @@ class SingleCurrency extends LayoutBase_1.LayoutBase {
     }
     bindKeys() {
         super.bindKeys();
-        this.screen.key(['t'], (ch, key) => {
+        this.screen.key(["t"], (ch, key) => {
             this.tickerList.toggleVisibility();
         });
-        this.screen.key(['l'], (ch, key) => {
+        this.screen.key(["l"], (ch, key) => {
             this.log.toggleVisibility();
         });
     }

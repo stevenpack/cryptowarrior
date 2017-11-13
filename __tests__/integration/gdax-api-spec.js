@@ -22,7 +22,7 @@ describe("GdaxApi", () => {
         const callback = (data) => {
             switch (data.type) {
                 case "open":
-                    //console.log("got open: " + data.price);
+                    // console.log("got open: " + data.price);
                     api.unsubscribe();
                     done();
                     break;

@@ -4,7 +4,7 @@ const gdax_1 = require("gdax");
 class GdaxApi {
     constructor() {
         this.httpClient = new gdax_1.PublicClient();
-        this.websocketClient = new gdax_1.WebsocketClient(['BTC-USD']);
+        this.websocketClient = new gdax_1.WebsocketClient(["BTC-USD"]);
     }
     async getData() {
         return this.getPriceHistory();
@@ -16,10 +16,10 @@ class GdaxApi {
         return this.httpClient.getProducts();
     }
     subscribe(callback) {
-        this.websocketClient.on('close', () => { console.log('open'); });
-        this.websocketClient.on('message', data => { callback(data); });
-        this.websocketClient.on('error', err => { console.error(err); });
-        this.websocketClient.on('close', () => { console.log('close'); });
+        this.websocketClient.on("close", () => { console.log("open"); });
+        this.websocketClient.on("message", (data) => { callback(data); });
+        this.websocketClient.on("error", (err) => { console.error(err); });
+        this.websocketClient.on("close", () => { console.log("close"); });
     }
     unsubscribe() {
         this.websocketClient.disconnect();
