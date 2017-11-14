@@ -1,8 +1,9 @@
+// TODO: The typedefs are wrong and cause compile errors. Either fix or don't use
 import {ProductInfo, PublicClient, WebsocketClient} from "gdax";
 import {Events} from "../events/Events";
-import {IDataSource} from "./Interfaces";
+import {IDataSource, IStreamingSource} from "./Interfaces";
 
-export class GdaxApi implements IDataSource {
+export class GdaxApi implements IDataSource, IStreamingSource {
     public websocketClient: WebsocketClient;
     public httpClient: PublicClient;
 

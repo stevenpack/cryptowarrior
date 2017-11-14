@@ -71,7 +71,8 @@ class LayoutBase {
             // TODO: throttle updates to once per interval e.g. 100ms
             if (element.component instanceof Component_1.ComponentBase) {
                 element.component.eventHub.subscribe(events_1.Events.UIUpdate, (msg, data) => {
-                    if (this.uiThrottle.tryRemoveToken()) {
+                    const force = data;
+                    if (force || this.uiThrottle.tryRemoveToken()) {
                         this.renderCount++;
                         if (this.renderCount % 100 === 0) {
                             this.onLogEvent(null, `+100 renders (${this.renderCount})`);
@@ -99,7 +100,7 @@ class LayoutBase {
         }
     }
     isLogger(element) {
-        return element.component.log != undefined;
+        return element.component.log !== undefined;
     }
     bindKeys() {
         // TODO: base screen with standard shortcuts and per-screen ones

@@ -75,7 +75,8 @@ export abstract class LayoutBase {
             // TODO: throttle updates to once per interval e.g. 100ms
             if (element.component instanceof ComponentBase) {
                 element.component.eventHub.subscribe(Events.UIUpdate, (msg, data) => {
-                    if (this.uiThrottle.tryRemoveToken()) {
+                    const force = data as boolean;
+                    if (force || this.uiThrottle.tryRemoveToken()) {
                         this.renderCount++;
                         if (this.renderCount % 100 === 0) {
                             this.onLogEvent(null, `+100 renders (${this.renderCount})`);
@@ -99,14 +100,14 @@ export abstract class LayoutBase {
     public setLogger(): any {
         for (const e of this.elements) {
             if (this.isLogger(e)) {
-                this.logger = e.component;
+                this.logger = e.component as ILog;
                 break;
             }
         }
     }
 
     public isLogger(element: Element): boolean {
-        return (element.component as ILog).log != undefined;
+        return (element.component as ILog).log !== undefined;
     }
 
     protected bindKeys() {

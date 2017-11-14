@@ -18,13 +18,13 @@ export class SingleCurrency extends LayoutBase {
     }
 
     public addElements() {
-        this.tickerList = new TickerListComponent(this.eventHub);
+        this.tickerList = new TickerListComponent(this.eventHub, this.container.tickerSource);
         this.log = new LoggerComponent(this.eventHub);
         this.priceHistoryComponent = new PriceHistoryComponent(this.eventHub, this.container.priceHistorySource);
         this.livePriceComponent = new LivePriceComponent(this.eventHub, this.container.livePriceSource);
 
         this.elements.push(new Element(this.log, new Location(9, 0), new Size(3, 12)));
-        //this.elements.push(new Element(this.tickerList, new Location(0, 0), new Size(12, 2)));
+        this.elements.push(new Element(this.tickerList, new Location(0, 0), new Size(12, 2)));
         this.elements.push(new Element(this.priceHistoryComponent, new Location(2, 7), new Size(10, 5)));
         this.elements.push(new Element(this.livePriceComponent, new Location(0, 8), new Size(2, 4)));
     }

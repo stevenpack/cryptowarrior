@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+// TODO: The typedefs are wrong and cause compile errors. Either fix or don't use
 const gdax_1 = require("gdax");
 const Events_1 = require("../events/Events");
 class GdaxApi {

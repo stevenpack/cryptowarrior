@@ -15,11 +15,11 @@ export abstract class ComponentBase {
             element.hide();
         }
         element.focus();
-        this.eventHub.publish(Events.UIUpdate, null);
+        this.fireUpdated(true)
     }
 
-    protected fireUpdated() {
-        this.eventHub.publish(Events.UIUpdate, null);
+    protected fireUpdated(force: boolean) {
+        this.eventHub.publish(Events.UIUpdate, true);
     }
 }
 

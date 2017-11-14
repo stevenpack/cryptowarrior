@@ -14,10 +14,10 @@ class ComponentBase {
             element.hide();
         }
         element.focus();
-        this.eventHub.publish(Events_1.Events.UIUpdate, null);
+        this.fireUpdated(true);
     }
-    fireUpdated() {
-        this.eventHub.publish(Events_1.Events.UIUpdate, null);
+    fireUpdated(force) {
+        this.eventHub.publish(Events_1.Events.UIUpdate, true);
     }
 }
 exports.ComponentBase = ComponentBase;

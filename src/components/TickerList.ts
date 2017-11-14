@@ -1,14 +1,14 @@
 import * as blessed from "blessed";
-import {ProductInfo} from "gdax";
 import { Events } from "../events/events";
-import { GdaxApi } from "../sources/GdaxApi";
 import { Component, ComponentBase, WidgetOpts } from "./Component";
+import {ISource} from "../sources/Interfaces";
+import {Ticker} from "../types/Ticker";
 
 export class TickerListComponent extends ComponentBase implements Component {
-    public products: ProductInfo[];
+    public tickers: Ticker[];
     public list: blessed.Widgets.ListElement;
 
-    constructor(eventHub: PubSubJS.Base) {
+    constructor(eventHub: PubSubJS.Base, private source: ISource<Ticker[]>) {
         super(eventHub);
     }
 
@@ -34,7 +34,7 @@ export class TickerListComponent extends ComponentBase implements Component {
     }
 
     public onSelected(item: blessed.Widgets.BlessedElement, index: number) {
-        const ticker = this.products[index];
+        const ticker = this.tickers[index];
         // TODO: Redefine GDax types... prefer to be platform agnostic
         // TODO: This will go to screen, need flag for whether it should rebroadcast to children
         this.eventHub.publish(Events.TickerChanged, ticker);
@@ -43,11 +43,10 @@ export class TickerListComponent extends ComponentBase implements Component {
     }
 
     public async load(opts?: any) {
-        const rawSource = new GdaxApi();
-        this.products = await rawSource.getProducts();
-        for (const p of this.products) {
-            //Works (index.d.ts is wrong)
-            this.list.pushItem(p.id);
+        this.tickers = await this.source.getData(null);
+        for (const t of this.tickers) {
+            // Works (index.d.ts is wrong)
+            this.list.pushItem(t.id);
         }
     }
 
