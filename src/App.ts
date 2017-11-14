@@ -1,21 +1,18 @@
 
-
-import { GdaxApi } from './sources/GdaxApi';
-import { PriceHistorySource, GdaxPriceHistoryAdapter } from './sources/PriceHistorySource';
-import { SingleCurrency } from './layouts/SingleCurrency';
-import Container from './Container';
-let contrib = require('blessed-contrib');
+import { SingleCurrency } from "./layouts/SingleCurrency";
+import Container from "./Container";
 
 export class App {
-    screen: SingleCurrency;
-    
+    public screen: SingleCurrency;
+
     constructor() {
-        
-    }   
-    
-    loadUI() {
-        let container = new Container();
-        this.screen = new SingleCurrency(container.eventHub);
-        this.screen.load();
+    }
+
+    public loadUI() {
+        const container = new Container();
+        this.screen = new SingleCurrency(container.eventHub, container);
+        this.screen.load()
+            .then(() => {/* done*/})
+            .catch((err) => console.error(err));
     }
 }

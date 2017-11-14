@@ -1,21 +1,22 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const Component_1 = require("./Component");
-const GdaxApi_1 = require("../sources/GdaxApi");
-const PriceHistorySource_1 = require("../sources/PriceHistorySource");
-const contrib = require('blessed-contrib');
+const moment = require("moment");
+const Events_1 = require("../events/Events");
+const contrib = require("blessed-contrib");
 class PriceHistoryComponent extends Component_1.ComponentBase {
-    constructor(eventHub) {
+    constructor(eventHub, source) {
         super(eventHub);
-        this.headers = ['Time', 'Low', 'High', 'Open', 'Close'];
+        this.source = source;
+        this.headers = ["Time", "Low", "High", "Open", "Close"];
     }
     getWidgetOpts(opts) {
         return new Component_1.WidgetOpts(contrib.table, {
             keys: true,
-            fg: 'green',
-            label: 'Price History',
+            fg: "green",
+            label: "Price History",
             columnSpacing: 1,
-            columnWidth: [12, 10, 10, 10, 10]
+            columnWidth: [18, 10, 10, 10, 10],
         });
     }
     setWidget(widget) {
@@ -23,21 +24,33 @@ class PriceHistoryComponent extends Component_1.ComponentBase {
     }
     configure(widget, opts) {
         widget.setData({ headers: this.headers, data: [] });
+        this.eventHub.subscribe(Events_1.Events.TickerChanged, (msg, data) => this.reload(data));
     }
     async load(opts) {
-        //TODO: IoC container
-        let rawSource = new GdaxApi_1.GdaxApi();
-        let adapter = new PriceHistorySource_1.GdaxPriceHistoryAdapter();
-        let priceHistorySource = new PriceHistorySource_1.PriceHistorySource(rawSource, adapter);
-        let priceHistoryData = await priceHistorySource.getData();
-        //The table takes data as an array per row
-        let table_data = [];
-        for (let candle of priceHistoryData.Items) {
-            table_data.push([candle.Time, candle.Low, candle.High, candle.Open, candle.Close]);
+        const ticker = opts || ["BTC-USD"];
+        const priceHistoryData = await this.source.getData(ticker);
+        // The table takes data as an array per row
+        const tableData = [];
+        for (const candle of priceHistoryData.Items) {
+            // TODO: configurable approach to format with defaults
+            const timeFmt = moment(candle.Time * 1000).format("DD-MMM-YY HH:mm");
+            const formatPrice = (price) => price.toFixed(2);
+            tableData.push([
+                timeFmt,
+                formatPrice(candle.Low),
+                formatPrice(candle.High),
+                formatPrice(candle.Open),
+                formatPrice(candle.Close),
+            ]);
         }
-        console.log("loaded");
-        this.table.setData({ headers: this.headers, data: table_data });
-        this.eventHub.publish("test", "yo");
+        this.table.setData({ headers: this.headers, data: tableData });
+        this.fireUpdated();
+    }
+    reload(ticker) {
+        // TODO: relaod with new ticker!
+        this.table.setData({ headers: this.headers, data: [] });
+        this.fireUpdated();
+        this.load();
     }
 }
 exports.PriceHistoryComponent = PriceHistoryComponent;

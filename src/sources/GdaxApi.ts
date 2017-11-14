@@ -1,37 +1,42 @@
 import {ProductInfo, PublicClient, WebsocketClient} from "gdax";
-import { RawSource } from "./PriceHistorySource";
+import {Events} from "../events/Events";
+import {IDataSource} from "./Interfaces";
 
-export class GdaxApi implements RawSource {
+export class GdaxApi implements IDataSource {
     public websocketClient: WebsocketClient;
     public httpClient: PublicClient;
 
-    constructor() {
+    constructor(private eventHub) {
        this.httpClient = new PublicClient();
-       this.websocketClient = new WebsocketClient(["BTC-USD"]);
     }
 
-    public async getData(): Promise<any> {
-        return this.getPriceHistory();
+    public async getData(opts): Promise<any> {
+        return this.getPriceHistory(opts);
     }
 
-    public async getPriceHistory(): Promise<any> {
-       return this.httpClient.getProductHistoricRates(null);
+    public async getPriceHistory(productIds: string[]): Promise<any> {
+       return this.httpClient.getProductHistoricRates(productIds);
     }
 
     public async getProducts(): Promise<ProductInfo[]> {
         return this.httpClient.getProducts();
     }
 
-    public subscribe(callback) {
+    public subscribe(productIds: string[], callback: (data) => void) {
 
-        this.websocketClient.on("close", () => { console.log("open"); });
+        this.unsubscribe();
+        this.websocketClient = new WebsocketClient(productIds);
+        this.websocketClient.on("open", () => this.publishEvent("GDAX Websocket: Open"));
         this.websocketClient.on("message", (data) => { callback(data); });
-        this.websocketClient.on("error", (err) => { console.error(err); });
-        this.websocketClient.on("close", () => { console.log("close"); });
+        this.websocketClient.on("error", (err) => this.publishEvent(`GDAX Websocket: Error (${err})`));
+        this.websocketClient.on("close", () => this.publishEvent("GDAX Websocket: Close"));
     }
 
     public unsubscribe() {
         this.websocketClient.disconnect();
     }
 
+    private publishEvent(data: string) {
+        this.eventHub.publish(Events.LogEvent, data);
+    }
 }

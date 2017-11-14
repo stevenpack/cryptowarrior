@@ -1,3 +1,6 @@
-- Element messaging passing. Broadcast/Subscribe
+
 - Handle network errors on startup
-- Layout builder
+- Layout builder with prebuilt defaults
+- Handle ticker change
+- Charts
+- Execution

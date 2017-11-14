@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const GdaxApi_1 = require("../../src/sources/GdaxApi");
 describe("GdaxApi", () => {
-    const api = new GdaxApi_1.GdaxApi();
+    const api = new GdaxApi_1.GdaxApi({});
     it("gets ticker list", async (done) => {
         const products = await api.getProducts();
         expect(products.map((pi) => pi.id).includes("BTC-USD")).toBeTruthy();
@@ -10,7 +10,7 @@ describe("GdaxApi", () => {
     });
     it("gets", async (done) => {
         try {
-            const data = await api.getPriceHistory();
+            const data = await api.getPriceHistory(["BTC-USD"]);
             expect(data).toBeTruthy();
             done();
         }
@@ -28,7 +28,7 @@ describe("GdaxApi", () => {
                     break;
             }
         };
-        api.subscribe(callback);
+        api.subscribe(["BTC-USD"], callback);
     });
 });
 //# sourceMappingURL=gdax-api-spec.js.map

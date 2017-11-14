@@ -14,7 +14,10 @@ describe("Price History", () => {
 
 describe("Parsed data", () => {
   it("parses", () => {
-    const response = "[[1510269120,7110.01,7110.02,7110.01,7110.02,3.489994839999999],[1510269060,7110,7110.01,7110.01,7110,4.042463090000001]]";
+    const response = "[" +
+        "[1510269120,7110.01,7110.02,7110.01,7110.02,3.489994839999999]," +
+        "[1510269060,7110,7110.01,7110.01,7110,4.042463090000001]" +
+        "]";
     const json = JSON.parse(response);
     const adapter = new GdaxPriceHistoryAdapter();
     const priceHistory = adapter.convert(json);

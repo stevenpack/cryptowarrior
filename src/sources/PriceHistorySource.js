@@ -4,11 +4,11 @@ const PriceHistory_1 = require("../types/PriceHistory");
 class GdaxPriceHistoryAdapter {
     convert(data) {
         try {
-            let candles = new Array();
-            for (let item of data) {
+            const candles = [];
+            for (const item of data) {
                 try {
-                    //console.log("About to map: " + item);
-                    let candle = this.map(item);
+                    // console.log("About to map: " + item);
+                    const candle = this.map(item);
                     candles.push(candle);
                 }
                 catch (e) {
@@ -24,12 +24,12 @@ class GdaxPriceHistoryAdapter {
         }
     }
     map(item) {
-        let time = parseInt(item[0]);
-        let low = parseFloat(item[1]);
-        let high = parseFloat(item[2]);
-        let open = parseFloat(item[3]);
-        let close = parseFloat(item[4]);
-        let volume = parseFloat(item[5]);
+        const time = parseInt(item[0]);
+        const low = parseFloat(item[1]);
+        const high = parseFloat(item[2]);
+        const open = parseFloat(item[3]);
+        const close = parseFloat(item[4]);
+        const volume = parseFloat(item[5]);
         return new PriceHistory_1.Candle(time, low, high, open, close, volume);
     }
 }
@@ -39,9 +39,9 @@ class PriceHistorySource {
         this.rawSource = rawSource;
         this.adapter = adapter;
     }
-    async getData() {
-        let data = await this.rawSource.getData();
-        let priceHistory = this.adapter.convert(data);
+    async getData(opts) {
+        const data = await this.rawSource.getData(opts);
+        const priceHistory = this.adapter.convert(data);
         return priceHistory;
     }
 }

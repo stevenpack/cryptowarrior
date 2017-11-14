@@ -2,6 +2,7 @@ import { Events } from "../events/events";
 import { GdaxApi } from "../sources/GdaxApi";
 import { Component, ComponentBase, WidgetOpts } from "./Component";
 import {Throttle} from "../events/Throttle";
+import {IStreamingSource} from "../sources/Interfaces";
 const contrib = require("blessed-contrib");
 
 export class LivePriceComponent extends ComponentBase implements Component {
@@ -9,7 +10,7 @@ export class LivePriceComponent extends ComponentBase implements Component {
 
     private throttle: Throttle;
 
-    constructor(eventHub) {
+    constructor(eventHub, private source: IStreamingSource) {
         super(eventHub);
         this.throttle = new Throttle(200);
     }
@@ -33,9 +34,8 @@ export class LivePriceComponent extends ComponentBase implements Component {
     }
 
     public async load(opts?: any) {
-        const rawSource = new GdaxApi();
         const callback = (data) => this.onPriceChanged(data);
-        rawSource.subscribe(callback);
+        this.source.subscribe(["BTC-USD"], callback);
     }
 
     public onPriceChanged(data: any) {

@@ -4,7 +4,7 @@
   "description": "Text-based crypto dashboard",
   "main": "index.js",
   "scripts": {
-    "start": "node src/index.js",
+    "start": "node $NODE_DEBUG_OPTION src/index.js",
     "test": "jest",
     "unit": "jest unit",
     "int": "jest integration",
@@ -38,6 +38,7 @@
     "install": "^0.10.1",
     "jest": "^21.2.1",
     "limiter": "^1.1.2",
+    "moment": "^2.19.2",
     "npm": "^5.5.1",
     "pubsub-js": "^1.5.7",
     "request": "^2.83.0",

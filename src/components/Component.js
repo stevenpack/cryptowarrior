@@ -16,6 +16,9 @@ class ComponentBase {
         element.focus();
         this.eventHub.publish(Events_1.Events.UIUpdate, null);
     }
+    fireUpdated() {
+        this.eventHub.publish(Events_1.Events.UIUpdate, null);
+    }
 }
 exports.ComponentBase = ComponentBase;
 class WidgetOpts {

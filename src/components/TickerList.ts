@@ -37,7 +37,7 @@ export class TickerListComponent extends ComponentBase implements Component {
         const ticker = this.products[index];
         // TODO: Redefine GDax types... prefer to be platform agnostic
         // TODO: This will go to screen, need flag for whether it should rebroadcast to children
-        this.eventHub.publish(Events.TickerChanged, {ticker});
+        this.eventHub.publish(Events.TickerChanged, ticker);
         this.eventHub.publish(Events.LogEvent, "New ticker: " + ticker.id);
         this.list.hide();
     }
@@ -46,7 +46,7 @@ export class TickerListComponent extends ComponentBase implements Component {
         const rawSource = new GdaxApi();
         this.products = await rawSource.getProducts();
         for (const p of this.products) {
-            // Works (index.d.ts is wrong)
+            //Works (index.d.ts is wrong)
             this.list.pushItem(p.id);
         }
     }

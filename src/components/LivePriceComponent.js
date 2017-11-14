@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const events_1 = require("../events/events");
-const GdaxApi_1 = require("../sources/GdaxApi");
 const Component_1 = require("./Component");
 const Throttle_1 = require("../events/Throttle");
 const contrib = require("blessed-contrib");
 class LivePriceComponent extends Component_1.ComponentBase {
-    constructor(eventHub) {
+    constructor(eventHub, source) {
         super(eventHub);
+        this.source = source;
         this.throttle = new Throttle_1.Throttle(200);
     }
     getWidgetOpts(opts) {
@@ -24,9 +24,8 @@ class LivePriceComponent extends Component_1.ComponentBase {
     configure(widget, opts) {
     }
     async load(opts) {
-        const rawSource = new GdaxApi_1.GdaxApi();
         const callback = (data) => this.onPriceChanged(data);
-        rawSource.subscribe(callback);
+        this.source.subscribe(["BTC-USD"], callback);
     }
     onPriceChanged(data) {
         switch (data.type) {

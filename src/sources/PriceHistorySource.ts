@@ -1,60 +1,50 @@
 import { PriceHistory, Candle } from "../types/PriceHistory";
+import {IAdapter, IDataSource, ISource} from "./Interfaces";
 
 
-export interface RawSource {
-    getData() : Promise<any>
-}
 
-interface Source<T> {
-    getData() : Promise<T>
-}
-interface Adapter<T> {
-    convert(data: any) : T;
-}
-
-export class GdaxPriceHistoryAdapter implements Adapter<PriceHistory> {
-    public convert(data: any) : PriceHistory {
-        try {          
-            let candles = new Array<Candle>();
-            for (let item of data) {
+export class GdaxPriceHistoryAdapter implements IAdapter<PriceHistory> {
+    public convert(data: any): PriceHistory {
+        try {
+            const candles = [];
+            for (const item of data) {
                 try {
-                    //console.log("About to map: " + item);
-                    let candle = this.map(item)
+                    // console.log("About to map: " + item);
+                    const candle = this.map(item);
                     candles.push(candle);
                 } catch (e) {
                     console.error("Ignored bad candle.");
                     console.error(e);
                     console.error(item);
-                }            
+                }
             }
             return new PriceHistory(candles);
-        } catch (e) {            
+        } catch (e) {
             console.error(e);
-            
+
         }
     }
 
-    public map(item: any) : Candle {
-        let time = parseInt(item[0]);
-        let low = parseFloat(item[1]);
-        let high = parseFloat(item[2]);
-        let open = parseFloat(item[3]);
-        let close = parseFloat(item[4]);
-        let volume = parseFloat(item[5]);
+    public map(item: any): Candle {
+        const time = parseInt(item[0]);
+        const low = parseFloat(item[1]);
+        const high = parseFloat(item[2]);
+        const open = parseFloat(item[3]);
+        const close = parseFloat(item[4]);
+        const volume = parseFloat(item[5]);
 
         return new Candle(time, low, high, open, close, volume);
     }
 }
 
-export class PriceHistorySource implements Source<PriceHistory> {
+export class PriceHistorySource implements ISource<PriceHistory> {
 
-    constructor(private rawSource: RawSource, private adapter: Adapter<PriceHistory>) {
+    constructor(private rawSource: IDataSource, private adapter: IAdapter<PriceHistory>) {
     }
 
-    public async getData() : Promise<PriceHistory> {
-
-        let data = await this.rawSource.getData();
-        let priceHistory = this.adapter.convert(data);
-        return priceHistory
+    public async getData(opts): Promise<PriceHistory> {
+        const data = await this.rawSource.getData(opts);
+        const priceHistory = this.adapter.convert(data);
+        return priceHistory;
     }
 }

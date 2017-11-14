@@ -3,24 +3,30 @@ import { LoggerComponent } from "../components/LoggerComponent";
 import { PriceHistoryComponent } from "../components/PriceHistoryComponent";
 import { TickerListComponent } from "../components/TickerList";
 import { Element, LayoutBase, Location, Size } from "./LayoutBase";
+import Container from "../Container";
 /**
  * Layout optimized for viewing a single currency
  */
 export class SingleCurrency extends LayoutBase {
     public log: LoggerComponent;
-    public tickerList: TickerListComponent;
+    private tickerList: TickerListComponent;
+    private priceHistoryComponent: PriceHistoryComponent;
+    private livePriceComponent: LivePriceComponent;
 
-    constructor(eventHub: PubSubJS.Base) {
-        super(12, 12, eventHub);
+    constructor(eventHub: PubSubJS.Base, container: Container) {
+        super(12, 12, eventHub, container);
     }
 
     public addElements() {
         this.tickerList = new TickerListComponent(this.eventHub);
         this.log = new LoggerComponent(this.eventHub);
+        this.priceHistoryComponent = new PriceHistoryComponent(this.eventHub, this.container.priceHistorySource);
+        this.livePriceComponent = new LivePriceComponent(this.eventHub, this.container.livePriceSource);
+
         this.elements.push(new Element(this.log, new Location(9, 0), new Size(3, 12)));
-        this.elements.push(new Element(this.tickerList, new Location(0, 0), new Size(12, 2)));
-        this.elements.push(new Element(new PriceHistoryComponent(this.eventHub), new Location(2, 8), new Size(10, 4)));
-        this.elements.push(new Element(new LivePriceComponent(this.eventHub), new Location(0, 8), new Size(2, 4)));
+        //this.elements.push(new Element(this.tickerList, new Location(0, 0), new Size(12, 2)));
+        this.elements.push(new Element(this.priceHistoryComponent, new Location(2, 7), new Size(10, 5)));
+        this.elements.push(new Element(this.livePriceComponent, new Location(0, 8), new Size(2, 4)));
     }
 
     public bindKeys() {

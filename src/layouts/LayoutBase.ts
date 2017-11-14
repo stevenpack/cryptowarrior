@@ -4,6 +4,7 @@ const contrib = require("blessed-contrib");
 import { Component, ILog, ComponentBase } from "../components/Component";
 import { Events } from "../events/events";
 import {Throttle} from "../events/Throttle";
+import Container from "../Container";
 
 export class Location {
     constructor(public x: number, public y: number) {}
@@ -22,7 +23,6 @@ export class Element {
 }
 
 export abstract class LayoutBase {
-    protected eventHub: PubSubJS.Base;
     protected screen: blessed.Widgets.Screen;
     protected elements: Element[];
 
@@ -31,10 +31,9 @@ export abstract class LayoutBase {
     private uiThrottle: Throttle;
     private renderCount = 0;
 
-    constructor(rows: number, cols: number, eventHub) {
+    constructor(rows: number, cols: number, protected eventHub, protected container: Container) {
         this.screen = blessed.screen({});
         this.grid = new contrib.grid({rows, cols, screen: this.screen})     ;
-        this.eventHub = eventHub;
         this.elements = [];
         this.uiThrottle = new Throttle(200);
         // todo: check javascript spec re: calling abstract from constructor
@@ -79,7 +78,7 @@ export abstract class LayoutBase {
                     if (this.uiThrottle.tryRemoveToken()) {
                         this.renderCount++;
                         if (this.renderCount % 100 === 0) {
-                            this.onLogEvent(null, "100 renders");
+                            this.onLogEvent(null, `+100 renders (${this.renderCount})`);
                         }
                         this.screen.render();
                     }

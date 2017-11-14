@@ -1,28 +1,34 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const gdax_1 = require("gdax");
+const Events_1 = require("../events/Events");
 class GdaxApi {
-    constructor() {
+    constructor(eventHub) {
+        this.eventHub = eventHub;
         this.httpClient = new gdax_1.PublicClient();
-        this.websocketClient = new gdax_1.WebsocketClient(["BTC-USD"]);
     }
-    async getData() {
-        return this.getPriceHistory();
+    async getData(opts) {
+        return this.getPriceHistory(opts);
     }
-    async getPriceHistory() {
-        return this.httpClient.getProductHistoricRates(null);
+    async getPriceHistory(productIds) {
+        return this.httpClient.getProductHistoricRates(productIds);
     }
     async getProducts() {
         return this.httpClient.getProducts();
     }
-    subscribe(callback) {
-        this.websocketClient.on("close", () => { console.log("open"); });
+    subscribe(productIds, callback) {
+        this.unsubscribe();
+        this.websocketClient = new gdax_1.WebsocketClient(productIds);
+        this.websocketClient.on("open", () => this.publishEvent("GDAX Websocket: Open"));
         this.websocketClient.on("message", (data) => { callback(data); });
-        this.websocketClient.on("error", (err) => { console.error(err); });
-        this.websocketClient.on("close", () => { console.log("close"); });
+        this.websocketClient.on("error", (err) => this.publishEvent(`GDAX Websocket: Error (${err})`));
+        this.websocketClient.on("close", () => this.publishEvent("GDAX Websocket: Close"));
     }
     unsubscribe() {
         this.websocketClient.disconnect();
+    }
+    publishEvent(data) {
+        this.eventHub.publish(Events_1.Events.LogEvent, data);
     }
 }
 exports.GdaxApi = GdaxApi;

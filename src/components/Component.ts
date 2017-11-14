@@ -18,6 +18,9 @@ export abstract class ComponentBase {
         this.eventHub.publish(Events.UIUpdate, null);
     }
 
+    protected fireUpdated() {
+        this.eventHub.publish(Events.UIUpdate, null);
+    }
 }
 
 export interface ILog {
@@ -57,6 +60,4 @@ export interface Component {
      * Load the (initial) data
      */
     load(opts?: any);
-
-    //update()
 }

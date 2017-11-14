@@ -32,11 +32,12 @@ class Element {
 }
 exports.Element = Element;
 class LayoutBase {
-    constructor(rows, cols, eventHub) {
+    constructor(rows, cols, eventHub, container) {
+        this.eventHub = eventHub;
+        this.container = container;
         this.renderCount = 0;
         this.screen = blessed.screen({});
         this.grid = new contrib.grid({ rows, cols, screen: this.screen });
-        this.eventHub = eventHub;
         this.elements = [];
         this.uiThrottle = new Throttle_1.Throttle(200);
         // todo: check javascript spec re: calling abstract from constructor
@@ -73,7 +74,7 @@ class LayoutBase {
                     if (this.uiThrottle.tryRemoveToken()) {
                         this.renderCount++;
                         if (this.renderCount % 100 === 0) {
-                            this.onLogEvent(null, "100 renders");
+                            this.onLogEvent(null, `+100 renders (${this.renderCount})`);
                         }
                         this.screen.render();
                     }
