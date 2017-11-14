@@ -20,7 +20,7 @@ class Size {
 }
 exports.Size = Size;
 /**
- * An `Element` is composed of a `Component`, `Location` and `Size` to make up
+ * An `Element` is composed of a `IComponent`, `Location` and `Size` to make up
  * part of a `LayoutBase`
  */
 class Element {

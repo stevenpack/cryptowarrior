@@ -1,4 +1,4 @@
-import { Component, WidgetOpts, ComponentBase } from "./Component";
+import { IComponent, WidgetOpts, ComponentBase } from "./Component";
 import moment = require("moment");
 import {Events} from "../events/Events";
 import {ISource} from "../sources/Interfaces";
@@ -6,7 +6,7 @@ import {PriceHistory} from "../types/PriceHistory";
 
 const contrib = require("blessed-contrib");
 
-export class PriceHistoryComponent extends ComponentBase implements Component {
+export class PriceHistoryComponent extends ComponentBase implements IComponent {
 
     public headers: string[];
     public table: any;

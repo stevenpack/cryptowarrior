@@ -1,6 +1,6 @@
 
-export interface IStreamingSource {
-    subscribe(opts: any, callback: (data) => void);
+export interface IStreamingSource<T> {
+    subscribe(opts: any, callback: (t: T) => void);
 }
 
 export interface IDataSource {

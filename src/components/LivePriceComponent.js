@@ -27,17 +27,13 @@ class LivePriceComponent extends Component_1.ComponentBase {
         const callback = (data) => this.onPriceChanged(data);
         this.source.subscribe(["BTC-USD"], callback);
     }
-    onPriceChanged(data) {
-        switch (data.type) {
-            case "open":
-                if (!this.throttle.tryRemoveToken()) {
-                    return;
-                }
-                this.lcd.setDisplay(data.price);
-                // too heavy-weight? just mark component as dirty?
-                this.eventHub.publish(events_1.Events.UIUpdate, null);
-                break;
+    onPriceChanged(livePrice) {
+        if (!this.throttle.tryRemoveToken()) {
+            return;
         }
+        this.lcd.setDisplay(livePrice.price);
+        // too heavy-weight? just mark component as dirty?
+        this.eventHub.publish(events_1.Events.UIUpdate, null);
     }
 }
 exports.LivePriceComponent = LivePriceComponent;

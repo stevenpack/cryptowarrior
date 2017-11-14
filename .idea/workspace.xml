@@ -2,37 +2,33 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1058f5d6-5b9c-4c9c-8a3f-fcc67ae88a38" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/sources/MockSources.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/sources/MockSources.js.map" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/sources/MockSources.ts" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/sources/TickerSource.ts" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/types/Ticker.ts" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/sources/RawTestApi.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/sources/RawTestApi.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/sources/RawTestApi.ts" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/typescript-compiler.xml" afterPath="$PROJECT_DIR$/.idea/typescript-compiler.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/types/LivePrice.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Container.js" afterPath="$PROJECT_DIR$/src/Container.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Container.js.map" afterPath="$PROJECT_DIR$/src/Container.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Container.ts" afterPath="$PROJECT_DIR$/src/Container.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Component.js" afterPath="$PROJECT_DIR$/src/components/Component.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Component.js.map" afterPath="$PROJECT_DIR$/src/components/Component.js.map" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Component.ts" afterPath="$PROJECT_DIR$/src/components/Component.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/TickerList.js" afterPath="$PROJECT_DIR$/src/components/TickerList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/LivePriceComponent.js" afterPath="$PROJECT_DIR$/src/components/LivePriceComponent.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/LivePriceComponent.js.map" afterPath="$PROJECT_DIR$/src/components/LivePriceComponent.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/LivePriceComponent.ts" afterPath="$PROJECT_DIR$/src/components/LivePriceComponent.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/LoggerComponent.js.map" afterPath="$PROJECT_DIR$/src/components/LoggerComponent.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/LoggerComponent.ts" afterPath="$PROJECT_DIR$/src/components/LoggerComponent.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/PriceHistoryComponent.js.map" afterPath="$PROJECT_DIR$/src/components/PriceHistoryComponent.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/PriceHistoryComponent.ts" afterPath="$PROJECT_DIR$/src/components/PriceHistoryComponent.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/TickerList.js.map" afterPath="$PROJECT_DIR$/src/components/TickerList.js.map" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/TickerList.ts" afterPath="$PROJECT_DIR$/src/components/TickerList.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/events/Events.js" afterPath="$PROJECT_DIR$/src/events/Events.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/events/Events.js.map" afterPath="$PROJECT_DIR$/src/events/Events.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/events/Events.ts" afterPath="$PROJECT_DIR$/src/events/Events.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/layouts/LayoutBase.js" afterPath="$PROJECT_DIR$/src/layouts/LayoutBase.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/layouts/LayoutBase.js.map" afterPath="$PROJECT_DIR$/src/layouts/LayoutBase.js.map" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/layouts/LayoutBase.ts" afterPath="$PROJECT_DIR$/src/layouts/LayoutBase.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/layouts/SingleCurrency.js" afterPath="$PROJECT_DIR$/src/layouts/SingleCurrency.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/layouts/SingleCurrency.js.map" afterPath="$PROJECT_DIR$/src/layouts/SingleCurrency.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/layouts/SingleCurrency.ts" afterPath="$PROJECT_DIR$/src/layouts/SingleCurrency.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sources/GdaxApi.js" afterPath="$PROJECT_DIR$/src/sources/GdaxApi.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sources/GdaxApi.js.map" afterPath="$PROJECT_DIR$/src/sources/GdaxApi.js.map" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sources/GdaxApi.ts" afterPath="$PROJECT_DIR$/src/sources/GdaxApi.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sources/Interfaces.ts" afterPath="$PROJECT_DIR$/src/sources/Interfaces.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sources/MockSources.js" afterPath="$PROJECT_DIR$/src/sources/MockSources.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sources/MockSources.js.map" afterPath="$PROJECT_DIR$/src/sources/MockSources.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sources/MockSources.ts" afterPath="$PROJECT_DIR$/src/sources/MockSources.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/types/PriceHistory.js.map" afterPath="$PROJECT_DIR$/src/types/PriceHistory.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/types/PriceHistory.ts" afterPath="$PROJECT_DIR$/src/types/PriceHistory.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tslint.json" afterPath="$PROJECT_DIR$/tslint.json" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -49,79 +45,54 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="TickerList.ts" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/components/TickerList.ts">
+      <file leaf-file-name="tslint.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tslint.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="352">
-              <caret line="48" column="31" lean-forward="false" selection-start-line="48" selection-start-column="31" selection-end-line="48" selection-end-column="31" />
+            <state relative-caret-position="140">
+              <caret line="10" column="32" lean-forward="false" selection-start-line="10" selection-start-column="32" selection-end-line="10" selection-end-column="32" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PriceHistory.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/types/PriceHistory.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="42">
+              <caret line="3" column="40" lean-forward="false" selection-start-line="3" selection-start-column="40" selection-end-line="3" selection-end-column="40" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LivePrice.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/types/LivePrice.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="28">
+              <caret line="2" column="59" lean-forward="false" selection-start-line="2" selection-start-column="59" selection-end-line="2" selection-end-column="59" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LivePriceComponent.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/LivePriceComponent.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="366">
+              <caret line="44" column="19" lean-forward="false" selection-start-line="44" selection-start-column="19" selection-end-line="44" selection-end-column="19" />
               <folding>
-                <element signature="e#0#35#0" expanded="true" />
+                <element signature="e#0#42#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TickerList.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/TickerList.js">
+      <file leaf-file-name="package.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding>
-                <marker date="1510692137000" expanded="true" signature="263:1537" ph="{...}" />
-                <marker date="1510692137000" expanded="true" signature="845:1245" ph="{...}" />
-                <marker date="1510692137000" expanded="true" signature="899:1058" ph="//..." />
-                <marker date="1510692137000" expanded="true" signature="1267:1461" ph="{...}" />
-                <marker date="1510692137000" expanded="true" signature="1363:1455" ph="{...}" />
-                <marker date="1510692137000" expanded="true" signature="1485:1535" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Component.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/Component.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="294">
-              <caret line="21" column="51" lean-forward="false" selection-start-line="21" selection-start-column="51" selection-end-line="21" selection-end-column="51" />
-              <folding>
-                <element signature="e#1#36#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SingleCurrency.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/layouts/SingleCurrency.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="402">
-              <caret line="34" column="33" lean-forward="false" selection-start-line="34" selection-start-column="33" selection-end-line="34" selection-end-column="33" />
-              <folding>
-                <element signature="e#0#70#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PriceHistorySource.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/sources/PriceHistorySource.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="352">
-              <caret line="41" column="4" lean-forward="false" selection-start-line="41" selection-start-column="4" selection-end-line="41" selection-end-column="4" />
-              <folding>
-                <element signature="e#0#61#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Container.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Container.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
-              <caret line="38" column="5" lean-forward="true" selection-start-line="38" selection-start-column="5" selection-end-line="38" selection-end-column="5" />
-              <folding>
-                <element signature="e#0#36#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="-144">
+              <caret line="6" column="37" lean-forward="false" selection-start-line="6" selection-start-column="37" selection-end-line="6" selection-end-column="37" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -129,34 +100,10 @@
       <file leaf-file-name="GdaxApi.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sources/GdaxApi.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="11">
-              <caret line="5" column="61" lean-forward="false" selection-start-line="5" selection-start-column="61" selection-end-line="5" selection-end-column="61" />
+            <state relative-caret-position="336">
+              <caret line="38" column="24" lean-forward="false" selection-start-line="38" selection-start-column="24" selection-end-line="38" selection-end-column="24" />
               <folding>
                 <element signature="e#82#146#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LayoutBase.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/layouts/LayoutBase.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="199">
-              <caret line="77" column="25" lean-forward="false" selection-start-line="77" selection-start-column="25" selection-end-line="77" selection-end-column="25" />
-              <folding>
-                <element signature="e#81#154#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TickerSource.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/sources/TickerSource.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="84">
-              <caret line="6" column="54" lean-forward="false" selection-start-line="6" selection-start-column="54" selection-end-line="6" selection-end-column="54" />
-              <folding>
-                <element signature="e#0#47#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -165,11 +112,45 @@
       <file leaf-file-name="MockSources.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sources/MockSources.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="394">
-              <caret line="34" column="13" lean-forward="false" selection-start-line="34" selection-start-column="13" selection-end-line="34" selection-end-column="13" />
+            <state relative-caret-position="98">
+              <caret line="7" column="67" lean-forward="false" selection-start-line="7" selection-start-column="67" selection-end-line="7" selection-end-column="67" />
               <folding>
                 <element signature="e#1#69#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PriceHistoryComponent.ts" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/components/PriceHistoryComponent.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="112">
+              <caret line="8" column="47" lean-forward="true" selection-start-line="8" selection-start-column="47" selection-end-line="8" selection-end-column="47" />
+              <folding>
+                <element signature="e#0#68#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Component.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/Component.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="70">
+              <caret line="5" column="22" lean-forward="false" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
+              <folding>
+                <element signature="e#1#36#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Interfaces.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/sources/Interfaces.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="42">
+              <caret line="3" column="1" lean-forward="false" selection-start-line="3" selection-start-column="1" selection-end-line="3" selection-end-column="1" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -209,9 +190,7 @@
         <option value="$PROJECT_DIR$/src/events/Throttle.ts" />
         <option value="$PROJECT_DIR$/__tests__/unit/throttle.ts" />
         <option value="$PROJECT_DIR$/src/components/LoggerComponent.ts" />
-        <option value="$PROJECT_DIR$/tslint.json" />
         <option value="$PROJECT_DIR$/TODO.md" />
-        <option value="$PROJECT_DIR$/src/sources/Interfaces.ts" />
         <option value="$PROJECT_DIR$/__tests__/integration/gdax-api-spec.ts" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/src/App.ts" />
@@ -219,18 +198,23 @@
         <option value="$PROJECT_DIR$/src/index.ts" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/src/components/PriceHistoryComponent.ts" />
-        <option value="$PROJECT_DIR$/src/components/LivePriceComponent.ts" />
         <option value="$PROJECT_DIR$/src/events/Events.ts" />
         <option value="$PROJECT_DIR$/src/sources/PriceHistorySource.ts" />
         <option value="$PROJECT_DIR$/src/types/Ticker.ts" />
         <option value="$PROJECT_DIR$/src/sources/RawTestApi.ts" />
-        <option value="$PROJECT_DIR$/src/sources/GdaxApi.ts" />
         <option value="$PROJECT_DIR$/src/sources/TickerSource.ts" />
         <option value="$PROJECT_DIR$/src/Container.ts" />
         <option value="$PROJECT_DIR$/src/layouts/SingleCurrency.ts" />
-        <option value="$PROJECT_DIR$/src/components/Component.ts" />
         <option value="$PROJECT_DIR$/src/layouts/LayoutBase.ts" />
         <option value="$PROJECT_DIR$/src/components/TickerList.ts" />
+        <option value="$PROJECT_DIR$/tslint.json" />
+        <option value="$PROJECT_DIR$/src/types/PriceHistory.ts" />
+        <option value="$PROJECT_DIR$/src/sources/Interfaces.ts" />
+        <option value="$PROJECT_DIR$/src/types/LivePrice.ts" />
+        <option value="$PROJECT_DIR$/src/components/LivePriceComponent.ts" />
+        <option value="$PROJECT_DIR$/src/sources/GdaxApi.ts" />
+        <option value="$PROJECT_DIR$/src/sources/MockSources.ts" />
+        <option value="$PROJECT_DIR$/src/components/Component.ts" />
       </list>
     </option>
   </component>
@@ -313,13 +297,6 @@
               <item name="packfinance" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="packfinance" type="b2602c69:ProjectViewProjectNode" />
-              <item name="packfinance" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="TickerList.ts" type="620a8d5e:NestingTreeNode" />
             </path>
             <path>
               <item name="packfinance" type="b2602c69:ProjectViewProjectNode" />
@@ -527,22 +504,22 @@
       <workItem from="1510610441738" duration="192000" />
       <workItem from="1510610714275" duration="301000" />
       <workItem from="1510611119117" duration="252000" />
-      <workItem from="1510611408078" duration="14388000" />
+      <workItem from="1510611408078" duration="15268000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="19375000" />
+    <option name="totallyTimeSpent" value="20255000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2636034" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2636034" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24947146" sideWeight="0.48422498" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32921812" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32892805" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32889965" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32921812" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24947146" sideWeight="0.515775" order="2" side_tool="true" content_ui="tabs" />
@@ -592,14 +569,14 @@
         <option value="$PROJECT_DIR$/src/components/TickerList.js.map" />
         <option value="$PROJECT_DIR$/src/components/Component.js" />
         <option value="$PROJECT_DIR$/src/components/Component.js.map" />
-        <option value="$PROJECT_DIR$/src/sources/RawTestApi.js" />
-        <option value="$PROJECT_DIR$/src/sources/RawTestApi.js.map" />
         <option value="$PROJECT_DIR$/src/sources/Interfaces.js.map" />
         <option value="$PROJECT_DIR$/src/sources/Interfaces.js" />
         <option value="$PROJECT_DIR$/src/sources/TickerSource.js" />
         <option value="$PROJECT_DIR$/src/sources/TickerSource.js.map" />
         <option value="$PROJECT_DIR$/src/types/Ticker.js" />
         <option value="$PROJECT_DIR$/src/types/Ticker.js.map" />
+        <option value="$PROJECT_DIR$/src/types/LivePrice.js.map" />
+        <option value="$PROJECT_DIR$/src/types/LivePrice.js" />
       </list>
     </option>
   </component>
@@ -632,13 +609,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/components/LivePriceComponent.ts</url>
-          <line>42</line>
-          <properties />
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/components/LivePriceComponent.ts</url>
-          <line>37</line>
+          <line>38</line>
           <properties />
           <option name="timeStamp" value="13" />
         </line-breakpoint>
@@ -648,23 +619,12 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/__tests__/unit/throttle-a.ts" />
-    <entry file="file://$PROJECT_DIR$/src/events/Throttle.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="406">
-          <caret line="31" column="36" lean-forward="false" selection-start-line="31" selection-start-column="36" selection-end-line="31" selection-end-column="36" />
-          <folding>
-            <element signature="e#0#40#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/layouts/LayoutBase.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="378">
           <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
           <folding>
-            <element signature="e#81#154#0" expanded="true" />
+            <element signature="e#81#155#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -750,7 +710,7 @@
         <state relative-caret-position="56">
           <caret line="4" column="34" lean-forward="false" selection-start-line="4" selection-start-column="34" selection-end-line="4" selection-end-column="34" />
           <folding>
-            <marker date="1510690480000" expanded="true" signature="238:261" ph="{...}" />
+            <marker date="1510692517000" expanded="true" signature="238:261" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -778,7 +738,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1510690480000" expanded="true" signature="742:943" ph="{...}" />
+            <marker date="1510692517000" expanded="true" signature="742:943" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -787,14 +747,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="441">
           <caret line="57" column="16" lean-forward="false" selection-start-line="57" selection-start-column="16" selection-end-line="57" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tslint.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="10" column="32" lean-forward="false" selection-start-line="10" selection-start-column="27" selection-end-line="10" selection-end-column="32" />
           <folding />
         </state>
       </provider>
@@ -817,16 +769,6 @@
           <second_editor>
             <js_state />
           </second_editor>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/LoggerComponent.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="354">
-          <caret line="32" column="5" lean-forward="false" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="5" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -861,14 +803,6 @@
           <folding>
             <element signature="e#1#78#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="6" column="37" lean-forward="false" selection-start-line="6" selection-start-column="37" selection-end-line="6" selection-end-column="37" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -927,17 +861,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1510690480000" expanded="true" signature="90:191" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/PriceHistoryComponent.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="35" column="35" lean-forward="false" selection-start-line="35" selection-start-column="35" selection-end-line="35" selection-end-column="35" />
-          <folding>
-            <element signature="e#0#67#0" expanded="true" />
+            <marker date="1510692517000" expanded="true" signature="90:191" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -947,82 +871,6 @@
         <state relative-caret-position="56">
           <caret line="4" column="18" lean-forward="false" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/types/Ticker.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="3" column="4" lean-forward="false" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sources/Interfaces.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="9" column="17" lean-forward="false" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/LivePriceComponent.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="481">
-          <caret line="49" column="45" lean-forward="false" selection-start-line="49" selection-start-column="45" selection-end-line="49" selection-end-column="45" />
-          <folding>
-            <element signature="e#0#42#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sources/PriceHistorySource.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="41" column="4" lean-forward="false" selection-start-line="41" selection-start-column="4" selection-end-line="41" selection-end-column="4" />
-          <folding>
-            <element signature="e#0#61#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sources/GdaxApi.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="11">
-          <caret line="5" column="61" lean-forward="false" selection-start-line="5" selection-start-column="61" selection-end-line="5" selection-end-column="61" />
-          <folding>
-            <element signature="e#82#146#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Container.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="38" column="5" lean-forward="true" selection-start-line="38" selection-start-column="5" selection-end-line="38" selection-end-column="5" />
-          <folding>
-            <element signature="e#0#36#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sources/TickerSource.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="6" column="54" lean-forward="false" selection-start-line="6" selection-start-column="54" selection-end-line="6" selection-end-column="54" />
-          <folding>
-            <element signature="e#0#47#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sources/MockSources.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="394">
-          <caret line="34" column="13" lean-forward="false" selection-start-line="34" selection-start-column="13" selection-end-line="34" selection-end-column="13" />
-          <folding>
-            <element signature="e#1#69#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1036,22 +884,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="21" column="51" lean-forward="false" selection-start-line="21" selection-start-column="51" selection-end-line="21" selection-end-column="51" />
-          <folding>
-            <element signature="e#1#36#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/layouts/LayoutBase.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="199">
           <caret line="77" column="25" lean-forward="false" selection-start-line="77" selection-start-column="25" selection-end-line="77" selection-end-column="25" />
           <folding>
-            <element signature="e#81#154#0" expanded="true" />
+            <element signature="e#81#155#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1061,12 +899,12 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1510692137000" expanded="true" signature="263:1537" ph="{...}" />
-            <marker date="1510692137000" expanded="true" signature="845:1245" ph="{...}" />
-            <marker date="1510692137000" expanded="true" signature="899:1058" ph="//..." />
-            <marker date="1510692137000" expanded="true" signature="1267:1461" ph="{...}" />
-            <marker date="1510692137000" expanded="true" signature="1363:1455" ph="{...}" />
-            <marker date="1510692137000" expanded="true" signature="1485:1535" ph="{...}" />
+            <marker date="1510693004000" expanded="true" signature="263:1537" ph="{...}" />
+            <marker date="1510693004000" expanded="true" signature="845:1245" ph="{...}" />
+            <marker date="1510693004000" expanded="true" signature="899:1058" ph="//..." />
+            <marker date="1510693004000" expanded="true" signature="1267:1461" ph="{...}" />
+            <marker date="1510693004000" expanded="true" signature="1363:1455" ph="{...}" />
+            <marker date="1510693004000" expanded="true" signature="1485:1535" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1077,6 +915,144 @@
           <caret line="48" column="31" lean-forward="false" selection-start-line="48" selection-start-column="31" selection-end-line="48" selection-end-column="31" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/LoggerComponent.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="282">
+          <caret line="32" column="5" lean-forward="false" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="5" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sources/PriceHistorySource.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="41" column="4" lean-forward="false" selection-start-line="41" selection-start-column="4" selection-end-line="41" selection-end-column="4" />
+          <folding>
+            <element signature="e#0#61#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Container.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="366">
+          <caret line="37" column="41" lean-forward="false" selection-start-line="37" selection-start-column="41" selection-end-line="37" selection-end-column="41" />
+          <folding>
+            <element signature="e#0#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sources/TickerSource.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="6" column="4" lean-forward="false" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
+          <folding>
+            <element signature="e#0#47#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/types/Ticker.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="42">
+          <caret line="3" column="4" lean-forward="false" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tslint.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="10" column="32" lean-forward="false" selection-start-line="10" selection-start-column="32" selection-end-line="10" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-144">
+          <caret line="6" column="37" lean-forward="false" selection-start-line="6" selection-start-column="37" selection-end-line="6" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/types/PriceHistory.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="42">
+          <caret line="3" column="40" lean-forward="false" selection-start-line="3" selection-start-column="40" selection-end-line="3" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sources/Interfaces.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="42">
+          <caret line="3" column="1" lean-forward="false" selection-start-line="3" selection-start-column="1" selection-end-line="3" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/types/LivePrice.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="28">
+          <caret line="2" column="59" lean-forward="false" selection-start-line="2" selection-start-column="59" selection-end-line="2" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/LivePriceComponent.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="366">
+          <caret line="44" column="19" lean-forward="false" selection-start-line="44" selection-start-column="19" selection-end-line="44" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#42#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sources/GdaxApi.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="38" column="24" lean-forward="false" selection-start-line="38" selection-start-column="24" selection-end-line="38" selection-end-column="24" />
+          <folding>
+            <element signature="e#82#146#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sources/MockSources.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="98">
+          <caret line="7" column="67" lean-forward="false" selection-start-line="7" selection-start-column="67" selection-end-line="7" selection-end-column="67" />
+          <folding>
+            <element signature="e#1#69#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="70">
+          <caret line="5" column="22" lean-forward="false" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
+          <folding>
+            <element signature="e#1#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/PriceHistoryComponent.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="8" column="47" lean-forward="true" selection-start-line="8" selection-start-column="47" selection-end-line="8" selection-end-column="47" />
+          <folding>
+            <element signature="e#0#68#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -2,8 +2,9 @@
 import {ProductInfo, PublicClient, WebsocketClient} from "gdax";
 import {Events} from "../events/Events";
 import {IDataSource, IStreamingSource} from "./Interfaces";
+import {LivePrice} from "../types/LivePrice";
 
-export class GdaxApi implements IDataSource, IStreamingSource {
+export class GdaxApi implements IDataSource, IStreamingSource<LivePrice> {
     public websocketClient: WebsocketClient;
     public httpClient: PublicClient;
 
@@ -23,14 +24,23 @@ export class GdaxApi implements IDataSource, IStreamingSource {
         return this.httpClient.getProducts();
     }
 
-    public subscribe(productIds: string[], callback: (data) => void) {
+    public subscribe(productIds: string[], callback: (data: LivePrice) => void) {
 
         this.unsubscribe();
         this.websocketClient = new WebsocketClient(productIds);
         this.websocketClient.on("open", () => this.publishEvent("GDAX Websocket: Open"));
-        this.websocketClient.on("message", (data) => { callback(data); });
+        this.websocketClient.on("message", (data) => this.onMessage(data, callback));
         this.websocketClient.on("error", (err) => this.publishEvent(`GDAX Websocket: Error (${err})`));
         this.websocketClient.on("close", () => this.publishEvent("GDAX Websocket: Close"));
+    }
+
+    private onMessage(data: any, callback: (data: LivePrice)) {
+        switch (data.type) {
+            case "open":
+                const livePrice = new LivePrice(data.id, data.price);
+                callback(livePrice);
+                break;
+        }
     }
 
     public unsubscribe() {

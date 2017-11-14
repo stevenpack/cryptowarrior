@@ -1,7 +1,7 @@
 import * as blessed from "blessed";
-import { Component, ComponentBase, ILog, WidgetOpts } from "./Component";
+import { IComponent, ComponentBase, ILog, WidgetOpts } from "./Component";
 
-export class LoggerComponent extends ComponentBase implements Component, ILog {
+export class LoggerComponent extends ComponentBase implements IComponent, ILog {
 
     public logger: blessed.Widgets.Log;
 

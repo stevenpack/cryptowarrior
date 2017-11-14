@@ -17,7 +17,7 @@ class ComponentBase {
         this.fireUpdated(true);
     }
     fireUpdated(force) {
-        this.eventHub.publish(Events_1.Events.UIUpdate, true);
+        this.eventHub.publish(Events_1.Events.UIUpdate, force);
     }
 }
 exports.ComponentBase = ComponentBase;

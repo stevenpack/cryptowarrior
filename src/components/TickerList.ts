@@ -1,10 +1,10 @@
 import * as blessed from "blessed";
 import { Events } from "../events/events";
-import { Component, ComponentBase, WidgetOpts } from "./Component";
+import { IComponent, ComponentBase, WidgetOpts } from "./Component";
 import {ISource} from "../sources/Interfaces";
 import {Ticker} from "../types/Ticker";
 
-export class TickerListComponent extends ComponentBase implements Component {
+export class TickerListComponent extends ComponentBase implements IComponent {
     public tickers: Ticker[];
     public list: blessed.Widgets.ListElement;
 

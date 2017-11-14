@@ -1,7 +1,7 @@
 import * as blessed from "blessed";
 const contrib = require("blessed-contrib");
 
-import { Component, ILog, ComponentBase } from "../components/Component";
+import { IComponent, ILog, ComponentBase } from "../components/Component";
 import { Events } from "../events/events";
 import {Throttle} from "../events/Throttle";
 import Container from "../Container";
@@ -15,11 +15,11 @@ export class Size {
 }
 
 /**
- * An `Element` is composed of a `Component`, `Location` and `Size` to make up
+ * An `Element` is composed of a `IComponent`, `Location` and `Size` to make up
  * part of a `LayoutBase`
  */
 export class Element {
-    constructor(public component: Component, public location: Location, public size: Size) {}
+    constructor(public component: IComponent, public location: Location, public size: Size) {}
 }
 
 export abstract class LayoutBase {

@@ -3,8 +3,9 @@ import {IDataSource, ISource, IStreamingSource} from "./Interfaces";
 import {Ticker} from "../types/Ticker";
 import {PriceHistory} from "../types/PriceHistory";
 import {GdaxPriceHistoryAdapter} from "./PriceHistorySource";
+import {LivePrice} from "../types/LivePrice";
 
-export class MockPriceHistorySource implements ISource<PriceHistory[]> {
+export class MockPriceHistorySource implements ISource<PriceHistory> {
 
     public getData(opts: any): Promise<PriceHistory> {
         const raw = [
@@ -18,15 +19,15 @@ export class MockPriceHistorySource implements ISource<PriceHistory[]> {
 }
 
 // todo: IStreamingSource<Price>
-export class MockLivePriceSource implements IStreamingSource {
+export class MockLivePriceSource implements IStreamingSource<LivePrice> {
 
-    public subscribe(opts: any, callback: (data: any) => void) {
+    public subscribe(opts: any, callback: (data: LivePrice) => void) {
         this.delayAndPublish(callback, 6500);
     }
 
-    private delayAndPublish(callback, price) {
+    private delayAndPublish(callback: (data: LivePrice) => void, price) {
         setTimeout(() => {
-            callback({type: "open", price});
+            callback(new LivePrice("BTC-USD", price));
             this.delayAndPublish(callback, price + 1);
         }, 1000);
     }

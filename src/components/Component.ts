@@ -15,11 +15,11 @@ export abstract class ComponentBase {
             element.hide();
         }
         element.focus();
-        this.fireUpdated(true)
+        this.fireUpdated(true);
     }
 
-    protected fireUpdated(force: boolean) {
-        this.eventHub.publish(Events.UIUpdate, true);
+    protected fireUpdated(force?: boolean) {
+        this.eventHub.publish(Events.UIUpdate, force);
     }
 }
 
@@ -34,12 +34,12 @@ export class WidgetOpts {
 }
 
 /**
- * A Component is the main building block. It contains the display (using Widgets)
+ * A IComponent is the main building block. It contains the display (using Widgets)
  * and the logic to get its data.
  *
  * Components with a size and location are `LayoutElements`
  */
-export interface Component {
+export interface IComponent {
 
     /**
      * Provide the widget and creation options for the screen to create it.

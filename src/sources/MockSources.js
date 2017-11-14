@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const Ticker_1 = require("../types/Ticker");
 const PriceHistorySource_1 = require("./PriceHistorySource");
+const LivePrice_1 = require("../types/LivePrice");
 class MockPriceHistorySource {
     getData(opts) {
         const raw = [
@@ -21,7 +22,7 @@ class MockLivePriceSource {
     }
     delayAndPublish(callback, price) {
         setTimeout(() => {
-            callback({ type: "open", price });
+            callback(new LivePrice_1.LivePrice("BTC-USD", price));
             this.delayAndPublish(callback, price + 1);
         }, 1000);
     }
