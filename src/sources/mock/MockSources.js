@@ -1,15 +1,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const Ticker_1 = require("../types/Ticker");
-const PriceHistorySource_1 = require("./PriceHistorySource");
-const LivePrice_1 = require("../types/LivePrice");
+const GdaxPriceHistorySource_1 = require("../gdax/GdaxPriceHistorySource");
+const LivePrice_1 = require("../../types/LivePrice");
+const Ticker_1 = require("../../types/Ticker");
 class MockPriceHistorySource {
     getData(opts) {
         const raw = [
             [1510269120, 7110.01, 7110.02, 7110.01, 7110.02, 3.489994839999999],
             [1510269060, 7110, 7110.01, 7110.01, 7110, 4.042463090000001],
         ];
-        const adapter = new PriceHistorySource_1.GdaxPriceHistoryAdapter();
+        const adapter = new GdaxPriceHistorySource_1.GdaxPriceHistoryAdapter();
         const priceHistory = adapter.convert(raw);
         return Promise.resolve(priceHistory);
     }
@@ -24,7 +24,7 @@ class MockLivePriceSource {
         setTimeout(() => {
             callback(new LivePrice_1.LivePrice("BTC-USD", price));
             this.delayAndPublish(callback, price + 1);
-        }, 1000);
+        }, 10);
     }
 }
 exports.MockLivePriceSource = MockLivePriceSource;

@@ -45,7 +45,7 @@ export class LivePriceComponent extends ComponentBase implements IComponent {
             return;
         }
         this.lcd.setDisplay(livePrice.price);
-        // too heavy-weight? just mark component as dirty?
+        // todo: too heavy-weight? just mark component as dirty?
         this.eventHub.publish(Events.UIUpdate, null);
     }
 

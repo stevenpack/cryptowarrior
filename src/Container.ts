@@ -1,11 +1,13 @@
 import * as PubSub from "pubsub-js";
-import {GdaxApi} from "./sources/GdaxApi";
-import {GdaxPriceHistoryAdapter, PriceHistorySource} from "./sources/PriceHistorySource";
 import {PriceHistory} from "./types/PriceHistory";
 import {IAdapter, IDataSource, ISource, IStreamingSource} from "./sources/Interfaces";
-import {MockLivePriceSource, MockPriceHistorySource, MockTickerSource} from "./sources/MockSources";
 import {Ticker} from "./types/Ticker";
-import {GdaxTickerSource} from "./sources/TickerSource";
+import {GdaxApi} from "./sources/gdax/GdaxApi";
+import {GdaxPriceHistoryAdapter, GdaxPriceHistorySource} from "./sources/gdax/GdaxPriceHistorySource";
+import {GdaxTickerSource} from "./sources/gdax/GdaxTickerSource";
+import {MockLivePriceSource, MockPriceHistorySource, MockTickerSource} from "./sources/mock/MockSources";
+import {LivePrice} from "./types/LivePrice";
+import {GdaxLivePriceSource} from "./sources/gdax/GdaxLivePriceSource";
 
 /**
  * IoC Container
@@ -19,7 +21,7 @@ export default class Container {
     public gdaxApi: GdaxApi;
     public gdaxPriceHistoryAdapter: IAdapter<PriceHistory>;
 
-    public livePriceSource: IStreamingSource;
+    public livePriceSource: IStreamingSource<LivePrice>;
     public priceHistorySource: ISource<PriceHistory>;
     public tickerSource: ISource<Ticker[]>;
 
@@ -28,17 +30,16 @@ export default class Container {
 
         this.gdaxApi = new GdaxApi(this.eventHub);
         this.gdaxPriceHistoryAdapter = new GdaxPriceHistoryAdapter();
-
         this.initMock();
     }
 
-    initGdax() {
-        this.priceHistorySource = new PriceHistorySource(this.gdaxApi, this.gdaxPriceHistoryAdapter);
-        this.livePriceSource = this.gdaxApi;
+    private initGdax() {
+        this.priceHistorySource = new GdaxPriceHistorySource(this.gdaxApi, this.gdaxPriceHistoryAdapter);
+        this.livePriceSource = new GdaxLivePriceSource(this.gdaxApi);
         this.tickerSource = new GdaxTickerSource(this.gdaxApi);
     }
 
-    initMock() {
+    private initMock() {
         this.priceHistorySource = new MockPriceHistorySource();
         this.livePriceSource = new MockLivePriceSource();
         this.tickerSource = new MockTickerSource();

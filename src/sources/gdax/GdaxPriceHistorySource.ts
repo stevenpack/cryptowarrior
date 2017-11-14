@@ -1,8 +1,9 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const PriceHistory_1 = require("../types/PriceHistory");
-class GdaxPriceHistoryAdapter {
-    convert(data) {
+import {GdaxApi} from "./GdaxApi";
+import {IAdapter, ISource} from "../Interfaces";
+import {Candle, PriceHistory} from "../../types/PriceHistory";
+
+export class GdaxPriceHistoryAdapter implements IAdapter<PriceHistory> {
+    public convert(data: any): PriceHistory {
         try {
             const candles = [];
             for (const item of data) {
@@ -10,40 +11,39 @@ class GdaxPriceHistoryAdapter {
                     // console.log("About to map: " + item);
                     const candle = this.map(item);
                     candles.push(candle);
-                }
-                catch (e) {
+                } catch (e) {
                     console.error("Ignored bad candle.");
                     console.error(e);
                     console.error(item);
                 }
             }
-            return new PriceHistory_1.PriceHistory(candles);
-        }
-        catch (e) {
+            return new PriceHistory(candles);
+        } catch (e) {
             console.error(e);
+
         }
     }
-    map(item) {
+
+    public map(item: any): Candle {
         const time = parseInt(item[0]);
         const low = parseFloat(item[1]);
         const high = parseFloat(item[2]);
         const open = parseFloat(item[3]);
         const close = parseFloat(item[4]);
         const volume = parseFloat(item[5]);
-        return new PriceHistory_1.Candle(time, low, high, open, close, volume);
+
+        return new Candle(time, low, high, open, close, volume);
     }
 }
-exports.GdaxPriceHistoryAdapter = GdaxPriceHistoryAdapter;
-class PriceHistorySource {
-    constructor(rawSource, adapter) {
-        this.rawSource = rawSource;
-        this.adapter = adapter;
+
+export class GdaxPriceHistorySource implements ISource<PriceHistory> {
+
+    constructor(private api: GdaxApi, private adapter: IAdapter<PriceHistory>) {
     }
-    async getData(opts) {
-        const data = await this.rawSource.getData(opts);
+
+    public async getData(opts): Promise<PriceHistory> {
+        const data = await this.api.getPriceHistory(opts);
         const priceHistory = this.adapter.convert(data);
         return priceHistory;
     }
 }
-exports.PriceHistorySource = PriceHistorySource;
-//# sourceMappingURL=PriceHistorySource.js.map

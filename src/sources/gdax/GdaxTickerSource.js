@@ -1,10 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const Ticker_1 = require("../types/Ticker");
+const Ticker_1 = require("../../types/Ticker");
 class GdaxTickerSource {
-    constructor(api, adapter) {
+    constructor(api) {
         this.api = api;
-        this.adapter = adapter;
     }
     async getData(opts) {
         const data = await this.api.getProducts();
@@ -12,4 +11,4 @@ class GdaxTickerSource {
     }
 }
 exports.GdaxTickerSource = GdaxTickerSource;
-//# sourceMappingURL=TickerSource.js.map
+//# sourceMappingURL=GdaxTickerSource.js.map

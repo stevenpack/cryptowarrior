@@ -1,9 +1,10 @@
 
-import {IDataSource, ISource, IStreamingSource} from "./Interfaces";
-import {Ticker} from "../types/Ticker";
-import {PriceHistory} from "../types/PriceHistory";
-import {GdaxPriceHistoryAdapter} from "./PriceHistorySource";
-import {LivePrice} from "../types/LivePrice";
+
+import {ISource, IStreamingSource} from "../Interfaces";
+import {PriceHistory} from "../../types/PriceHistory";
+import {GdaxPriceHistoryAdapter} from "../gdax/GdaxPriceHistorySource";
+import {LivePrice} from "../../types/LivePrice";
+import {Ticker} from "../../types/Ticker";
 
 export class MockPriceHistorySource implements ISource<PriceHistory> {
 
@@ -29,7 +30,7 @@ export class MockLivePriceSource implements IStreamingSource<LivePrice> {
         setTimeout(() => {
             callback(new LivePrice("BTC-USD", price));
             this.delayAndPublish(callback, price + 1);
-        }, 1000);
+        }, 10);
     }
 }
 

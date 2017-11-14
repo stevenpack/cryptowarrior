@@ -1,10 +1,10 @@
-import {IAdapter, ISource} from "./Interfaces";
-import {Ticker} from "../types/Ticker";
 import {GdaxApi} from "./GdaxApi";
+import {Ticker} from "../../types/Ticker";
+import {ISource} from "../Interfaces";
 
 export class GdaxTickerSource implements ISource<Ticker[]> {
 
-    constructor(private api: GdaxApi, private adapter?: IAdapter<Ticker>) {
+    constructor(private api: GdaxApi) {
     }
 
     public async getData(opts): Promise<Ticker[]> {
