@@ -24,11 +24,18 @@ class PriceHistoryComponent extends Component_1.ComponentBase {
     }
     configure(widget, opts) {
         widget.setData({ headers: this.headers, data: [] });
-        this.eventHub.subscribe(Events_1.Events.TickerChanged, (msg, data) => this.reload(data));
+        this.eventHub.subscribe(Events_1.Events.TickerChanged, (msg, data) => this.onTickerChanged(msg, data));
     }
     async load(opts) {
-        const ticker = opts || ["BTC-USD"];
-        const priceHistoryData = await this.source.getData(ticker);
+    }
+    onTickerChanged(msg, data) {
+        const ticker = data;
+        this.reload(ticker);
+    }
+    async reload(ticker) {
+        this.table.setData({ headers: this.headers, data: [] });
+        this.fireUpdated();
+        const priceHistoryData = await this.source.getData(ticker.id);
         // The table takes data as an array per row
         const tableData = [];
         for (const candle of priceHistoryData.Items) {
@@ -45,12 +52,6 @@ class PriceHistoryComponent extends Component_1.ComponentBase {
         }
         this.table.setData({ headers: this.headers, data: tableData });
         this.fireUpdated();
-    }
-    reload(ticker) {
-        // TODO: relaod with new ticker!
-        this.table.setData({ headers: this.headers, data: [] });
-        this.fireUpdated();
-        this.load();
     }
 }
 exports.PriceHistoryComponent = PriceHistoryComponent;

@@ -22,10 +22,13 @@ class LivePriceComponent extends Component_1.ComponentBase {
         this.lcd = widget;
     }
     configure(widget, opts) {
+        this.eventHub.subscribe(events_1.Events.TickerChanged, (msg, data) => this.onTickerChanged(msg, data));
     }
     async load(opts) {
+    }
+    reload(ticker) {
         const callback = (data) => this.onPriceChanged(data);
-        this.source.subscribe(["BTC-USD"], callback);
+        this.source.subscribe([ticker], callback);
     }
     onPriceChanged(livePrice) {
         if (!this.throttle.tryRemoveToken()) {
@@ -34,6 +37,10 @@ class LivePriceComponent extends Component_1.ComponentBase {
         this.lcd.setDisplay(livePrice.price);
         // todo: too heavy-weight? just mark component as dirty?
         this.eventHub.publish(events_1.Events.UIUpdate, null);
+    }
+    onTickerChanged(msg, data) {
+        this.lcd.label = data.id;
+        this.reload(data.id);
     }
 }
 exports.LivePriceComponent = LivePriceComponent;

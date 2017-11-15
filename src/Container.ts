@@ -30,7 +30,8 @@ export default class Container {
 
         this.gdaxApi = new GdaxApi(this.eventHub);
         this.gdaxPriceHistoryAdapter = new GdaxPriceHistoryAdapter();
-        this.initMock();
+        //this.initMock();
+        this.initGdax();
     }
 
     private initGdax() {

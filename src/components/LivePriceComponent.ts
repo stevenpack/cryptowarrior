@@ -1,5 +1,4 @@
 import { Events } from "../events/events";
-import { GdaxApi } from "../sources/GdaxApi";
 import { IComponent, ComponentBase, WidgetOpts } from "./Component";
 import {Throttle} from "../events/Throttle";
 import {IStreamingSource} from "../sources/Interfaces";
@@ -31,16 +30,18 @@ export class LivePriceComponent extends ComponentBase implements IComponent {
     }
 
     public configure(widget: any, opts?: any) {
-
+        this.eventHub.subscribe(Events.TickerChanged, (msg, data) => this.onTickerChanged(msg, data));
     }
 
     public async load(opts?: any) {
+    }
+
+    public reload(ticker: string) {
         const callback = (data) => this.onPriceChanged(data);
-        this.source.subscribe(["BTC-USD"], callback);
+        this.source.subscribe([ticker], callback);
     }
 
     public onPriceChanged(livePrice: LivePrice) {
-
         if (!this.throttle.tryRemoveToken()) {
             return;
         }
@@ -49,4 +50,8 @@ export class LivePriceComponent extends ComponentBase implements IComponent {
         this.eventHub.publish(Events.UIUpdate, null);
     }
 
+    private onTickerChanged(msg: any, data: any) {
+        this.lcd.label = data.id;
+        this.reload(data.id);
+    }
 }

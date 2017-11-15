@@ -40,8 +40,6 @@ class LayoutBase {
         this.grid = new contrib.grid({ rows, cols, screen: this.screen });
         this.elements = [];
         this.uiThrottle = new Throttle_1.Throttle(200);
-        // todo: check javascript spec re: calling abstract from constructor
-        this.init();
     }
     init() {
         this.addElements();
@@ -102,17 +100,23 @@ class LayoutBase {
     isLogger(element) {
         return element.component.log !== undefined;
     }
+    async load() {
+        this.preLoad();
+        for (const element of this.elements) {
+            await element.component.load();
+        }
+        this.postLoad();
+        this.screen.render();
+    }
     bindKeys() {
         // TODO: base screen with standard shortcuts and per-screen ones
         this.screen.key(["escape", "q", "C-c"], (ch, key) => {
             return process.exit(0);
         });
     }
-    async load() {
-        for (const element of this.elements) {
-            await element.component.load();
-        }
-        this.screen.render();
+    preLoad() {
+    }
+    postLoad() {
     }
 }
 exports.LayoutBase = LayoutBase;

@@ -4,6 +4,8 @@ import { PriceHistoryComponent } from "../components/PriceHistoryComponent";
 import { TickerListComponent } from "../components/TickerList";
 import { Element, LayoutBase, Location, Size } from "./LayoutBase";
 import Container from "../Container";
+import {Events} from "../events/Events";
+import {Ticker} from "../types/Ticker";
 /**
  * Layout optimized for viewing a single currency
  */
@@ -37,5 +39,9 @@ export class SingleCurrency extends LayoutBase {
         this.screen.key(["l"], (ch, key) => {
             this.log.toggleVisibility();
         });
+    }
+
+    protected postLoad() {
+        this.eventHub.publish(Events.TickerChanged, new Ticker("BTC-USD"));
     }
 }

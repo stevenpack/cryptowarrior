@@ -17,7 +17,8 @@ class Container {
         this.eventHub = PubSub;
         this.gdaxApi = new GdaxApi_1.GdaxApi(this.eventHub);
         this.gdaxPriceHistoryAdapter = new GdaxPriceHistorySource_1.GdaxPriceHistoryAdapter();
-        this.initMock();
+        //this.initMock();
+        this.initGdax();
     }
     initGdax() {
         this.priceHistorySource = new GdaxPriceHistorySource_1.GdaxPriceHistorySource(this.gdaxApi, this.gdaxPriceHistoryAdapter);

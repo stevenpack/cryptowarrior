@@ -1,5 +1,6 @@
 
-import {GdaxApi} from "../../src/sources/GdaxApi";
+
+import {GdaxApi} from "../../src/sources/gdax/GdaxApi";
 
 describe("GdaxApi", () => {
     const api = new GdaxApi({});

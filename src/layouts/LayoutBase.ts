@@ -33,11 +33,9 @@ export abstract class LayoutBase {
 
     constructor(rows: number, cols: number, protected eventHub, protected container: Container) {
         this.screen = blessed.screen({});
-        this.grid = new contrib.grid({rows, cols, screen: this.screen})     ;
+        this.grid = new contrib.grid({rows, cols, screen: this.screen});
         this.elements = [];
         this.uiThrottle = new Throttle(200);
-        // todo: check javascript spec re: calling abstract from constructor
-        this.init();
     }
 
     public abstract addElements();
@@ -110,6 +108,15 @@ export abstract class LayoutBase {
         return (element.component as ILog).log !== undefined;
     }
 
+    public async load() {
+        this.preLoad();
+        for (const element of this.elements) {
+            await element.component.load();
+        }
+        this.postLoad();
+        this.screen.render();
+    }
+
     protected bindKeys() {
         // TODO: base screen with standard shortcuts and per-screen ones
         this.screen.key(["escape", "q", "C-c"], (ch, key) => {
@@ -117,10 +124,11 @@ export abstract class LayoutBase {
         });
     }
 
-    public async load() {
-        for (const element of this.elements) {
-            await element.component.load();
-        }
-        this.screen.render();
+    protected preLoad() {
+
+    }
+
+    protected postLoad() {
+
     }
 }

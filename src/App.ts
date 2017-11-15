@@ -11,6 +11,7 @@ export class App {
     public loadUI() {
         const container = new Container();
         this.screen = new SingleCurrency(container.eventHub, container);
+        this.screen.init();
         this.screen.load()
             .then(() => {/* done*/})
             .catch((err) => console.error(err));

@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const PriceHistorySource_1 = require("../../src/sources/PriceHistorySource");
 const PriceHistory_1 = require("../../src/types/PriceHistory");
+const GdaxPriceHistorySource_1 = require("../../src/sources/gdax/GdaxPriceHistorySource");
 describe("Price History", () => {
     it("ctor", () => {
         const items = [];
@@ -17,7 +17,7 @@ describe("Parsed data", () => {
             "[1510269060,7110,7110.01,7110.01,7110,4.042463090000001]" +
             "]";
         const json = JSON.parse(response);
-        const adapter = new PriceHistorySource_1.GdaxPriceHistoryAdapter();
+        const adapter = new GdaxPriceHistorySource_1.GdaxPriceHistoryAdapter();
         const priceHistory = adapter.convert(json);
         expect(priceHistory).toBeTruthy();
         expect(priceHistory.Items).toBeTruthy();

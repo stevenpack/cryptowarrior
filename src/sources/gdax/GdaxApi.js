@@ -8,8 +8,10 @@ class GdaxApi {
         this.eventHub = eventHub;
         this.httpClient = new gdax_1.PublicClient();
     }
-    async getPriceHistory(productIds) {
-        return this.httpClient.getProductHistoricRates(productIds);
+    async getPriceHistory(productId) {
+        this.eventHub.publish(Events_1.Events.LogEvent, `getting ${productId}`);
+        const priceHistoryHttpClient = new gdax_1.PublicClient(productId);
+        return priceHistoryHttpClient.getProductHistoricRates(null);
     }
     async getProducts() {
         return this.httpClient.getProducts();
@@ -23,7 +25,9 @@ class GdaxApi {
         this.websocketClient.on("close", () => this.publishEvent("GDAX Websocket: Close"));
     }
     unsubscribe() {
-        this.websocketClient.disconnect();
+        if (this.websocketClient) {
+            this.websocketClient.disconnect();
+        }
     }
     publishEvent(data) {
         this.eventHub.publish(Events_1.Events.LogEvent, data);

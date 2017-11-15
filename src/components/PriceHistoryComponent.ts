@@ -3,6 +3,7 @@ import moment = require("moment");
 import {Events} from "../events/Events";
 import {ISource} from "../sources/Interfaces";
 import {PriceHistory} from "../types/PriceHistory";
+import {Ticker} from "../types/Ticker";
 
 const contrib = require("blessed-contrib");
 
@@ -33,13 +34,22 @@ export class PriceHistoryComponent extends ComponentBase implements IComponent {
 
     public configure(widget: any, opts?: any) {
         widget.setData({headers: this.headers, data: []});
-        this.eventHub.subscribe(Events.TickerChanged, (msg, data) => this.reload(data));
+        this.eventHub.subscribe(Events.TickerChanged, (msg, data) => this.onTickerChanged(msg, data));
     }
 
     public async load(opts?: any) {
+    }
 
-        const ticker = opts || ["BTC-USD"];
-        const priceHistoryData = await this.source.getData(ticker);
+    private onTickerChanged(msg, data) {
+        const ticker = data as Ticker;
+        this.reload(ticker);
+    }
+
+    private async reload(ticker) {
+        this.table.setData({headers: this.headers, data: []});
+        this.fireUpdated();
+
+        const priceHistoryData = await this.source.getData(ticker.id);
 
         // The table takes data as an array per row
         const tableData = [];
@@ -58,13 +68,5 @@ export class PriceHistoryComponent extends ComponentBase implements IComponent {
         }
         this.table.setData({headers: this.headers, data: tableData});
         this.fireUpdated();
-    }
-
-    private reload(ticker) {
-        // TODO: relaod with new ticker!
-        this.table.setData({headers: this.headers, data: []});
-        this.fireUpdated();
-        this.load();
-
     }
 }

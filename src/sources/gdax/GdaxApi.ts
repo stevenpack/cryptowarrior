@@ -10,8 +10,11 @@ export class GdaxApi {
        this.httpClient = new PublicClient();
     }
 
-    public async getPriceHistory(productIds: string[]): Promise<any> {
-       return this.httpClient.getProductHistoricRates(productIds);
+    public async getPriceHistory(productId: string): Promise<any> {
+        this.eventHub.publish(Events.LogEvent, `getting ${productId}`);
+
+        const priceHistoryHttpClient = new PublicClient(productId);
+        return priceHistoryHttpClient.getProductHistoricRates(null);
     }
 
     public async getProducts(): Promise<ProductInfo[]> {
@@ -29,7 +32,9 @@ export class GdaxApi {
     }
 
     public unsubscribe() {
-        this.websocketClient.disconnect();
+        if (this.websocketClient) {
+            this.websocketClient.disconnect();
+        }
     }
 
     private publishEvent(data: string) {

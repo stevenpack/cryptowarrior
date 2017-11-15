@@ -1,6 +1,6 @@
 
-import {GdaxPriceHistoryAdapter} from "../../src/sources/PriceHistorySource";
 import {Candle, PriceHistory} from "../../src/types/PriceHistory";
+import {GdaxPriceHistoryAdapter} from "../../src/sources/gdax/GdaxPriceHistorySource";
 
 describe("Price History", () => {
   it("ctor", () => {

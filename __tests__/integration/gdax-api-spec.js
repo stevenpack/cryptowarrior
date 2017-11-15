@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const GdaxApi_1 = require("../../src/sources/GdaxApi");
+const GdaxApi_1 = require("../../src/sources/gdax/GdaxApi");
 describe("GdaxApi", () => {
     const api = new GdaxApi_1.GdaxApi({});
     it("gets ticker list", async (done) => {

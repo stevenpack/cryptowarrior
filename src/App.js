@@ -8,6 +8,7 @@ class App {
     loadUI() {
         const container = new Container_1.default();
         this.screen = new SingleCurrency_1.SingleCurrency(container.eventHub, container);
+        this.screen.init();
         this.screen.load()
             .then(() => { })
             .catch((err) => console.error(err));

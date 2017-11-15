@@ -5,6 +5,8 @@ const LoggerComponent_1 = require("../components/LoggerComponent");
 const PriceHistoryComponent_1 = require("../components/PriceHistoryComponent");
 const TickerList_1 = require("../components/TickerList");
 const LayoutBase_1 = require("./LayoutBase");
+const Events_1 = require("../events/Events");
+const Ticker_1 = require("../types/Ticker");
 /**
  * Layout optimized for viewing a single currency
  */
@@ -30,6 +32,9 @@ class SingleCurrency extends LayoutBase_1.LayoutBase {
         this.screen.key(["l"], (ch, key) => {
             this.log.toggleVisibility();
         });
+    }
+    postLoad() {
+        this.eventHub.publish(Events_1.Events.TickerChanged, new Ticker_1.Ticker("BTC-USD"));
     }
 }
 exports.SingleCurrency = SingleCurrency;
