@@ -19,4 +19,4 @@ class GdaxLivePriceSource {
     }
 }
 exports.GdaxLivePriceSource = GdaxLivePriceSource;
-//# sourceMappingURL=GdaxLivePricesource.js.map
+//# sourceMappingURL=GdaxLivePriceSource.js.map

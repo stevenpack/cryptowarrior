@@ -6,4 +6,4 @@ Events.LogEvent = "log";
 Events.UIUpdate = "ui.updated";
 Events.TickerChanged = "ticker-changed";
 exports.Events = Events;
-//# sourceMappingURL=events.js.map
+//# sourceMappingURL=Events.js.map

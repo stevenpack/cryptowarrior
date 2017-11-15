@@ -9,7 +9,6 @@ class GdaxApi {
         this.httpClient = new gdax_1.PublicClient();
     }
     async getPriceHistory(productId) {
-        this.eventHub.publish(Events_1.Events.LogEvent, `getting ${productId}`);
         const priceHistoryHttpClient = new gdax_1.PublicClient(productId);
         return priceHistoryHttpClient.getProductHistoricRates(null);
     }

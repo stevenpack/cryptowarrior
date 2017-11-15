@@ -28,7 +28,6 @@
   },
   "homepage": "https://github.com/stevenpack/packfinance#readme",
   "dependencies": {
-    "@types/blessed": "^0.1.7",
     "@types/pubsub-js": "^1.5.18",
     "@types/request": "^2.0.7",
     "@types/request-promise": "^4.1.39",

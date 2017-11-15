@@ -10,7 +10,7 @@ describe("GdaxApi", () => {
     });
     it("gets", async (done) => {
         try {
-            const data = await api.getPriceHistory(["BTC-USD"]);
+            const data = await api.getPriceHistory("BTC-USD");
             expect(data).toBeTruthy();
             done();
         }

@@ -2,34 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1058f5d6-5b9c-4c9c-8a3f-fcc67ae88a38" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/PriceHistoryLineChartComponent.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/typescript-compiler.xml" afterPath="$PROJECT_DIR$/.idea/typescript-compiler.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/__tests__/integration/gdax-api-spec.js" afterPath="$PROJECT_DIR$/__tests__/integration/gdax-api-spec.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/__tests__/integration/gdax-api-spec.js.map" afterPath="$PROJECT_DIR$/__tests__/integration/gdax-api-spec.js.map" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/__tests__/integration/gdax-api-spec.ts" afterPath="$PROJECT_DIR$/__tests__/integration/gdax-api-spec.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/__tests__/unit/price-history.js" afterPath="$PROJECT_DIR$/__tests__/unit/price-history.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/__tests__/unit/price-history.js.map" afterPath="$PROJECT_DIR$/__tests__/unit/price-history.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/__tests__/unit/price-history.ts" afterPath="$PROJECT_DIR$/__tests__/unit/price-history.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/App.js" afterPath="$PROJECT_DIR$/src/App.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/App.js.map" afterPath="$PROJECT_DIR$/src/App.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/App.ts" afterPath="$PROJECT_DIR$/src/App.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Container.js" afterPath="$PROJECT_DIR$/src/Container.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Container.js.map" afterPath="$PROJECT_DIR$/src/Container.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Container.ts" afterPath="$PROJECT_DIR$/src/Container.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/LivePriceComponent.js" afterPath="$PROJECT_DIR$/src/components/LivePriceComponent.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/LivePriceComponent.js.map" afterPath="$PROJECT_DIR$/src/components/LivePriceComponent.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/LivePriceComponent.ts" afterPath="$PROJECT_DIR$/src/components/LivePriceComponent.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/PriceHistoryComponent.js" afterPath="$PROJECT_DIR$/src/components/PriceHistoryComponent.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/PriceHistoryComponent.js.map" afterPath="$PROJECT_DIR$/src/components/PriceHistoryComponent.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/PriceHistoryComponent.ts" afterPath="$PROJECT_DIR$/src/components/PriceHistoryComponent.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/layouts/LayoutBase.js" afterPath="$PROJECT_DIR$/src/layouts/LayoutBase.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/layouts/LayoutBase.js.map" afterPath="$PROJECT_DIR$/src/layouts/LayoutBase.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/layouts/LayoutBase.ts" afterPath="$PROJECT_DIR$/src/layouts/LayoutBase.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package-lock.json" afterPath="$PROJECT_DIR$/package-lock.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/events/Events.js" afterPath="$PROJECT_DIR$/src/events/Events.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/events/Events.js.map" afterPath="$PROJECT_DIR$/src/events/Events.js.map" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/layouts/SingleCurrency.js" afterPath="$PROJECT_DIR$/src/layouts/SingleCurrency.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/layouts/SingleCurrency.js.map" afterPath="$PROJECT_DIR$/src/layouts/SingleCurrency.js.map" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/layouts/SingleCurrency.ts" afterPath="$PROJECT_DIR$/src/layouts/SingleCurrency.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sources/gdax/GdaxApi.js" afterPath="$PROJECT_DIR$/src/sources/gdax/GdaxApi.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sources/gdax/GdaxApi.js.map" afterPath="$PROJECT_DIR$/src/sources/gdax/GdaxApi.js.map" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sources/gdax/GdaxApi.ts" afterPath="$PROJECT_DIR$/src/sources/gdax/GdaxApi.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sources/gdax/GdaxLivePriceSource.js" afterPath="$PROJECT_DIR$/src/sources/gdax/GdaxLivePriceSource.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sources/gdax/GdaxLivePriceSource.js.map" afterPath="$PROJECT_DIR$/src/sources/gdax/GdaxLivePriceSource.js.map" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -46,23 +36,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="SingleCurrency.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/layouts/SingleCurrency.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="263">
-              <caret line="44" column="8" lean-forward="false" selection-start-line="44" selection-start-column="8" selection-end-line="44" selection-end-column="8" />
-              <folding>
-                <element signature="e#0#70#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GdaxApi.ts" pinned="false" current-in-tab="true">
+      <file leaf-file-name="GdaxApi.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sources/gdax/GdaxApi.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="224">
-              <caret line="16" column="66" lean-forward="false" selection-start-line="16" selection-start-column="66" selection-end-line="16" selection-end-column="66" />
+            <state relative-caret-position="196">
+              <caret line="14" column="8" lean-forward="false" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="8" />
               <folding>
                 <element signature="e#82#146#0" expanded="true" />
               </folding>
@@ -70,11 +48,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.d.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/node_modules/gdax/index.d.ts">
+      <file leaf-file-name="gdax-api-spec.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/__tests__/integration/gdax-api-spec.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="226">
-              <caret line="153" column="8" lean-forward="false" selection-start-line="153" selection-start-column="8" selection-end-line="153" selection-end-column="8" />
+            <state relative-caret-position="169">
+              <caret line="15" column="60" lean-forward="false" selection-start-line="15" selection-start-column="60" selection-end-line="15" selection-end-column="60" />
               <folding />
             </state>
           </provider>
@@ -83,22 +61,10 @@
       <file leaf-file-name="GdaxPriceHistorySource.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sources/gdax/GdaxPriceHistorySource.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="524">
-              <caret line="44" column="42" lean-forward="false" selection-start-line="44" selection-start-column="42" selection-end-line="44" selection-end-column="42" />
+            <state relative-caret-position="235">
+              <caret line="44" column="21" lean-forward="false" selection-start-line="44" selection-start-column="21" selection-end-line="44" selection-end-column="21" />
               <folding>
                 <element signature="e#0#34#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LivePriceComponent.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/LivePriceComponent.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="622">
-              <caret line="54" column="29" lean-forward="false" selection-start-line="54" selection-start-column="29" selection-end-line="54" selection-end-column="29" />
-              <folding>
-                <element signature="e#0#42#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -107,7 +73,7 @@
       <file leaf-file-name="PriceHistoryComponent.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/PriceHistoryComponent.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="387">
+            <state relative-caret-position="129">
               <caret line="36" column="99" lean-forward="false" selection-start-line="36" selection-start-column="99" selection-end-line="36" selection-end-column="99" />
               <folding>
                 <element signature="e#0#68#0" expanded="true" />
@@ -116,12 +82,60 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="public.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/node_modules/gdax/lib/clients/public.js">
+      <file leaf-file-name="dash-test.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/dash-test.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="258">
-              <caret line="201" column="20" lean-forward="false" selection-start-line="201" selection-start-column="20" selection-end-line="201" selection-end-column="20" />
+            <state relative-caret-position="384">
+              <caret line="292" column="60" lean-forward="true" selection-start-line="292" selection-start-column="9" selection-end-line="292" selection-end-column="60" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PriceHistoryLineChartComponent.ts" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/components/PriceHistoryLineChartComponent.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="263">
+              <caret line="66" column="61" lean-forward="false" selection-start-line="66" selection-start-column="61" selection-end-line="66" selection-end-column="61" />
+              <folding>
+                <element signature="e#451#519#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SingleCurrency.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/layouts/SingleCurrency.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="406">
+              <caret line="34" column="109" lean-forward="false" selection-start-line="34" selection-start-column="109" selection-end-line="34" selection-end-column="109" />
+              <folding>
+                <element signature="e#0#70#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LayoutBase.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/layouts/LayoutBase.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="244">
+              <caret line="60" column="46" lean-forward="false" selection-start-line="60" selection-start-column="45" selection-end-line="60" selection-end-column="46" />
+              <folding>
+                <element signature="e#81#155#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LoggerComponent.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/LoggerComponent.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="462">
+              <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#35#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -129,33 +143,9 @@
       <file leaf-file-name="Interfaces.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sources/Interfaces.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="140">
-              <caret line="10" column="4" lean-forward="false" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="4" />
+            <state relative-caret-position="28">
+              <caret line="2" column="4" lean-forward="false" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="4" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Container.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Container.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
-              <caret line="37" column="56" lean-forward="false" selection-start-line="37" selection-start-column="56" selection-end-line="37" selection-end-column="56" />
-              <folding>
-                <element signature="e#0#36#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GdaxLivePriceSource.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/sources/gdax/GdaxLivePriceSource.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="327">
-              <caret line="24" column="0" lean-forward="true" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-              <folding>
-                <element signature="e#1#48#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -181,6 +171,11 @@
       <find>BTC</find>
       <find>reload</find>
       <find>historic</find>
+      <find>getting</find>
+      <find>errors</find>
+      <find>errorsLin</find>
+      <find>x</find>
+      <find>errors rate</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -219,16 +214,17 @@
         <option value="$PROJECT_DIR$/src/sources/gdax/GdaxLivePriceSource.ts" />
         <option value="$PROJECT_DIR$/src/sources/gdax/GdaxTickerSource.ts" />
         <option value="$PROJECT_DIR$/src/sources/mock/MockSources.ts" />
-        <option value="$PROJECT_DIR$/__tests__/integration/gdax-api-spec.ts" />
         <option value="$PROJECT_DIR$/__tests__/unit/price-history.ts" />
         <option value="$PROJECT_DIR$/src/components/PriceHistoryComponent.ts" />
         <option value="$PROJECT_DIR$/src/Container.ts" />
         <option value="$PROJECT_DIR$/src/App.ts" />
-        <option value="$PROJECT_DIR$/src/layouts/SingleCurrency.ts" />
-        <option value="$PROJECT_DIR$/src/layouts/LayoutBase.ts" />
-        <option value="$PROJECT_DIR$/src/components/LivePriceComponent.ts" />
         <option value="$PROJECT_DIR$/src/sources/gdax/GdaxPriceHistorySource.ts" />
+        <option value="$PROJECT_DIR$/src/components/LivePriceComponent.ts" />
         <option value="$PROJECT_DIR$/src/sources/gdax/GdaxApi.ts" />
+        <option value="$PROJECT_DIR$/__tests__/integration/gdax-api-spec.ts" />
+        <option value="$PROJECT_DIR$/src/layouts/LayoutBase.ts" />
+        <option value="$PROJECT_DIR$/src/layouts/SingleCurrency.ts" />
+        <option value="$PROJECT_DIR$/src/components/PriceHistoryLineChartComponent.ts" />
       </list>
     </option>
   </component>
@@ -282,54 +278,6 @@
             <path>
               <item name="packfinance" type="b2602c69:ProjectViewProjectNode" />
               <item name="packfinance" type="462c0819:PsiDirectoryNode" />
-              <item name=".vscode" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="packfinance" type="b2602c69:ProjectViewProjectNode" />
-              <item name="packfinance" type="462c0819:PsiDirectoryNode" />
-              <item name="__tests__" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="packfinance" type="b2602c69:ProjectViewProjectNode" />
-              <item name="packfinance" type="462c0819:PsiDirectoryNode" />
-              <item name="__tests__" type="462c0819:PsiDirectoryNode" />
-              <item name="integration" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="packfinance" type="b2602c69:ProjectViewProjectNode" />
-              <item name="packfinance" type="462c0819:PsiDirectoryNode" />
-              <item name="__tests__" type="462c0819:PsiDirectoryNode" />
-              <item name="unit" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="packfinance" type="b2602c69:ProjectViewProjectNode" />
-              <item name="packfinance" type="462c0819:PsiDirectoryNode" />
-              <item name="node_modules" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="packfinance" type="b2602c69:ProjectViewProjectNode" />
-              <item name="packfinance" type="462c0819:PsiDirectoryNode" />
-              <item name="node_modules" type="462c0819:PsiDirectoryNode" />
-              <item name="gdax" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="packfinance" type="b2602c69:ProjectViewProjectNode" />
-              <item name="packfinance" type="462c0819:PsiDirectoryNode" />
-              <item name="node_modules" type="462c0819:PsiDirectoryNode" />
-              <item name="gdax" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="packfinance" type="b2602c69:ProjectViewProjectNode" />
-              <item name="packfinance" type="462c0819:PsiDirectoryNode" />
-              <item name="node_modules" type="462c0819:PsiDirectoryNode" />
-              <item name="gdax" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-              <item name="clients" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="packfinance" type="b2602c69:ProjectViewProjectNode" />
-              <item name="packfinance" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -337,12 +285,6 @@
               <item name="packfinance" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="packfinance" type="b2602c69:ProjectViewProjectNode" />
-              <item name="packfinance" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="events" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="packfinance" type="b2602c69:ProjectViewProjectNode" />
@@ -362,19 +304,6 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="sources" type="462c0819:PsiDirectoryNode" />
               <item name="gdax" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="packfinance" type="b2602c69:ProjectViewProjectNode" />
-              <item name="packfinance" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="sources" type="462c0819:PsiDirectoryNode" />
-              <item name="mock" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="packfinance" type="b2602c69:ProjectViewProjectNode" />
-              <item name="packfinance" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="types" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -558,18 +487,18 @@
       <workItem from="1510610441738" duration="192000" />
       <workItem from="1510610714275" duration="301000" />
       <workItem from="1510611119117" duration="252000" />
-      <workItem from="1510611408078" duration="19803000" />
+      <workItem from="1510611408078" duration="21746000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24790000" />
+    <option name="totallyTimeSpent" value="26733000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1388" height="820" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2636034" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26344827" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25896123" sideWeight="0.48422498" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32921812" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -579,7 +508,7 @@
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24947146" sideWeight="0.515775" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3986207" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3986207" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24947146" sideWeight="0.51028806" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -627,6 +556,8 @@
         <option value="$PROJECT_DIR$/src/types/LivePrice.js" />
         <option value="$PROJECT_DIR$/src/sources/gdax/GdaxLivePricesource.js.map" />
         <option value="$PROJECT_DIR$/src/sources/gdax/GdaxLivePricesource.js" />
+        <option value="$PROJECT_DIR$/src/components/PriceHistoryLineChartComponent.js" />
+        <option value="$PROJECT_DIR$/src/components/PriceHistoryLineChartComponent.js.map" />
       </list>
     </option>
   </component>
@@ -638,45 +569,11 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/components/PriceHistoryComponent.ts</url>
-          <line>36</line>
-          <properties lambdaOrdinal="0" />
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/sources/gdax/GdaxPriceHistorySource.ts</url>
-          <line>44</line>
-          <properties />
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/sources/gdax/GdaxApi.ts</url>
-          <line>16</line>
-          <properties />
-          <option name="timeStamp" value="16" />
-        </line-breakpoint>
-      </breakpoints>
-      <option name="time" value="17" />
+      <option name="time" value="18" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/events/Events.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="14">
-          <caret line="1" column="12" lean-forward="false" selection-start-line="1" selection-start-column="12" selection-end-line="1" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/index.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="70">
-          <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -724,7 +621,7 @@
         <state relative-caret-position="56">
           <caret line="4" column="34" lean-forward="false" selection-start-line="4" selection-start-column="34" selection-end-line="4" selection-end-column="34" />
           <folding>
-            <marker date="1510693597000" expanded="true" signature="238:261" ph="{...}" />
+            <marker date="1510769353000" expanded="true" signature="238:261" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -752,7 +649,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1510694343000" expanded="true" signature="747:948" ph="{...}" />
+            <marker date="1510769353000" expanded="true" signature="745:946" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -761,14 +658,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="441">
           <caret line="57" column="16" lean-forward="false" selection-start-line="57" selection-start-column="16" selection-end-line="57" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/@types/blessed/index.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="318">
-          <caret line="1215" column="12" lean-forward="false" selection-start-line="1215" selection-start-column="12" selection-end-line="1215" selection-end-column="12" />
           <folding />
         </state>
       </provider>
@@ -794,14 +683,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/dash-test.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="14">
@@ -823,7 +704,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1510693597000" expanded="true" signature="90:191" ph="{...}" />
+            <marker date="1510769353000" expanded="true" signature="90:191" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -841,12 +722,12 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1510693597000" expanded="true" signature="263:1537" ph="{...}" />
-            <marker date="1510693597000" expanded="true" signature="845:1245" ph="{...}" />
-            <marker date="1510693597000" expanded="true" signature="899:1058" ph="//..." />
-            <marker date="1510693597000" expanded="true" signature="1267:1461" ph="{...}" />
-            <marker date="1510693597000" expanded="true" signature="1363:1455" ph="{...}" />
-            <marker date="1510693597000" expanded="true" signature="1485:1535" ph="{...}" />
+            <marker date="1510769353000" expanded="true" signature="263:1537" ph="{...}" />
+            <marker date="1510769353000" expanded="true" signature="845:1245" ph="{...}" />
+            <marker date="1510769353000" expanded="true" signature="899:1058" ph="//..." />
+            <marker date="1510769353000" expanded="true" signature="1267:1461" ph="{...}" />
+            <marker date="1510769353000" expanded="true" signature="1363:1455" ph="{...}" />
+            <marker date="1510769353000" expanded="true" signature="1485:1535" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -858,14 +739,6 @@
           <folding>
             <element signature="e#0#35#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/LoggerComponent.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="282">
-          <caret line="32" column="5" lean-forward="false" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -937,14 +810,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/__tests__/integration/gdax-api-spec.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44">
-          <caret line="5" column="22" lean-forward="false" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/__tests__/unit/price-history.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="364">
@@ -991,32 +856,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/layouts/LayoutBase.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
-          <caret line="116" column="29" lean-forward="false" selection-start-line="116" selection-start-column="29" selection-end-line="116" selection-end-column="29" />
-          <folding>
-            <element signature="e#81#155#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/sources/gdax/GdaxLivePriceSource.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="327">
           <caret line="24" column="0" lean-forward="true" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
           <folding>
             <element signature="e#1#48#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/LivePriceComponent.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="622">
-          <caret line="54" column="29" lean-forward="false" selection-start-line="54" selection-start-column="29" selection-end-line="54" selection-end-column="29" />
-          <folding>
-            <element signature="e#0#42#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1031,42 +876,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sources/Interfaces.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="10" column="4" lean-forward="false" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/layouts/SingleCurrency.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="263">
-          <caret line="44" column="8" lean-forward="false" selection-start-line="44" selection-start-column="8" selection-end-line="44" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#70#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/PriceHistoryComponent.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="387">
-          <caret line="36" column="99" lean-forward="false" selection-start-line="36" selection-start-column="99" selection-end-line="36" selection-end-column="99" />
-          <folding>
-            <element signature="e#0#68#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/gdax/index.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="153" column="8" lean-forward="false" selection-start-line="153" selection-start-column="8" selection-end-line="153" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/gdax/lib/clients/public.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="258">
@@ -1075,22 +884,130 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sources/gdax/GdaxPriceHistorySource.ts">
+    <entry file="file://$PROJECT_DIR$/src/components/LivePriceComponent.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="524">
-          <caret line="44" column="42" lean-forward="false" selection-start-line="44" selection-start-column="42" selection-end-line="44" selection-end-column="42" />
+        <state relative-caret-position="377">
+          <caret line="40" column="25" lean-forward="false" selection-start-line="40" selection-start-column="25" selection-end-line="40" selection-end-column="25" />
           <folding>
-            <element signature="e#0#34#0" expanded="true" />
+            <element signature="e#0#42#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sources/Interfaces.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="28">
+          <caret line="2" column="4" lean-forward="false" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/@types/blessed/index.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="500">
+          <caret line="1228" column="15" lean-forward="true" selection-start-line="1228" selection-start-column="15" selection-end-line="1228" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/@types/blessed/LICENSE">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/LoggerComponent.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/gdax/index.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="568">
+          <caret line="119" column="21" lean-forward="true" selection-start-line="119" selection-start-column="21" selection-end-line="119" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/__tests__/integration/gdax-api-spec.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="169">
+          <caret line="15" column="60" lean-forward="false" selection-start-line="15" selection-start-column="60" selection-end-line="15" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/dash-test.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="384">
+          <caret line="292" column="60" lean-forward="true" selection-start-line="292" selection-start-column="9" selection-end-line="292" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/layouts/SingleCurrency.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="406">
+          <caret line="34" column="109" lean-forward="false" selection-start-line="34" selection-start-column="109" selection-end-line="34" selection-end-column="109" />
+          <folding>
+            <element signature="e#0#70#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/layouts/LayoutBase.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="244">
+          <caret line="60" column="46" lean-forward="false" selection-start-line="60" selection-start-column="45" selection-end-line="60" selection-end-column="46" />
+          <folding>
+            <element signature="e#81#155#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sources/gdax/GdaxApi.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="16" column="66" lean-forward="false" selection-start-line="16" selection-start-column="66" selection-end-line="16" selection-end-column="66" />
+        <state relative-caret-position="196">
+          <caret line="14" column="8" lean-forward="false" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="8" />
           <folding>
             <element signature="e#82#146#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sources/gdax/GdaxPriceHistorySource.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="235">
+          <caret line="44" column="21" lean-forward="false" selection-start-line="44" selection-start-column="21" selection-end-line="44" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#34#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/PriceHistoryComponent.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="129">
+          <caret line="36" column="99" lean-forward="false" selection-start-line="36" selection-start-column="99" selection-end-line="36" selection-end-column="99" />
+          <folding>
+            <element signature="e#0#68#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/PriceHistoryLineChartComponent.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="263">
+          <caret line="66" column="61" lean-forward="false" selection-start-line="66" selection-start-column="61" selection-end-line="66" selection-end-column="61" />
+          <folding>
+            <element signature="e#451#519#0" expanded="true" />
           </folding>
         </state>
       </provider>

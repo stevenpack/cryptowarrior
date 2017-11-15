@@ -6,6 +6,7 @@ import { Element, LayoutBase, Location, Size } from "./LayoutBase";
 import Container from "../Container";
 import {Events} from "../events/Events";
 import {Ticker} from "../types/Ticker";
+import {PriceHistoryLineChartComponent} from "../components/PriceHistoryLineChartComponent";
 /**
  * Layout optimized for viewing a single currency
  */
@@ -14,6 +15,7 @@ export class SingleCurrency extends LayoutBase {
     private tickerList: TickerListComponent;
     private priceHistoryComponent: PriceHistoryComponent;
     private livePriceComponent: LivePriceComponent;
+    private priceHistoryLineChartComponent: any;
 
     constructor(eventHub: PubSubJS.Base, container: Container) {
         super(12, 12, eventHub, container);
@@ -24,11 +26,13 @@ export class SingleCurrency extends LayoutBase {
         this.log = new LoggerComponent(this.eventHub);
         this.priceHistoryComponent = new PriceHistoryComponent(this.eventHub, this.container.priceHistorySource);
         this.livePriceComponent = new LivePriceComponent(this.eventHub, this.container.livePriceSource);
+        this.priceHistoryLineChartComponent = new PriceHistoryLineChartComponent(this.eventHub, this.container.priceHistorySource);
 
         this.elements.push(new Element(this.log, new Location(9, 0), new Size(3, 12)));
         this.elements.push(new Element(this.tickerList, new Location(0, 0), new Size(12, 2)));
         this.elements.push(new Element(this.priceHistoryComponent, new Location(2, 7), new Size(10, 5)));
         this.elements.push(new Element(this.livePriceComponent, new Location(0, 8), new Size(2, 4)));
+        this.elements.push(new Element(this.priceHistoryLineChartComponent, new Location(0, 0), new Size(8, 6)));
     }
 
     public bindKeys() {

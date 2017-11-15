@@ -7,6 +7,7 @@ const TickerList_1 = require("../components/TickerList");
 const LayoutBase_1 = require("./LayoutBase");
 const Events_1 = require("../events/Events");
 const Ticker_1 = require("../types/Ticker");
+const PriceHistoryLineChartComponent_1 = require("../components/PriceHistoryLineChartComponent");
 /**
  * Layout optimized for viewing a single currency
  */
@@ -19,10 +20,12 @@ class SingleCurrency extends LayoutBase_1.LayoutBase {
         this.log = new LoggerComponent_1.LoggerComponent(this.eventHub);
         this.priceHistoryComponent = new PriceHistoryComponent_1.PriceHistoryComponent(this.eventHub, this.container.priceHistorySource);
         this.livePriceComponent = new LivePriceComponent_1.LivePriceComponent(this.eventHub, this.container.livePriceSource);
+        this.priceHistoryLineChartComponent = new PriceHistoryLineChartComponent_1.PriceHistoryLineChartComponent(this.eventHub, this.container.priceHistorySource);
         this.elements.push(new LayoutBase_1.Element(this.log, new LayoutBase_1.Location(9, 0), new LayoutBase_1.Size(3, 12)));
         this.elements.push(new LayoutBase_1.Element(this.tickerList, new LayoutBase_1.Location(0, 0), new LayoutBase_1.Size(12, 2)));
         this.elements.push(new LayoutBase_1.Element(this.priceHistoryComponent, new LayoutBase_1.Location(2, 7), new LayoutBase_1.Size(10, 5)));
         this.elements.push(new LayoutBase_1.Element(this.livePriceComponent, new LayoutBase_1.Location(0, 8), new LayoutBase_1.Size(2, 4)));
+        this.elements.push(new LayoutBase_1.Element(this.priceHistoryLineChartComponent, new LayoutBase_1.Location(0, 0), new LayoutBase_1.Size(8, 6)));
     }
     bindKeys() {
         super.bindKeys();
