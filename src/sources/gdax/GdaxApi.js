@@ -10,7 +10,7 @@ class GdaxApi {
     }
     async getPriceHistory(productId) {
         const priceHistoryHttpClient = new gdax_1.PublicClient(productId);
-        return priceHistoryHttpClient.getProductHistoricRates(null);
+        return priceHistoryHttpClient.getProductHistoricRates({ granularity: 86400 });
     }
     async getProducts() {
         return this.httpClient.getProducts();

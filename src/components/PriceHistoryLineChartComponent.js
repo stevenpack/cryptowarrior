@@ -10,9 +10,7 @@ class PriceHistoryLineChartComponent extends Component_1.ComponentBase {
         this.source = source;
     }
     getWidgetOpts(opts) {
-        return new Component_1.WidgetOpts(contrib.line, {
-            label: "Line chart"
-        });
+        return new Component_1.WidgetOpts(contrib.line, {});
     }
     setWidget(widget) {
         this.lineChart = widget;
@@ -32,9 +30,8 @@ class PriceHistoryLineChartComponent extends Component_1.ComponentBase {
         const title = ticker.id;
         const x = [];
         const y = [];
-        for (const candle of priceHistoryData.Items) {
+        for (const candle of priceHistoryData.Items.reverse()) {
             if (candle.Time && candle.Close) {
-                // TODO: configurable approach to format with defaults
                 const timeFmt = moment(candle.Time * 1000).format("DD-MMM-YY HH:mm");
                 const formatPrice = (price) => price.toFixed(2);
                 x.push(timeFmt);

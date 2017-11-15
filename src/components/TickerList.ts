@@ -35,8 +35,6 @@ export class TickerListComponent extends ComponentBase implements IComponent {
 
     public onSelected(item: blessed.Widgets.BlessedElement, index: number) {
         const ticker = this.tickers[index];
-        // TODO: Redefine GDax types... prefer to be platform agnostic
-        // TODO: This will go to screen, need flag for whether it should rebroadcast to children
         this.eventHub.publish(Events.TickerChanged, ticker);
         this.eventHub.publish(Events.LogEvent, "New ticker: " + ticker.id);
         this.list.hide();

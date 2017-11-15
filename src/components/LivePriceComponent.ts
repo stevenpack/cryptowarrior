@@ -18,7 +18,7 @@ export class LivePriceComponent extends ComponentBase implements IComponent {
     public getWidgetOpts(opts?: any): WidgetOpts {
         return new WidgetOpts(contrib.lcd,
             {
-                label: "BTC-USD",
+                label: "Live price",
                 strokeWidth: 1,
                 elements: 4,
                 display: "0000",

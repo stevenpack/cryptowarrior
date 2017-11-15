@@ -12,7 +12,7 @@ export class GdaxApi {
 
     public async getPriceHistory(productId: string): Promise<any> {
         const priceHistoryHttpClient = new PublicClient(productId);
-        return priceHistoryHttpClient.getProductHistoricRates(null);
+        return priceHistoryHttpClient.getProductHistoricRates({granularity: 86400});
     }
 
     public async getProducts(): Promise<ProductInfo[]> {

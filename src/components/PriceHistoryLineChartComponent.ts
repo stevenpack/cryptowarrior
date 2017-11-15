@@ -16,7 +16,7 @@ export class PriceHistoryLineChartComponent extends ComponentBase implements ICo
 
     public getWidgetOpts(opts?: any): WidgetOpts {
         return new WidgetOpts(contrib.line, {
-            label: "Line chart"
+            
         });
     }
 
@@ -43,10 +43,8 @@ export class PriceHistoryLineChartComponent extends ComponentBase implements ICo
         const title = ticker.id;
         const x = [];
         const y = [];
-        for (const candle of priceHistoryData.Items) {
-
+        for (const candle of priceHistoryData.Items.reverse()) {
             if (candle.Time && candle.Close) {
-                // TODO: configurable approach to format with defaults
                 const timeFmt = moment(candle.Time * 1000).format("DD-MMM-YY HH:mm");
                 const formatPrice = (price) => price.toFixed(2);
                 x.push(timeFmt);

@@ -12,7 +12,7 @@ class LivePriceComponent extends Component_1.ComponentBase {
     }
     getWidgetOpts(opts) {
         return new Component_1.WidgetOpts(contrib.lcd, {
-            label: "BTC-USD",
+            label: "Live price",
             strokeWidth: 1,
             elements: 4,
             display: "0000",
