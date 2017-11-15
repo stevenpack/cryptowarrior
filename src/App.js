@@ -3,10 +3,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const SingleCurrency_1 = require("./layouts/SingleCurrency");
 const Container_1 = require("./Container");
 class App {
-    constructor() {
+    constructor(argv) {
+        this.argv = argv;
     }
     loadUI() {
-        const container = new Container_1.default();
+        const container = new Container_1.default(this.argv);
         this.screen = new SingleCurrency_1.SingleCurrency(container.eventHub, container);
         this.screen.init();
         this.screen.load()

@@ -5,11 +5,11 @@ import Container from "./Container";
 export class App {
     public screen: SingleCurrency;
 
-    constructor() {
+    constructor(private argv) {
     }
 
     public loadUI() {
-        const container = new Container();
+        const container = new Container(this.argv);
         this.screen = new SingleCurrency(container.eventHub, container);
         this.screen.init();
         this.screen.load()

@@ -1,19 +1,3 @@
-
-// var errorsLine = grid.set(0, 6, 4, 3, contrib.line,
-//     { style:
-//         { line: "red"
-//             , text: "white"
-//             , baseline: "black"}
-//         , label: 'Errors Rate'
-//         , maxY: 60
-//         , showLegend: true })
-// var errorsData = {
-//     title: 'server 1',
-//     x: ['00:00', '00:05', '00:10', '00:15', '00:20', '00:25'],
-//     y: [30, 50, 70, 40, 50, 20]
-// }
-//
-// setLineData([errorsData], errorsLine)
 import { IComponent, WidgetOpts, ComponentBase } from "./Component";
 import moment = require("moment");
 import {Events} from "../events/Events";
@@ -31,7 +15,9 @@ export class PriceHistoryLineChartComponent extends ComponentBase implements ICo
     }
 
     public getWidgetOpts(opts?: any): WidgetOpts {
-        return new WidgetOpts(contrib.line, {});
+        return new WidgetOpts(contrib.line, {
+            label: "Line chart"
+        });
     }
 
     public setWidget(widget: any) {
@@ -67,6 +53,8 @@ export class PriceHistoryLineChartComponent extends ComponentBase implements ICo
                 y.push(parseFloat(formatPrice(candle.Close)));
             }
         }
+        this.lineChart.options.label = ticker.id;
+        this.lineChart.options.minY = Math.min.apply(this, y);
         this.lineChart.setData({title, x, y});
         this.fireUpdated();
     }

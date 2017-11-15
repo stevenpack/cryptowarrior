@@ -25,13 +25,24 @@ export default class Container {
     public priceHistorySource: ISource<PriceHistory>;
     public tickerSource: ISource<Ticker[]>;
 
-    constructor() {
+    public source: string;
+
+    constructor(private argv) {
         this.eventHub = PubSub;
 
         this.gdaxApi = new GdaxApi(this.eventHub);
         this.gdaxPriceHistoryAdapter = new GdaxPriceHistoryAdapter();
-        //this.initMock();
-        this.initGdax();
+
+        switch (argv.source) {
+            case "mock":
+                this.initMock();
+                this.source = "Mock";
+                break;
+            default:
+                this.initGdax();
+                this.source = "GDAX";
+                break;
+        }
     }
 
     private initGdax() {

@@ -16,9 +16,11 @@ export class SingleCurrency extends LayoutBase {
     private priceHistoryComponent: PriceHistoryComponent;
     private livePriceComponent: LivePriceComponent;
     private priceHistoryLineChartComponent: any;
+    private source: string;
 
     constructor(eventHub: PubSubJS.Base, container: Container) {
         super(12, 12, eventHub, container);
+        this.source = container.source;
     }
 
     public addElements() {
@@ -26,13 +28,14 @@ export class SingleCurrency extends LayoutBase {
         this.log = new LoggerComponent(this.eventHub);
         this.priceHistoryComponent = new PriceHistoryComponent(this.eventHub, this.container.priceHistorySource);
         this.livePriceComponent = new LivePriceComponent(this.eventHub, this.container.livePriceSource);
-        this.priceHistoryLineChartComponent = new PriceHistoryLineChartComponent(this.eventHub, this.container.priceHistorySource);
+        this.priceHistoryLineChartComponent = new PriceHistoryLineChartComponent(
+            this.eventHub, this.container.priceHistorySource);
 
         this.elements.push(new Element(this.log, new Location(9, 0), new Size(3, 12)));
         this.elements.push(new Element(this.tickerList, new Location(0, 0), new Size(12, 2)));
         this.elements.push(new Element(this.priceHistoryComponent, new Location(2, 7), new Size(10, 5)));
         this.elements.push(new Element(this.livePriceComponent, new Location(0, 8), new Size(2, 4)));
-        this.elements.push(new Element(this.priceHistoryLineChartComponent, new Location(0, 0), new Size(8, 6)));
+        this.elements.push(new Element(this.priceHistoryLineChartComponent, new Location(2, 0), new Size(10, 7)));
     }
 
     public bindKeys() {
@@ -47,5 +50,6 @@ export class SingleCurrency extends LayoutBase {
 
     protected postLoad() {
         this.eventHub.publish(Events.TickerChanged, new Ticker("BTC-USD"));
+        this.log.log(`Source: ${this.source}`);
     }
 }

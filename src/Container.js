@@ -13,12 +13,21 @@ const GdaxLivePriceSource_1 = require("./sources/gdax/GdaxLivePriceSource");
  *       solutions on npm
  */
 class Container {
-    constructor() {
+    constructor(argv) {
+        this.argv = argv;
         this.eventHub = PubSub;
         this.gdaxApi = new GdaxApi_1.GdaxApi(this.eventHub);
         this.gdaxPriceHistoryAdapter = new GdaxPriceHistorySource_1.GdaxPriceHistoryAdapter();
-        //this.initMock();
-        this.initGdax();
+        switch (argv.source) {
+            case "mock":
+                this.initMock();
+                this.source = "Mock";
+                break;
+            default:
+                this.initGdax();
+                this.source = "GDAX";
+                break;
+        }
     }
     initGdax() {
         this.priceHistorySource = new GdaxPriceHistorySource_1.GdaxPriceHistorySource(this.gdaxApi, this.gdaxPriceHistoryAdapter);

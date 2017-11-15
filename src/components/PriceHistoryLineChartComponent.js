@@ -1,20 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-// var errorsLine = grid.set(0, 6, 4, 3, contrib.line,
-//     { style:
-//         { line: "red"
-//             , text: "white"
-//             , baseline: "black"}
-//         , label: 'Errors Rate'
-//         , maxY: 60
-//         , showLegend: true })
-// var errorsData = {
-//     title: 'server 1',
-//     x: ['00:00', '00:05', '00:10', '00:15', '00:20', '00:25'],
-//     y: [30, 50, 70, 40, 50, 20]
-// }
-//
-// setLineData([errorsData], errorsLine)
 const Component_1 = require("./Component");
 const moment = require("moment");
 const Events_1 = require("../events/Events");
@@ -25,7 +10,9 @@ class PriceHistoryLineChartComponent extends Component_1.ComponentBase {
         this.source = source;
     }
     getWidgetOpts(opts) {
-        return new Component_1.WidgetOpts(contrib.line, {});
+        return new Component_1.WidgetOpts(contrib.line, {
+            label: "Line chart"
+        });
     }
     setWidget(widget) {
         this.lineChart = widget;
@@ -54,6 +41,8 @@ class PriceHistoryLineChartComponent extends Component_1.ComponentBase {
                 y.push(parseFloat(formatPrice(candle.Close)));
             }
         }
+        this.lineChart.options.label = ticker.id;
+        this.lineChart.options.minY = Math.min.apply(this, y);
         this.lineChart.setData({ title, x, y });
         this.fireUpdated();
     }
