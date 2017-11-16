@@ -1,22 +1,26 @@
 import {GdaxApi} from "./GdaxApi";
 import {IAdapter, ISource} from "../Interfaces";
 import {Candle, PriceHistory} from "../../types/PriceHistory";
+import {Javascript} from "../../util/Javascript";
 
 export class GdaxPriceHistoryAdapter implements IAdapter<PriceHistory> {
     public convert(data: any): PriceHistory {
         try {
             const candles = [];
-            for (const item of data) {
-                try {
-                    // console.log("About to map: " + item);
-                    const candle = this.map(item);
-                    candles.push(candle);
-                } catch (e) {
-                    console.error("Ignored bad candle.");
-                    console.error(e);
-                    console.error(item);
+            if (Javascript.isIterable(data)) {
+                for (const item of data) {
+                    try {
+                        // console.log("About to map: " + item);
+                        const candle = this.map(item);
+                        candles.push(candle);
+                    } catch (e) {
+                        console.error("Ignored bad candle.");
+                        console.error(e);
+                        console.error(item);
+                    }
                 }
             }
+
             return new PriceHistory(candles);
         } catch (e) {
             console.error(e);

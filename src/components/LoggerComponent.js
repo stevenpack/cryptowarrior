@@ -29,7 +29,7 @@ class LoggerComponent extends Component_1.ComponentBase {
         super.toggleVisibility(this.logger);
     }
     async load(opts) {
-        this.logger.log("Logger created");
+        this.logger.log("Logger created. Up/Down arrow to resize.");
     }
     log(msg) {
         this.logger.log(msg);

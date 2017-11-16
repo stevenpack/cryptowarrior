@@ -111,17 +111,24 @@ export abstract class LayoutBase {
     public async load() {
         this.preLoad();
         for (const element of this.elements) {
-            await element.component.load();
+            try {
+                await element.component.load();
+            } catch (e) {
+                this.logger.log(`Failed to load component ${element.component}. Error: ${e.message}`);
+            }
         }
         this.postLoad();
         this.screen.render();
     }
 
     protected bindKeys() {
-        // TODO: base screen with standard shortcuts and per-screen ones
         this.screen.key(["escape", "q", "C-c"], (ch, key) => {
             return process.exit(0);
         });
+    }
+
+    protected attachKeyHandler(keys: string[], handler: (ch, key) => void) {
+        this.screen.key(keys, (ch, key) => handler(ch, key));
     }
 
     protected preLoad() {

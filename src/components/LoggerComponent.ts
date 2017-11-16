@@ -37,7 +37,7 @@ export class LoggerComponent extends ComponentBase implements IComponent, ILog {
     }
 
     public async load(opts?: any) {
-        this.logger.log("Logger created");
+        this.logger.log("Logger created. Up/Down arrow to resize.");
     }
 
     public log(msg: string) {

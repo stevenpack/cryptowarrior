@@ -1,20 +1,23 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const PriceHistory_1 = require("../../types/PriceHistory");
+const Javascript_1 = require("../../util/Javascript");
 class GdaxPriceHistoryAdapter {
     convert(data) {
         try {
             const candles = [];
-            for (const item of data) {
-                try {
-                    // console.log("About to map: " + item);
-                    const candle = this.map(item);
-                    candles.push(candle);
-                }
-                catch (e) {
-                    console.error("Ignored bad candle.");
-                    console.error(e);
-                    console.error(item);
+            if (Javascript_1.Javascript.isIterable(data)) {
+                for (const item of data) {
+                    try {
+                        // console.log("About to map: " + item);
+                        const candle = this.map(item);
+                        candles.push(candle);
+                    }
+                    catch (e) {
+                        console.error("Ignored bad candle.");
+                        console.error(e);
+                        console.error(item);
+                    }
                 }
             }
             return new PriceHistory_1.PriceHistory(candles);

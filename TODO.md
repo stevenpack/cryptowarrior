@@ -1,9 +1,14 @@
-
-- Handle network errors on startup
-- Layout builder with prebuilt defaults
+## Features
 - Multi-currency live price
-- Screen switcher
-- Help with avaialable keys
-- Component tabbing and paging
 - Charts
 - Execution
+
+## Framework
+- Layout builder with prebuilt defaults
+- Screen switcher
+- Component tabbing and paging
+- Help with available keys
+
+## Code
+- log4js logging
+- Handle network errors on startup

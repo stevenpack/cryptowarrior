@@ -3,11 +3,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const Component_1 = require("./Component");
 const moment = require("moment");
 const Events_1 = require("../events/Events");
+const Ticker_1 = require("../types/Ticker");
+const Period_1 = require("../types/Period");
 const contrib = require("blessed-contrib");
 class PriceHistoryLineChartComponent extends Component_1.ComponentBase {
     constructor(eventHub, source) {
         super(eventHub);
         this.source = source;
+        this.state = {
+            ticker: new Ticker_1.Ticker("BTC-USD"),
+            period: Period_1.Period.Day,
+        };
     }
     getWidgetOpts(opts) {
         return new Component_1.WidgetOpts(contrib.line, {});
@@ -17,17 +23,25 @@ class PriceHistoryLineChartComponent extends Component_1.ComponentBase {
     }
     configure(widget, opts) {
         this.eventHub.subscribe(Events_1.Events.TickerChanged, (msg, data) => this.onTickerChanged(msg, data));
+        this.eventHub.subscribe(Events_1.Events.PeriodChanged, (msg, data) => this.onPeriodChanged(msg, data));
     }
     async load(opts) {
     }
     onTickerChanged(msg, data) {
-        const ticker = data;
-        this.reload(ticker);
+        this.state.ticker = data;
+        this.reload();
     }
-    async reload(ticker) {
-        const priceHistoryData = await this.source.getData(ticker.id);
+    onPeriodChanged(msg, data) {
+        this.state.period = data;
+        this.reload();
+    }
+    async reload() {
+        const priceHistoryData = await this.source.getData({
+            tickerId: this.state.ticker.id,
+            period: this.state.period,
+        });
         // The table takes data as an array per row
-        const title = ticker.id;
+        const title = this.state.ticker.id;
         const x = [];
         const y = [];
         for (const candle of priceHistoryData.Items.reverse()) {
@@ -38,7 +52,7 @@ class PriceHistoryLineChartComponent extends Component_1.ComponentBase {
                 y.push(parseFloat(formatPrice(candle.Close)));
             }
         }
-        this.lineChart.options.label = ticker.id;
+        this.lineChart.options.label = title;
         this.lineChart.options.minY = Math.min.apply(this, y);
         this.lineChart.setData({ title, x, y });
         this.fireUpdated();

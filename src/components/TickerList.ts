@@ -51,5 +51,4 @@ export class TickerListComponent extends ComponentBase implements IComponent {
     public toggleVisibility() {
         super.toggleVisibility(this.list);
     }
-
 }

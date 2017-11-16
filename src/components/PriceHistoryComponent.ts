@@ -4,17 +4,26 @@ import {Events} from "../events/Events";
 import {ISource} from "../sources/Interfaces";
 import {PriceHistory} from "../types/PriceHistory";
 import {Ticker} from "../types/Ticker";
+import {Period} from "../types/Period";
 
 const contrib = require("blessed-contrib");
 
 export class PriceHistoryComponent extends ComponentBase implements IComponent {
-
     public headers: string[];
     public table: any;
+
+    private state: {
+        ticker: Ticker;
+        period: Period;
+    };
 
     constructor(eventHub, private source: ISource<PriceHistory>) {
         super(eventHub);
         this.headers = ["Time", "Low", "High", "Open", "Close"];
+        this.state = {
+            ticker: new Ticker("BTC-USD"),
+            period: Period.Day,
+        };
     }
 
     public getWidgetOpts(opts?: any): WidgetOpts {
@@ -35,21 +44,30 @@ export class PriceHistoryComponent extends ComponentBase implements IComponent {
     public configure(widget: any, opts?: any) {
         widget.setData({headers: this.headers, data: []});
         this.eventHub.subscribe(Events.TickerChanged, (msg, data) => this.onTickerChanged(msg, data));
+        this.eventHub.subscribe(Events.PeriodChanged, (msg, data) => this.onPeriodChanged(msg, data));
     }
 
     public async load(opts?: any) {
     }
 
     private onTickerChanged(msg, data) {
-        const ticker = data as Ticker;
-        this.reload(ticker);
+        this.state.ticker = data as Ticker;
+        this.reload();
     }
 
-    private async reload(ticker) {
+    private onPeriodChanged(msg, data) {
+        this.state.period = data;
+        this.reload();
+    }
+
+    private async reload() {
         this.table.setData({headers: this.headers, data: []});
         this.fireUpdated();
 
-        const priceHistoryData = await this.source.getData(ticker.id);
+        const priceHistoryData = await this.source.getData({
+            tickerId: this.state.ticker.id,
+            period: this.state.period,
+        });
 
         // The table takes data as an array per row
         const tableData = [];

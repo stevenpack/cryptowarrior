@@ -4,19 +4,27 @@ import {Events} from "../events/Events";
 import {ISource} from "../sources/Interfaces";
 import {PriceHistory} from "../types/PriceHistory";
 import {Ticker} from "../types/Ticker";
+import {Period} from "../types/Period";
 
 const contrib = require("blessed-contrib");
 
 export class PriceHistoryLineChartComponent extends ComponentBase implements IComponent {
     public lineChart: any;
-
+    private state: {
+        ticker: Ticker;
+        period: Period;
+    };
     constructor(eventHub, private source: ISource<PriceHistory>) {
         super(eventHub);
+        this.state = {
+            ticker: new Ticker("BTC-USD"),
+            period: Period.Day,
+        };
     }
 
     public getWidgetOpts(opts?: any): WidgetOpts {
         return new WidgetOpts(contrib.line, {
-            
+
         });
     }
 
@@ -26,21 +34,30 @@ export class PriceHistoryLineChartComponent extends ComponentBase implements ICo
 
     public configure(widget: any, opts?: any) {
         this.eventHub.subscribe(Events.TickerChanged, (msg, data) => this.onTickerChanged(msg, data));
+        this.eventHub.subscribe(Events.PeriodChanged, (msg, data) => this.onPeriodChanged(msg, data));
     }
 
     public async load(opts?: any) {
     }
 
     private onTickerChanged(msg, data) {
-        const ticker = data as Ticker;
-        this.reload(ticker);
+        this.state.ticker = data as Ticker;
+        this.reload();
     }
 
-    private async reload(ticker) {
-        const priceHistoryData = await this.source.getData(ticker.id);
+    private onPeriodChanged(msg, data) {
+        this.state.period = data;
+        this.reload();
+    }
+
+    private async reload() {
+        const priceHistoryData = await this.source.getData({
+            tickerId: this.state.ticker.id,
+            period: this.state.period,
+        });
 
         // The table takes data as an array per row
-        const title = ticker.id;
+        const title = this.state.ticker.id;
         const x = [];
         const y = [];
         for (const candle of priceHistoryData.Items.reverse()) {
@@ -51,7 +68,7 @@ export class PriceHistoryLineChartComponent extends ComponentBase implements ICo
                 y.push(parseFloat(formatPrice(candle.Close)));
             }
         }
-        this.lineChart.options.label = ticker.id;
+        this.lineChart.options.label = title;
         this.lineChart.options.minY = Math.min.apply(this, y);
         this.lineChart.setData({title, x, y});
         this.fireUpdated();

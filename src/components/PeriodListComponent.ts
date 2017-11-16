@@ -1,21 +1,26 @@
 import * as blessed from "blessed";
 import { Events } from "../events/events";
 import { IComponent, ComponentBase, WidgetOpts } from "./Component";
-import {ISource} from "../sources/Interfaces";
-import {Ticker} from "../types/Ticker";
+import {EnumEx} from "../types/EnumEx";
+import {Period} from "../types/Period";
 
-export class TickerListComponent extends ComponentBase implements IComponent {
-    public tickers: Ticker[];
+/**
+ * Component to choose a time period (Second, Minute, Hourly, Daily, Weekly etc.)
+ *
+ * Could be generalized ListPickerbase
+ */
+export class PeriodListComponent extends ComponentBase implements IComponent {
+    public periods: string[];
     public list: blessed.Widgets.ListElement;
 
-    constructor(eventHub: PubSubJS.Base, private source: ISource<Ticker[]>) {
+    constructor(eventHub: PubSubJS.Base) {
         super(eventHub);
     }
 
     public getWidgetOpts(opts?: any): WidgetOpts {
         return new WidgetOpts(blessed.list,
             {
-                label: "Ticker",
+                label: "Time Period",
                 selectedBg: "green",
                 focusable: true,
                 hidden: true,
@@ -34,17 +39,17 @@ export class TickerListComponent extends ComponentBase implements IComponent {
     }
 
     public onSelected(item: blessed.Widgets.BlessedElement, index: number) {
-        const ticker = this.tickers[index];
-        this.eventHub.publish(Events.TickerChanged, ticker);
-        this.eventHub.publish(Events.LogEvent, "New ticker: " + ticker.id);
+        const period = this.periods[index];
+        this.eventHub.publish(Events.PeriodChanged, Period[period]);
+        this.eventHub.publish(Events.LogEvent, `New Period: ${period} (${Period[period]} secs)`);
         this.list.hide();
     }
 
     public async load(opts?: any) {
-        this.tickers = await this.source.getData(null);
-        for (const t of this.tickers) {
+        this.periods = EnumEx.getNames(Period);
+        for (const p of this.periods) {
             // Works (index.d.ts is wrong)
-            this.list.pushItem(t.id);
+            this.list.pushItem(p);
         }
     }
 

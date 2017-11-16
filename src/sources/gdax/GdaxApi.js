@@ -8,9 +8,9 @@ class GdaxApi {
         this.eventHub = eventHub;
         this.httpClient = new gdax_1.PublicClient();
     }
-    async getPriceHistory(productId) {
-        const priceHistoryHttpClient = new gdax_1.PublicClient(productId);
-        return priceHistoryHttpClient.getProductHistoricRates({ granularity: 86400 });
+    async getPriceHistory(opts) {
+        const priceHistoryHttpClient = new gdax_1.PublicClient(opts.tickerId);
+        return priceHistoryHttpClient.getProductHistoricRates({ granularity: opts.period });
     }
     async getProducts() {
         return this.httpClient.getProducts();
