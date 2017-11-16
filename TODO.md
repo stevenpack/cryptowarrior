@@ -2,6 +2,7 @@
 - Multi-currency live price
 - Charts
 - Execution
+- Show current ticker and period
 
 ## Framework
 - Layout builder with prebuilt defaults

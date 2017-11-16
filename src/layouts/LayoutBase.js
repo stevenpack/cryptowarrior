@@ -114,7 +114,7 @@ class LayoutBase {
         this.screen.render();
     }
     bindKeys() {
-        this.screen.key(["escape", "q", "C-c"], (ch, key) => {
+        this.screen.key(["q", "C-c"], (ch, key) => {
             return process.exit(0);
         });
     }

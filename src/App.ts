@@ -2,15 +2,21 @@
 import { SingleCurrency } from "./layouts/SingleCurrency";
 import Container from "./Container";
 import {UnhandledExceptionHandler} from "./UnhandledExceptionHandler";
+import {ConfigLoader} from "./ConfigLoader";
 
 export class App {
     public screen: SingleCurrency;
 
     constructor(private argv) {
-
     }
 
     public loadUI() {
+
+        const configHandler = new ConfigLoader(this.argv);
+        const conf = configHandler.load();
+        // todo: logger
+        //Log.configure(conf.logFile, conf.logLevel);
+
         const container = new Container(this.argv);
         const exHandler = new UnhandledExceptionHandler(container.eventHub);
         exHandler.init();

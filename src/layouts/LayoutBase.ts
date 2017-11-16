@@ -122,7 +122,7 @@ export abstract class LayoutBase {
     }
 
     protected bindKeys() {
-        this.screen.key(["escape", "q", "C-c"], (ch, key) => {
+        this.screen.key(["q", "C-c"], (ch, key) => {
             return process.exit(0);
         });
     }
@@ -132,10 +132,8 @@ export abstract class LayoutBase {
     }
 
     protected preLoad() {
-
     }
 
     protected postLoad() {
-
     }
 }
