@@ -3,6 +3,7 @@ import { SingleCurrency } from "./layouts/SingleCurrency";
 import Container from "./Container";
 import {UnhandledExceptionHandler} from "./UnhandledExceptionHandler";
 import {ConfigLoader} from "./ConfigLoader";
+import {Log} from "./Logger";
 
 export class App {
     public screen: SingleCurrency;
@@ -15,7 +16,9 @@ export class App {
         const configHandler = new ConfigLoader(this.argv);
         const conf = configHandler.load();
         // todo: logger
-        //Log.configure(conf.logFile, conf.logLevel);
+        Log.init(conf.logFile, conf.logLevel);
+        const logger = Log.getLogger("InitLogger");
+        logger.info("Logger configured");
 
         const container = new Container(this.argv);
         const exHandler = new UnhandledExceptionHandler(container.eventHub);
