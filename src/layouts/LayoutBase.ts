@@ -98,14 +98,15 @@ export abstract class LayoutBase {
     public setLogger(): any {
         for (const e of this.elements) {
             if (this.isLogger(e)) {
-                this.logger = e.component as ILog;
+                const component: any = e.component;
+                this.logger = component as ILog;
                 break;
             }
         }
     }
 
-    public isLogger(element: Element): boolean {
-        return (element.component as ILog).log !== undefined;
+    public isLogger(element: any): boolean {
+        return element.component.log !== undefined;
     }
 
     public async load() {
@@ -132,8 +133,10 @@ export abstract class LayoutBase {
     }
 
     protected preLoad() {
+        /* Optionally overridden by inheritor */
     }
 
     protected postLoad() {
+        /* Optionally overridden by inheritor */
     }
 }

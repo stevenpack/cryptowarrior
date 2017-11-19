@@ -93,7 +93,8 @@ class LayoutBase {
     setLogger() {
         for (const e of this.elements) {
             if (this.isLogger(e)) {
-                this.logger = e.component;
+                const component = e.component;
+                this.logger = component;
                 break;
             }
         }
@@ -123,8 +124,10 @@ class LayoutBase {
         this.screen.key(keys, (ch, key) => handler(ch, key));
     }
     preLoad() {
+        /* Optionally overridden by inheritor */
     }
     postLoad() {
+        /* Optionally overridden by inheritor */
     }
 }
 exports.LayoutBase = LayoutBase;

@@ -1,6 +1,7 @@
 
 
 import {GdaxApi} from "../../src/sources/gdax/GdaxApi";
+import {Period} from "../../src/types/Period";
 
 describe("GdaxApi", () => {
     const api = new GdaxApi({});
@@ -13,7 +14,7 @@ describe("GdaxApi", () => {
 
     it("gets", async (done) => {
         try {
-            const data = await api.getPriceHistory("BTC-USD");
+            const data = await api.getPriceHistory({tickerId: "BTC-USD", period: Period.Day});
             expect(data).toBeTruthy();
             done();
         } catch (e) {

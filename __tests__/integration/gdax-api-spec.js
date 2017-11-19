@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const GdaxApi_1 = require("../../src/sources/gdax/GdaxApi");
+const Period_1 = require("../../src/types/Period");
 describe("GdaxApi", () => {
     const api = new GdaxApi_1.GdaxApi({});
     it("gets ticker list", async (done) => {
@@ -10,7 +11,7 @@ describe("GdaxApi", () => {
     });
     it("gets", async (done) => {
         try {
-            const data = await api.getPriceHistory("BTC-USD");
+            const data = await api.getPriceHistory({ tickerId: "BTC-USD", period: Period_1.Period.Day });
             expect(data).toBeTruthy();
             done();
         }

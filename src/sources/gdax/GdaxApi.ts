@@ -3,7 +3,7 @@ import {ProductInfo, PublicClient, WebsocketClient} from "gdax";
 import {Events} from "../../events/Events";
 
 export class GdaxApi {
-    public websocketClient: WebsocketClient;
+    public websocketClient: any; /* index.d.ts is wrong. Revert to Websocket when fixed */
     public httpClient: PublicClient;
 
     constructor(private eventHub) {
