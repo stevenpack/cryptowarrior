@@ -1,6 +1,6 @@
 ## Features
 - Multi-currency live price
-- Charts
+- Charts, OrderBook
 - Execution
 - Show current ticker and period
 
@@ -11,5 +11,4 @@
 - Help with available keys
 
 ## Code
-- log4js logging
 - Handle network errors on startup

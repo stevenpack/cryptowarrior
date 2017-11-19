@@ -2,7 +2,9 @@ import {GdaxApi} from "./GdaxApi";
 import {IAdapter, ISource} from "../Interfaces";
 import {Candle, PriceHistory} from "../../types/PriceHistory";
 import {Javascript} from "../../util/Javascript";
+import {Log} from "../../Logger";
 
+const logger = Log.getLogger("GdaxPriceHistoryAdapter");
 export class GdaxPriceHistoryAdapter implements IAdapter<PriceHistory> {
     public convert(data: any): PriceHistory {
         try {
@@ -10,26 +12,22 @@ export class GdaxPriceHistoryAdapter implements IAdapter<PriceHistory> {
             if (Javascript.isIterable(data)) {
                 for (const item of data) {
                     try {
-                        // console.log("About to map: " + item);
                         const candle = this.map(item);
                         candles.push(candle);
                     } catch (e) {
-                        console.error("Ignored bad candle.");
-                        console.error(e);
-                        console.error(item);
+                        logger.error(`Ignored bad candle. ${e} ${item}`);
                     }
                 }
             }
-
             return new PriceHistory(candles);
         } catch (e) {
-            console.error(e);
+            logger.error(`Failed to convert GDAX data to PriceHistory. Error: ${e}`);
 
         }
     }
 
     public map(item: any): Candle {
-        const time = parseInt(item[0]);
+        const time = parseInt(item[0], 10);
         const low = parseFloat(item[1]);
         const high = parseFloat(item[2]);
         const open = parseFloat(item[3]);

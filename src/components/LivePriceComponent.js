@@ -34,6 +34,7 @@ class LivePriceComponent extends Component_1.ComponentBase {
         if (!this.throttle.tryRemoveToken()) {
             return;
         }
+        // check if the price ticker matches (the source can send events for lots of tickers)
         this.lcd.setDisplay(livePrice.price);
         // todo: too heavy-weight? just mark component as dirty?
         this.eventHub.publish(events_1.Events.UIUpdate, null);

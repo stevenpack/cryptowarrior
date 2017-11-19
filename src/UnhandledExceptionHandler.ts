@@ -1,4 +1,5 @@
 import {Events} from "./events/Events";
+import {Log} from "./Logger";
 
 export class UnhandledExceptionHandler {
 
@@ -6,17 +7,17 @@ export class UnhandledExceptionHandler {
     }
 
     public init() {
-        // let logger = Log.getLogger("UnhandledExceptionHandler");
+        const logger = Log.getLogger("UnhandledExceptionHandler");
         console.log("Attaching error handlers...");
         process.on("uncaughtException", (err) => {
             this.eventHub.publish(Events.LogEvent, `UncaughtException: ${err.message}`);
-            // logger.fatal("process.on('uncaughtException'). Will rethrow");
-            // logger.fatal(err.stack);
-            // throw err;
+            logger.error(err.message);
+            logger.error(err.stack);
         });
         process.on("unhandledRejection", (reason, p) => {
             this.eventHub.publish(Events.LogEvent,
                 `Unhandled Rejection at: Promise ${p} reason: ${reason}`);
+            logger.error(reason);
         });
     }
 }
