@@ -23,9 +23,8 @@ export class Element {
 }
 
 export abstract class LayoutBase {
-    protected screen: blessed.Widgets.Screen;
-    protected elements: Element[];
-
+    private screen: blessed.Widgets.Screen;
+    private elements: Element[];
     private grid: any;
     private logger: ILog;
     private uiThrottle: Throttle;
@@ -38,10 +37,11 @@ export abstract class LayoutBase {
         this.uiThrottle = new Throttle(200);
     }
 
-    public abstract addElements();
+    public abstract getElements(): Element[];
 
     public init() {
-        this.addElements();
+        const elements = this.getElements();
+        this.elements.push.apply(this.elements, elements);
         this.build();
         // Render the elements as soon as they're ready
         this.screen.render();

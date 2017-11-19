@@ -25,7 +25,7 @@ export class SingleCurrency extends LayoutBase {
         this.source = container.source;
     }
 
-    public addElements() {
+    public getElements(): Element[] {
         this.tickerList = new TickerListComponent(this.eventHub, this.container.tickerSource);
         this.periodList = new PeriodListComponent(this.eventHub);
         this.log = new LoggerComponent(this.eventHub);
@@ -34,12 +34,14 @@ export class SingleCurrency extends LayoutBase {
         this.priceHistoryLineChartComponent = new PriceHistoryLineChartComponent(
             this.eventHub, this.container.priceHistorySource);
 
-        this.elements.push(new Element(this.log, new Location(9, 0), new Size(3, 12)));
-        this.elements.push(new Element(this.tickerList, new Location(0, 0), new Size(12, 2)));
-        this.elements.push(new Element(this.periodList, new Location(0, 0), new Size(12, 2)));
-        this.elements.push(new Element(this.priceHistoryComponent, new Location(2, 7), new Size(10, 5)));
-        this.elements.push(new Element(this.livePriceComponent, new Location(0, 8), new Size(2, 4)));
-        this.elements.push(new Element(this.priceHistoryLineChartComponent, new Location(2, 0), new Size(10, 7)));
+        const elements = [];
+        elements.push(new Element(this.log, new Location(9, 0), new Size(3, 12)));
+        elements.push(new Element(this.tickerList, new Location(0, 0), new Size(12, 2)));
+        elements.push(new Element(this.periodList, new Location(0, 0), new Size(12, 2)));
+        elements.push(new Element(this.priceHistoryComponent, new Location(2, 7), new Size(10, 5)));
+        elements.push(new Element(this.livePriceComponent, new Location(0, 8), new Size(2, 4)));
+        elements.push(new Element(this.priceHistoryLineChartComponent, new Location(2, 0), new Size(10, 7)));
+        return elements;
     }
 
     public bindKeys() {

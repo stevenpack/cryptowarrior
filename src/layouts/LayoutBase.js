@@ -42,7 +42,8 @@ class LayoutBase {
         this.uiThrottle = new Throttle_1.Throttle(200);
     }
     init() {
-        this.addElements();
+        const elements = this.getElements();
+        this.elements.push.apply(this.elements, elements);
         this.build();
         // Render the elements as soon as they're ready
         this.screen.render();

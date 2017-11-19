@@ -6,7 +6,7 @@ class ConfigLoader {
     }
     load() {
         const env = this.argv.env || "local";
-        const configPath = `./conf/${env}-config.js`;
+        const configPath = `./conf/${env}Config.js`;
         console.log(`Env: ${env} -> ${configPath}`);
         console.log(`Loading default..`);
         const confClass = require(configPath).default;

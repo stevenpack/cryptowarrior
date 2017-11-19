@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const CommonConfig_1 = require("./CommonConfig");
+//noinspection JSUnusedGlobalSymbols
 class LocalConfig extends CommonConfig_1.default {
     constructor() {
         super(...arguments);
@@ -9,4 +10,4 @@ class LocalConfig extends CommonConfig_1.default {
     }
 }
 exports.default = LocalConfig;
-//# sourceMappingURL=local-config.js.map
+//# sourceMappingURL=LocalConfig.js.map
