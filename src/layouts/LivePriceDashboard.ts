@@ -11,25 +11,27 @@ import {PeriodListComponent} from "../components/PeriodListComponent";
 /**
  * Layout optimized for viewing a single currency
  */
-export class SingleCurrency extends LayoutBase {
+export class LivePriceDashboard extends LayoutBase {
     public log: LoggerComponent;
-    private livePriceComponent: LivePriceComponent;
+    private livePriceComponent1: LivePriceComponent;
+    private livePriceComponent2: LivePriceComponent;
     private source: string;
 
     constructor(eventHub: PubSubJS.Base, container: Container) {
         super(12, 12, eventHub, container);
         this.source = container.source;
+
+        this.log = new LoggerComponent(this.eventHub);
+        this.livePriceComponent1 = new LivePriceComponent(this.eventHub, this.container.livePriceSource);
+        this.livePriceComponent2 = new LivePriceComponent(this.eventHub, this.container.livePriceSource);
     }
 
     public getElements(): Element[] {
-        this.log = new LoggerComponent(this.eventHub);
-        this.livePriceComponent = new LivePriceComponent(this.eventHub, this.container.livePriceSource);
-
-        const elements = [];
-        elements.push(new Element(this.log, new Location(9, 0), new Size(3, 12)));
-        //elements.push(new Element(this.tickerList, new Location(0, 0), new Size(12, 2)));
-        elements.push(new Element(this.livePriceComponent, new Location(0, 8), new Size(2, 4)));
-        return elements;
+        return [
+            new Element(this.log, new Location(9, 0), new Size(3, 12)),
+            new Element(this.livePriceComponent1, new Location(0, 8), new Size(2, 4)),
+            new Element(this.livePriceComponent2, new Location(3, 8), new Size(2, 4)),
+        ];
     }
 
     public bindKeys() {

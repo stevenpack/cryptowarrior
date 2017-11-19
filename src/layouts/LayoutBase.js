@@ -74,7 +74,7 @@ class LayoutBase {
                     if (force || this.uiThrottle.tryRemoveToken()) {
                         this.renderCount++;
                         if (this.renderCount % 100 === 0) {
-                            this.onLogEvent(null, `+100 renders (${this.renderCount})`);
+                            this.onLogEvent(null, `+100 screen render calls (total: ${this.renderCount})`);
                         }
                         this.screen.render();
                     }

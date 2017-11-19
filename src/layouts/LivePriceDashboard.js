@@ -8,19 +8,20 @@ const Ticker_1 = require("../types/Ticker");
 /**
  * Layout optimized for viewing a single currency
  */
-class SingleCurrency extends LayoutBase_1.LayoutBase {
+class LivePriceDashboard extends LayoutBase_1.LayoutBase {
     constructor(eventHub, container) {
         super(12, 12, eventHub, container);
         this.source = container.source;
+        this.log = new LoggerComponent_1.LoggerComponent(this.eventHub);
+        this.livePriceComponent1 = new LivePriceComponent_1.LivePriceComponent(this.eventHub, this.container.livePriceSource);
+        this.livePriceComponent2 = new LivePriceComponent_1.LivePriceComponent(this.eventHub, this.container.livePriceSource);
     }
     getElements() {
-        this.log = new LoggerComponent_1.LoggerComponent(this.eventHub);
-        this.livePriceComponent = new LivePriceComponent_1.LivePriceComponent(this.eventHub, this.container.livePriceSource);
-        const elements = [];
-        elements.push(new LayoutBase_1.Element(this.log, new LayoutBase_1.Location(9, 0), new LayoutBase_1.Size(3, 12)));
-        //elements.push(new Element(this.tickerList, new Location(0, 0), new Size(12, 2)));
-        elements.push(new LayoutBase_1.Element(this.livePriceComponent, new LayoutBase_1.Location(0, 8), new LayoutBase_1.Size(2, 4)));
-        return elements;
+        return [
+            new LayoutBase_1.Element(this.log, new LayoutBase_1.Location(9, 0), new LayoutBase_1.Size(3, 12)),
+            new LayoutBase_1.Element(this.livePriceComponent1, new LayoutBase_1.Location(0, 8), new LayoutBase_1.Size(2, 4)),
+            new LayoutBase_1.Element(this.livePriceComponent2, new LayoutBase_1.Location(3, 8), new LayoutBase_1.Size(2, 4)),
+        ];
     }
     bindKeys() {
         super.bindKeys();
@@ -31,5 +32,5 @@ class SingleCurrency extends LayoutBase_1.LayoutBase {
         this.log.log(`Source: ${this.source}`);
     }
 }
-exports.SingleCurrency = SingleCurrency;
+exports.LivePriceDashboard = LivePriceDashboard;
 //# sourceMappingURL=LivePriceDashboard.js.map

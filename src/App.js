@@ -9,17 +9,21 @@ class App {
     constructor(argv) {
         this.argv = argv;
     }
-    loadUI() {
+    load() {
+        // Load config
         const configHandler = new ConfigLoader_1.ConfigLoader(this.argv);
         const conf = configHandler.load();
-        // todo: logger
+        // Init logger
         Logger_1.Log.init(conf.logFile, conf.logLevel);
         const logger = Logger_1.Log.getLogger("InitLogger");
         logger.info("Logger configured");
+        // IoC container and logger
         const container = new Container_1.default(this.argv);
         const exHandler = new UnhandledExceptionHandler_1.UnhandledExceptionHandler(container.eventHub);
         exHandler.init();
+        // Load screen
         this.screen = new SingleCurrency_1.SingleCurrency(container.eventHub, container);
+        // this.screen = new LivePriceDashboard(container.eventHub, container);
         this.screen.init();
         this.screen.load()
             .then(() => { })
