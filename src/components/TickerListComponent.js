@@ -43,4 +43,4 @@ class TickerListComponent extends Component_1.ComponentBase {
     }
 }
 exports.TickerListComponent = TickerListComponent;
-//# sourceMappingURL=TickerList.js.map
+//# sourceMappingURL=TickerListComponent.js.map

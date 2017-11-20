@@ -6,6 +6,7 @@ const GdaxPriceHistorySource_1 = require("./sources/gdax/GdaxPriceHistorySource"
 const GdaxTickerSource_1 = require("./sources/gdax/GdaxTickerSource");
 const MockSources_1 = require("./sources/mock/MockSources");
 const GdaxLivePriceSource_1 = require("./sources/gdax/GdaxLivePriceSource");
+const ScreenInventory_1 = require("./layouts/ScreenInventory");
 /**
  * IoC Container
  *
@@ -28,6 +29,7 @@ class Container {
         this.tickers = ["BTC-USD", "ETH-USD", "LTC-USD"];
         this.gdaxApi = new GdaxApi_1.GdaxApi(this.eventHub);
         this.gdaxPriceHistoryAdapter = new GdaxPriceHistorySource_1.GdaxPriceHistoryAdapter();
+        this.screenInventory = new ScreenInventory_1.ScreenInventory();
         switch (argv.source) {
             case "mock":
                 this.initMock();

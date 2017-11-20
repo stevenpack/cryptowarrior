@@ -4,4 +4,6 @@ export class Events  {
     public static UIUpdate: string = "ui.updated";
     public static TickerChanged = "ticker.changed";
     public static PeriodChanged: string = "period.changed";
+    public static ScreenChanged: string = "screen.changed";
+
 }

@@ -22,6 +22,14 @@ export class Element {
     constructor(public component: IComponent, public location: Location, public size: Size) {}
 }
 
+export class LayoutDetails {
+    constructor(
+        public index: number,
+        public name: string,
+        public description: string,
+    ) {}
+}
+
 export abstract class LayoutBase {
     private screen: blessed.Widgets.Screen;
     private elements: Element[];
@@ -30,16 +38,17 @@ export abstract class LayoutBase {
     private uiThrottle: Throttle;
     private renderCount = 0;
 
-    constructor(rows: number, cols: number, protected eventHub, protected container: Container) {
-        this.screen = blessed.screen({});
-        this.grid = new contrib.grid({rows, cols, screen: this.screen});
+    constructor(private rows: number, private cols: number, protected eventHub, protected container: Container) {
         this.elements = [];
         this.uiThrottle = new Throttle(200);
     }
 
     public abstract getElements(): Element[];
+    //public abstract getDetails(): LayoutDetails;
 
     public init() {
+        this.screen = blessed.screen({});
+        this.grid = new contrib.grid({rows: this.rows, cols: this.cols, screen: this.screen});
         const elements = this.getElements();
         this.elements.push.apply(this.elements, elements);
         this.build();

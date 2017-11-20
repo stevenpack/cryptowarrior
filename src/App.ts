@@ -7,9 +7,9 @@ import {Log} from "./Logger";
 import {LivePriceComponent} from "./components/LivePriceComponent";
 import {LivePriceDashboard} from "./layouts/LivePriceDashboard";
 import {LayoutBase} from "./layouts/LayoutBase";
+import {ScreenManager} from "./layouts/ScreenManager";
 
 export class App {
-    public screen: LayoutBase;
 
     constructor(private argv) {
     }
@@ -30,12 +30,14 @@ export class App {
         const exHandler = new UnhandledExceptionHandler(container.eventHub);
         exHandler.init();
 
-        // Load screen
-        // this.screen = new SingleCurrency(container.eventHub, container);
-        this.screen = new LivePriceDashboard(container.eventHub, container);
-        this.screen.init();
-        this.screen.load()
-            .then(() => {/* done*/})
-            .catch((err) => console.error(err));
+        // Load screen manager
+        const screens = [];
+        screens.push(new SingleCurrency(container.eventHub, container));
+        screens.push(new LivePriceDashboard(container.eventHub, container));
+
+        const screenManager = new ScreenManager(container.eventHub, screens);
+
+        // Show the screen
+        screenManager.load(0);
     }
 }

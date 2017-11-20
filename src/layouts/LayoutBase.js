@@ -30,17 +30,28 @@ class Element {
     }
 }
 exports.Element = Element;
+class LayoutDetails {
+    constructor(index, name, description) {
+        this.index = index;
+        this.name = name;
+        this.description = description;
+    }
+}
+exports.LayoutDetails = LayoutDetails;
 class LayoutBase {
     constructor(rows, cols, eventHub, container) {
+        this.rows = rows;
+        this.cols = cols;
         this.eventHub = eventHub;
         this.container = container;
         this.renderCount = 0;
-        this.screen = blessed.screen({});
-        this.grid = new contrib.grid({ rows, cols, screen: this.screen });
         this.elements = [];
         this.uiThrottle = new Throttle_1.Throttle(200);
     }
+    //public abstract getDetails(): LayoutDetails;
     init() {
+        this.screen = blessed.screen({});
+        this.grid = new contrib.grid({ rows: this.rows, cols: this.cols, screen: this.screen });
         const elements = this.getElements();
         this.elements.push.apply(this.elements, elements);
         this.build();

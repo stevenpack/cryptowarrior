@@ -1,6 +1,6 @@
 import * as PubSub from "pubsub-js";
 import {PriceHistory} from "./types/PriceHistory";
-import {IAdapter, IDataSource, ISource, IStreamingSource} from "./sources/Interfaces";
+import {IAdapter, ISource, IStreamingSource} from "./sources/Interfaces";
 import {Ticker} from "./types/Ticker";
 import {GdaxApi} from "./sources/gdax/GdaxApi";
 import {GdaxPriceHistoryAdapter, GdaxPriceHistorySource} from "./sources/gdax/GdaxPriceHistorySource";
@@ -8,6 +8,8 @@ import {GdaxTickerSource} from "./sources/gdax/GdaxTickerSource";
 import {MockLivePriceSource, MockPriceHistorySource, MockTickerSource} from "./sources/mock/MockSources";
 import {LivePrice} from "./types/LivePrice";
 import {GdaxLivePriceSource} from "./sources/gdax/GdaxLivePriceSource";
+import {LayoutDetails} from "./layouts/LayoutBase";
+import {ScreenInventory} from "./layouts/ScreenInventory";
 
 /**
  * IoC Container
@@ -37,6 +39,8 @@ export default class Container {
     public priceHistorySource: ISource<PriceHistory>;
     public tickerSource: ISource<Ticker[]>;
 
+    public screenInventory: ScreenInventory;
+
     public source: string;
 
     constructor(private argv) {
@@ -45,6 +49,8 @@ export default class Container {
         this.tickers = ["BTC-USD", "ETH-USD", "LTC-USD"];
         this.gdaxApi = new GdaxApi(this.eventHub);
         this.gdaxPriceHistoryAdapter = new GdaxPriceHistoryAdapter();
+
+        this.screenInventory = new ScreenInventory();
 
         switch (argv.source) {
             case "mock":
