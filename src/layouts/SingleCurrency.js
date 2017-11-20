@@ -20,7 +20,7 @@ class SingleCurrency extends LayoutBase_1.LayoutBase {
         this.periodList = new PeriodListComponent_1.PeriodListComponent(this.eventHub);
         this.log = new LoggerComponent_1.LoggerComponent(this.eventHub);
         this.priceHistoryComponent = new PriceHistoryComponent_1.PriceHistoryComponent(this.eventHub, this.container.priceHistorySource);
-        this.livePriceComponent = new LivePriceComponent_1.LivePriceComponent(this.eventHub, this.container.livePriceSource);
+        this.livePriceComponent = new LivePriceComponent_1.LivePriceComponent(this.eventHub, "BTC-USD", this.container.livePriceSource);
         this.priceHistoryLineChartComponent = new PriceHistoryLineChartComponent_1.PriceHistoryLineChartComponent(this.eventHub, this.container.priceHistorySource);
     }
     getElements() {

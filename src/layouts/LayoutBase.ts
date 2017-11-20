@@ -69,8 +69,8 @@ export abstract class LayoutBase {
     }
 
     public subscribeEvents() {
-        this.eventHub.subscribe(Events.UIUpdate, (msg, data) => this.onUIUpdate(msg, data));
-        this.eventHub.subscribe(Events.LogEvent, (msg, data) => this.onLogEvent(msg, data));
+        this.eventHub.subscribe(Events.UIUpdate, this.onUIUpdate.bind(this));
+        this.eventHub.subscribe(Events.LogEvent, this.onLogEvent.bind(this));
     }
 
     public async load() {

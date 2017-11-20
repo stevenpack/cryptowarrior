@@ -65,8 +65,8 @@ class LayoutBase {
         }
     }
     subscribeEvents() {
-        this.eventHub.subscribe(events_1.Events.UIUpdate, (msg, data) => this.onUIUpdate(msg, data));
-        this.eventHub.subscribe(events_1.Events.LogEvent, (msg, data) => this.onLogEvent(msg, data));
+        this.eventHub.subscribe(events_1.Events.UIUpdate, this.onUIUpdate.bind(this));
+        this.eventHub.subscribe(events_1.Events.LogEvent, this.onLogEvent.bind(this));
     }
     async load() {
         this.preLoad();

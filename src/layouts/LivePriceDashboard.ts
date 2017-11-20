@@ -22,8 +22,8 @@ export class LivePriceDashboard extends LayoutBase {
         this.source = container.source;
 
         this.log = new LoggerComponent(this.eventHub);
-        this.livePriceComponent1 = new LivePriceComponent(this.eventHub, this.container.livePriceSource);
-        this.livePriceComponent2 = new LivePriceComponent(this.eventHub, this.container.livePriceSource);
+        this.livePriceComponent1 = new LivePriceComponent(this.eventHub, "BTC-USD", this.container.livePriceSource);
+        this.livePriceComponent2 = new LivePriceComponent(this.eventHub, "ETH-USD", this.container.livePriceSource);
     }
 
     public getElements(): Element[] {
@@ -36,7 +36,7 @@ export class LivePriceDashboard extends LayoutBase {
 
     public bindKeys() {
         super.bindKeys();
-        // this.attachKeyHandler(["l"], (ch, key) => this.log.toggleVisibility());
+        this.attachKeyHandler(["l"], (ch, key) => this.log.toggleVisibility());
     }
 
     protected postLoad() {

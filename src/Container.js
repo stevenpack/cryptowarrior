@@ -12,10 +12,20 @@ const GdaxLivePriceSource_1 = require("./sources/gdax/GdaxLivePriceSource");
  * Note: Would love to use the Angular style one where $args are auto-injected. Don't love the existing
  *       solutions on npm
  */
+class Factory {
+    constructor(func) {
+        this.func = func;
+    }
+    create(opts) {
+        return this.func(opts);
+    }
+}
+exports.Factory = Factory;
 class Container {
     constructor(argv) {
         this.argv = argv;
         this.eventHub = PubSub;
+        this.tickers = ["BTC-USD", "ETH-USD", "LTC-USD"];
         this.gdaxApi = new GdaxApi_1.GdaxApi(this.eventHub);
         this.gdaxPriceHistoryAdapter = new GdaxPriceHistorySource_1.GdaxPriceHistoryAdapter();
         switch (argv.source) {
@@ -31,7 +41,7 @@ class Container {
     }
     initGdax() {
         this.priceHistorySource = new GdaxPriceHistorySource_1.GdaxPriceHistorySource(this.gdaxApi, this.gdaxPriceHistoryAdapter);
-        this.livePriceSource = new GdaxLivePriceSource_1.GdaxLivePriceSource(this.gdaxApi);
+        this.livePriceSource = new GdaxLivePriceSource_1.GdaxLivePriceSource(this.tickers, this.gdaxApi);
         this.tickerSource = new GdaxTickerSource_1.GdaxTickerSource(this.gdaxApi);
     }
     initMock() {

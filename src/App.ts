@@ -31,8 +31,8 @@ export class App {
         exHandler.init();
 
         // Load screen
-        this.screen = new SingleCurrency(container.eventHub, container);
-        // this.screen = new LivePriceDashboard(container.eventHub, container);
+        // this.screen = new SingleCurrency(container.eventHub, container);
+        this.screen = new LivePriceDashboard(container.eventHub, container);
         this.screen.init();
         this.screen.load()
             .then(() => {/* done*/})

@@ -28,7 +28,11 @@ export class SingleCurrency extends LayoutBase {
         this.periodList = new PeriodListComponent(this.eventHub);
         this.log = new LoggerComponent(this.eventHub);
         this.priceHistoryComponent = new PriceHistoryComponent(this.eventHub, this.container.priceHistorySource);
-        this.livePriceComponent = new LivePriceComponent(this.eventHub, this.container.livePriceSource);
+        this.livePriceComponent = new LivePriceComponent(
+            this.eventHub,
+            "BTC-USD",
+            this.container.livePriceSource,
+        );
         this.priceHistoryLineChartComponent = new PriceHistoryLineChartComponent(
             this.eventHub, this.container.priceHistorySource);
     }

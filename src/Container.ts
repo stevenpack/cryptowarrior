@@ -15,9 +15,21 @@ import {GdaxLivePriceSource} from "./sources/gdax/GdaxLivePriceSource";
  * Note: Would love to use the Angular style one where $args are auto-injected. Don't love the existing
  *       solutions on npm
  */
+
+export class Factory<T> {
+
+    constructor(private func: (opts) => T) {
+    }
+
+    public create(opts): T {
+        return this.func(opts);
+    }
+}
+
 export default class Container {
 
     public eventHub: PubSubJS.Base;
+    public tickers: string[]; // hack around api/live price source not handling single vs multiple subscribes well
     public gdaxApi: GdaxApi;
     public gdaxPriceHistoryAdapter: IAdapter<PriceHistory>;
 
@@ -30,6 +42,7 @@ export default class Container {
     constructor(private argv) {
         this.eventHub = PubSub;
 
+        this.tickers = ["BTC-USD", "ETH-USD", "LTC-USD"];
         this.gdaxApi = new GdaxApi(this.eventHub);
         this.gdaxPriceHistoryAdapter = new GdaxPriceHistoryAdapter();
 
@@ -47,7 +60,7 @@ export default class Container {
 
     private initGdax() {
         this.priceHistorySource = new GdaxPriceHistorySource(this.gdaxApi, this.gdaxPriceHistoryAdapter);
-        this.livePriceSource = new GdaxLivePriceSource(this.gdaxApi);
+        this.livePriceSource = new GdaxLivePriceSource(this.tickers, this.gdaxApi);
         this.tickerSource = new GdaxTickerSource(this.gdaxApi);
     }
 

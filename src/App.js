@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const SingleCurrency_1 = require("./layouts/SingleCurrency");
 const Container_1 = require("./Container");
 const UnhandledExceptionHandler_1 = require("./UnhandledExceptionHandler");
 const ConfigLoader_1 = require("./ConfigLoader");
 const Logger_1 = require("./Logger");
+const LivePriceDashboard_1 = require("./layouts/LivePriceDashboard");
 class App {
     constructor(argv) {
         this.argv = argv;
@@ -22,8 +22,8 @@ class App {
         const exHandler = new UnhandledExceptionHandler_1.UnhandledExceptionHandler(container.eventHub);
         exHandler.init();
         // Load screen
-        this.screen = new SingleCurrency_1.SingleCurrency(container.eventHub, container);
-        // this.screen = new LivePriceDashboard(container.eventHub, container);
+        // this.screen = new SingleCurrency(container.eventHub, container);
+        this.screen = new LivePriceDashboard_1.LivePriceDashboard(container.eventHub, container);
         this.screen.init();
         this.screen.load()
             .then(() => { })

@@ -12,7 +12,7 @@ export class LivePriceComponent extends ComponentBase implements IComponent {
 
     private throttle: Throttle;
 
-    constructor(eventHub, private source: IStreamingSource<LivePrice>) {
+    constructor(eventHub, private tickerId: string, private source: IStreamingSource<LivePrice>) {
         super(eventHub);
         this.throttle = new Throttle(200);
     }
@@ -21,7 +21,7 @@ export class LivePriceComponent extends ComponentBase implements IComponent {
         return new WidgetOpts(contrib.lcd,
             {
                 label: "Live price",
-                strokeWidth: 1,
+                strokeWidth: 2,
                 elements: 4,
                 display: "0000",
             });
@@ -36,20 +36,24 @@ export class LivePriceComponent extends ComponentBase implements IComponent {
     }
 
     public async load(opts?: any) {
+        this.source.subscribe(null, this.onPriceChanged.bind(this));
     }
 
     public reload(ticker: string) {
         const callback = (data) => this.onPriceChanged(data);
+        this.source.unsubscribe();
         this.source.subscribe([ticker], callback);
     }
 
     public onPriceChanged(livePrice: LivePrice) {
-        if (!this.throttle.tryRemoveToken()) {
-            logger.trace("Throttle triggered");
+
+        if (livePrice.id !== this.tickerId) {
             return;
         }
 
-        // check if the price ticker matches (the source can send events for lots of tickers)
+        if (!this.throttle.tryRemoveToken()) {
+            return;
+        }
 
         this.lcd.setDisplay(livePrice.price);
         // todo: too heavy-weight? just mark component as dirty?

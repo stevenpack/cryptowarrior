@@ -19,7 +19,7 @@ export class GdaxApi {
     }
 
     public subscribe(productIds: string[], callback: (data) => void) {
-        // this.unsubscribe();
+        this.unsubscribe();
         this.websocketClient = new WebsocketClient(productIds);
         this.websocketClient.on("open", () => this.publishEvent("GDAX Websocket: Open"));
         this.websocketClient.on("message", callback);

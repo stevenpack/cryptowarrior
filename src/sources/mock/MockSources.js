@@ -21,14 +21,25 @@ class MockPriceHistorySource {
 exports.MockPriceHistorySource = MockPriceHistorySource;
 // todo: IStreamingSource<Price>
 class MockLivePriceSource {
-    subscribe(opts, callback) {
-        this.delayAndPublish(callback, 6500);
+    constructor() {
+        this.stopped = false;
     }
-    delayAndPublish(callback, price) {
+    subscribe(opts, callback) {
+        this.stopped = false;
+        this.delayAndPublish(callback, 6500, 300);
+    }
+    unsubscribe() {
+        this.stopped = true;
+    }
+    delayAndPublish(callback, btcPrice, ethPrice) {
         setTimeout(() => {
-            callback(new LivePrice_1.LivePrice("BTC-USD", price));
-            this.delayAndPublish(callback, price + 1);
-        }, 10);
+            if (this.stopped) {
+                return;
+            }
+            callback(new LivePrice_1.LivePrice("BTC-USD", btcPrice));
+            callback(new LivePrice_1.LivePrice("ETH-USD", ethPrice));
+            this.delayAndPublish(callback, btcPrice + .1, ethPrice + .1);
+        }, 100);
     }
 }
 exports.MockLivePriceSource = MockLivePriceSource;

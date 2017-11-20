@@ -7,15 +7,16 @@ const Logger_1 = require("../Logger");
 const contrib = require("blessed-contrib");
 const logger = Logger_1.Log.getLogger("LivePriceComponent");
 class LivePriceComponent extends Component_1.ComponentBase {
-    constructor(eventHub, source) {
+    constructor(eventHub, tickerId, source) {
         super(eventHub);
+        this.tickerId = tickerId;
         this.source = source;
         this.throttle = new Throttle_1.Throttle(200);
     }
     getWidgetOpts(opts) {
         return new Component_1.WidgetOpts(contrib.lcd, {
             label: "Live price",
-            strokeWidth: 1,
+            strokeWidth: 2,
             elements: 4,
             display: "0000",
         });
@@ -27,17 +28,20 @@ class LivePriceComponent extends Component_1.ComponentBase {
         this.eventHub.subscribe(events_1.Events.TickerChanged, (msg, data) => this.onTickerChanged(msg, data));
     }
     async load(opts) {
+        this.source.subscribe(null, this.onPriceChanged.bind(this));
     }
     reload(ticker) {
         const callback = (data) => this.onPriceChanged(data);
+        this.source.unsubscribe();
         this.source.subscribe([ticker], callback);
     }
     onPriceChanged(livePrice) {
-        if (!this.throttle.tryRemoveToken()) {
-            logger.trace("Throttle triggered");
+        if (livePrice.id !== this.tickerId) {
             return;
         }
-        // check if the price ticker matches (the source can send events for lots of tickers)
+        if (!this.throttle.tryRemoveToken()) {
+            return;
+        }
         this.lcd.setDisplay(livePrice.price);
         // todo: too heavy-weight? just mark component as dirty?
         this.eventHub.publish(events_1.Events.UIUpdate, null);
