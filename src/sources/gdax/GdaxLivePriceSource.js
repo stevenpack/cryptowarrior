@@ -16,7 +16,7 @@ class GdaxLivePriceSource {
     onMessage(callback, data) {
         switch (data.type) {
             case "open":
-                const livePrice = new LivePrice_1.LivePrice(data.id, data.price);
+                const livePrice = new LivePrice_1.LivePrice(data.product_id, data.price);
                 callback(livePrice);
                 break;
         }

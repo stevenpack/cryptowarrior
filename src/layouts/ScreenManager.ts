@@ -1,9 +1,9 @@
 
-import {LayoutBase, LayoutDetails} from "./LayoutBase";
+import {LayoutBase} from "./LayoutBase";
 import {Events} from "../events/Events";
 import {Log} from "../Logger";
 
-const logger = Log.getLogger("InitLogger");
+const logger = Log.getLogger("ScreenManager");
 export class ScreenManager {
 
     private currentScreenIndex: number = 0;

@@ -20,7 +20,7 @@ export class GdaxLivePriceSource implements IStreamingSource<LivePrice> {
     private onMessage(callback: (livePrice: LivePrice) => void, data: any) {
         switch (data.type) {
             case "open":
-                const livePrice = new LivePrice(data.id, data.price);
+                const livePrice = new LivePrice(data.product_id, data.price);
                 callback(livePrice);
                 break;
         }

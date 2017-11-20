@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const Events_1 = require("../events/Events");
 const Logger_1 = require("../Logger");
-const logger = Logger_1.Log.getLogger("InitLogger");
+const logger = Logger_1.Log.getLogger("ScreenManager");
 class ScreenManager {
     constructor(eventHub, screens) {
         this.eventHub = eventHub;

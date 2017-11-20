@@ -1,6 +1,8 @@
 import {ProductInfo, PublicClient, WebsocketClient} from "gdax";
 import {Events} from "../../events/Events";
+import {Log} from "../../Logger";
 
+const logger = Log.getLogger("GdaxApi");
 export class GdaxApi {
     public websocketClient: WebsocketClient;
     public httpClient: PublicClient;
@@ -19,7 +21,8 @@ export class GdaxApi {
     }
 
     public subscribe(productIds: string[], callback: (data) => void) {
-        this.unsubscribe();
+        // this.unsubscribe();
+        logger.info(`Subscribe: ${productIds}`);
         this.websocketClient = new WebsocketClient(productIds);
         this.websocketClient.on("open", () => this.publishEvent("GDAX Websocket: Open"));
         this.websocketClient.on("message", callback);
