@@ -7,7 +7,7 @@ export class ConfigLoader {
 
     public load(): IConfig {
 
-        const env = this.argv.env || "local";
+        const env = this.argv.env || "Local";
         const configPath: string = `./conf/${env}Config.js`;
         console.log(`Env: ${env} -> ${configPath}`);
         console.log(`Loading default..`);

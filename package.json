@@ -4,7 +4,8 @@
   "description": "Text-based crypto dashboard",
   "main": "index.js",
   "scripts": {
-    "start": "node $NODE_DEBUG_OPTION src/index.js",
+    "start": "node $NODE_DEBUG_OPTION src/index.js --source=gdax",
+    "mock": "node $NODE_DEBUG_OPTION src/index.js --source=mock",
     "test": "jest",
     "unit": "jest unit",
     "int": "jest integration",
@@ -29,12 +30,12 @@
   "homepage": "https://github.com/stevenpack/packfinance#readme",
   "dependencies": {
     "@types/pubsub-js": "^1.5.18",
-    "@types/request": "^2.0.7",
+    "@types/request": "^2.0.8",
     "@types/request-promise": "^4.1.39",
     "blessed": "^0.1.81",
     "blessed-contrib": "^4.8.5",
-    "gdax": "github:coinbase/gdax-node",
-    "install": "^0.10.1",
+    "gdax": "github:stevenpack/gdax-node",
+    "install": "^0.10.2",
     "jest": "^21.2.1",
     "limiter": "^1.1.2",
     "log4js": "^2.3.12",
@@ -47,8 +48,8 @@
     "typescript": "^2.6.1"
   },
   "devDependencies": {
-    "@types/jest": "^21.1.5",
-    "ts-jest": "^21.2.1"
+    "@types/jest": "^21.1.6",
+    "ts-jest": "^21.2.3"
   },
   "jest": {
     "transform": {

@@ -9,6 +9,8 @@ class GdaxLivePriceSource {
         const productIds = opts;
         this.api.subscribe(productIds, (data) => this.onMessage(callback, data));
     }
+    unsubscribe() {
+    }
     onMessage(callback, data) {
         switch (data.type) {
             case "open":

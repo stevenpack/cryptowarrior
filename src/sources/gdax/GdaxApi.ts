@@ -1,9 +1,8 @@
-// TODO: The typedefs are wrong and cause compile errors. Either fix or don't use
 import {ProductInfo, PublicClient, WebsocketClient} from "gdax";
 import {Events} from "../../events/Events";
 
 export class GdaxApi {
-    public websocketClient: any; /* index.d.ts is wrong. Revert to Websocket when fixed */
+    public websocketClient: WebsocketClient;
     public httpClient: PublicClient;
 
     constructor(private eventHub) {
@@ -20,8 +19,7 @@ export class GdaxApi {
     }
 
     public subscribe(productIds: string[], callback: (data) => void) {
-
-        this.unsubscribe();
+        // this.unsubscribe();
         this.websocketClient = new WebsocketClient(productIds);
         this.websocketClient.on("open", () => this.publishEvent("GDAX Websocket: Open"));
         this.websocketClient.on("message", callback);

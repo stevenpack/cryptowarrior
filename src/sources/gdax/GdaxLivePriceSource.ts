@@ -13,6 +13,10 @@ export class GdaxLivePriceSource implements IStreamingSource<LivePrice> {
         this.api.subscribe(productIds, (data) => this.onMessage(callback, data));
     }
 
+    public unsubscribe() {
+
+    }
+
     private onMessage(callback: (livePrice: LivePrice) => void, data: any) {
         switch (data.type) {
             case "open":

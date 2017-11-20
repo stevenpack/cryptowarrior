@@ -69,44 +69,8 @@ export abstract class LayoutBase {
     }
 
     public subscribeEvents() {
-        for (const element of this.elements) {
-            // TODO: throttle updates to once per interval e.g. 100ms
-            if (element.component instanceof ComponentBase) {
-                element.component.eventHub.subscribe(Events.UIUpdate, (msg, data) => {
-                    const force = data as boolean;
-                    if (force || this.uiThrottle.tryRemoveToken()) {
-                        this.renderCount++;
-                        if (this.renderCount % 100 === 0) {
-                            this.onLogEvent(null, `+100 screen render calls (total: ${this.renderCount})`);
-                        }
-                        this.screen.render();
-                    }
-                });
-                if (this.isLogger(element)) {
-                    element.component.eventHub.subscribe(Events.LogEvent, (msg, data) => this.onLogEvent(msg, data));
-                }
-            }
-        }
-    }
-
-    public onLogEvent(msg, data) {
-        if (this.logger) {
-            this.logger.log(data);
-        }
-    }
-
-    public setLogger(): any {
-        for (const e of this.elements) {
-            if (this.isLogger(e)) {
-                const component: any = e.component;
-                this.logger = component as ILog;
-                break;
-            }
-        }
-    }
-
-    public isLogger(element: any): boolean {
-        return element.component.log !== undefined;
+        this.eventHub.subscribe(Events.UIUpdate, (msg, data) => this.onUIUpdate(msg, data));
+        this.eventHub.subscribe(Events.LogEvent, (msg, data) => this.onLogEvent(msg, data));
     }
 
     public async load() {
@@ -138,5 +102,37 @@ export abstract class LayoutBase {
 
     protected postLoad() {
         /* Optionally overridden by inheritor */
+    }
+
+    private onUIUpdate(msg, data) {
+        const force = data as boolean;
+        // Restrict UI updates to maximum of x/sec (see this.uiThrottle)
+        if (force || this.uiThrottle.tryRemoveToken()) {
+            this.renderCount++;
+            if (this.renderCount % 100 === 0) {
+                this.onLogEvent(null, `+100 screen render calls (total: ${this.renderCount})`);
+            }
+            this.screen.render();
+        }
+    }
+
+    private onLogEvent(msg, data) {
+        if (this.logger) {
+            this.logger.log(data);
+        }
+    }
+
+    private setLogger(): any {
+        for (const e of this.elements) {
+            if (this.isLogger(e)) {
+                const component: any = e.component;
+                this.logger = component as ILog;
+                break;
+            }
+        }
+    }
+
+    private isLogger(element: any): boolean {
+        return element.component.log !== undefined;
     }
 }

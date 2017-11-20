@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-// TODO: The typedefs are wrong and cause compile errors. Either fix or don't use
 const gdax_1 = require("gdax");
 const Events_1 = require("../../events/Events");
 class GdaxApi {
@@ -16,7 +15,7 @@ class GdaxApi {
         return this.httpClient.getProducts();
     }
     subscribe(productIds, callback) {
-        this.unsubscribe();
+        // this.unsubscribe();
         this.websocketClient = new gdax_1.WebsocketClient(productIds);
         this.websocketClient.on("open", () => this.publishEvent("GDAX Websocket: Open"));
         this.websocketClient.on("message", callback);

@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const blessed = require("blessed");
 const contrib = require("blessed-contrib");
-const Component_1 = require("../components/Component");
 const events_1 = require("../events/events");
 const Throttle_1 = require("../events/Throttle");
 class Location {
@@ -66,41 +65,8 @@ class LayoutBase {
         }
     }
     subscribeEvents() {
-        for (const element of this.elements) {
-            // TODO: throttle updates to once per interval e.g. 100ms
-            if (element.component instanceof Component_1.ComponentBase) {
-                element.component.eventHub.subscribe(events_1.Events.UIUpdate, (msg, data) => {
-                    const force = data;
-                    if (force || this.uiThrottle.tryRemoveToken()) {
-                        this.renderCount++;
-                        if (this.renderCount % 100 === 0) {
-                            this.onLogEvent(null, `+100 screen render calls (total: ${this.renderCount})`);
-                        }
-                        this.screen.render();
-                    }
-                });
-                if (this.isLogger(element)) {
-                    element.component.eventHub.subscribe(events_1.Events.LogEvent, (msg, data) => this.onLogEvent(msg, data));
-                }
-            }
-        }
-    }
-    onLogEvent(msg, data) {
-        if (this.logger) {
-            this.logger.log(data);
-        }
-    }
-    setLogger() {
-        for (const e of this.elements) {
-            if (this.isLogger(e)) {
-                const component = e.component;
-                this.logger = component;
-                break;
-            }
-        }
-    }
-    isLogger(element) {
-        return element.component.log !== undefined;
+        this.eventHub.subscribe(events_1.Events.UIUpdate, (msg, data) => this.onUIUpdate(msg, data));
+        this.eventHub.subscribe(events_1.Events.LogEvent, (msg, data) => this.onLogEvent(msg, data));
     }
     async load() {
         this.preLoad();
@@ -128,6 +94,34 @@ class LayoutBase {
     }
     postLoad() {
         /* Optionally overridden by inheritor */
+    }
+    onUIUpdate(msg, data) {
+        const force = data;
+        // Restrict UI updates to maximum of x/sec (see this.uiThrottle)
+        if (force || this.uiThrottle.tryRemoveToken()) {
+            this.renderCount++;
+            if (this.renderCount % 100 === 0) {
+                this.onLogEvent(null, `+100 screen render calls (total: ${this.renderCount})`);
+            }
+            this.screen.render();
+        }
+    }
+    onLogEvent(msg, data) {
+        if (this.logger) {
+            this.logger.log(data);
+        }
+    }
+    setLogger() {
+        for (const e of this.elements) {
+            if (this.isLogger(e)) {
+                const component = e.component;
+                this.logger = component;
+                break;
+            }
+        }
+    }
+    isLogger(element) {
+        return element.component.log !== undefined;
     }
 }
 exports.LayoutBase = LayoutBase;

@@ -3,7 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const events_1 = require("../events/events");
 const Component_1 = require("./Component");
 const Throttle_1 = require("../events/Throttle");
+const Logger_1 = require("../Logger");
 const contrib = require("blessed-contrib");
+const logger = Logger_1.Log.getLogger("LivePriceComponent");
 class LivePriceComponent extends Component_1.ComponentBase {
     constructor(eventHub, source) {
         super(eventHub);
@@ -32,6 +34,7 @@ class LivePriceComponent extends Component_1.ComponentBase {
     }
     onPriceChanged(livePrice) {
         if (!this.throttle.tryRemoveToken()) {
+            logger.trace("Throttle triggered");
             return;
         }
         // check if the price ticker matches (the source can send events for lots of tickers)

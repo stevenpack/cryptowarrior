@@ -9,20 +9,13 @@ class Log {
     }
     static init(logFilePath, logLevel) {
         console.info("Configuring logger...");
-        // Log.log4js.configure({
-        //     appenders: [
-        //         { type: "console" },
-        //         { type: "file", filename: logFilePath},
-        //     ],
-        // });
         Log.log4js.configure({
             appenders: {
                 file: { type: "file", filename: logFilePath },
                 console: { type: "console" },
             },
-            categories: { default: { appenders: ["file", "console"], level: logLevel } },
+            categories: { default: { appenders: ["file" /*, "console"*/], level: logLevel } },
         });
-        //Log.log4js.setGlobalLogLevel(logLevel);
         console.info(`Logger configured. Root logLevel: ${logLevel}`);
     }
 }
