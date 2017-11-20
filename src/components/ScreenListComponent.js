@@ -36,7 +36,7 @@ class ScreenListComponent extends Component_1.ComponentBase {
         this.screens = await this.source.getData(null);
         for (const s of this.screens) {
             // Works (index.d.ts is wrong)
-            this.list.pushItem(`${s.name}: ${s.description}`);
+            this.list.pushItem(`${s.index + 1}. ${s.name}`);
         }
     }
     toggleVisibility() {

@@ -20,7 +20,7 @@ export class LivePriceComponent extends ComponentBase implements IComponent {
     public getWidgetOpts(opts?: any): WidgetOpts {
         return new WidgetOpts(contrib.lcd,
             {
-                label: "Live price",
+                label: this.tickerId + " (Live)",
                 strokeWidth: 2,
                 elements: 4,
                 display: "0000",
@@ -37,6 +37,10 @@ export class LivePriceComponent extends ComponentBase implements IComponent {
 
     public async load(opts?: any) {
         this.source.subscribe(null, this.onPriceChanged.bind(this));
+    }
+
+    public async unload() {
+        this.source.unsubscribe();
     }
 
     public reload(ticker: string) {

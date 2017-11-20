@@ -30,21 +30,22 @@ export class MockLivePriceSource implements IStreamingSource<LivePrice> {
 
     public subscribe(opts: any, callback: (data: LivePrice) => void) {
         this.stopped = false;
-        this.delayAndPublish(callback, 6500, 300);
+        this.delayAndPublish(callback, 6500, 300, 50);
     }
 
     public unsubscribe() {
         this.stopped = true;
     }
 
-    private delayAndPublish(callback: (data: LivePrice) => void, btcPrice, ethPrice) {
+    private delayAndPublish(callback: (data: LivePrice) => void, btcPrice, ethPrice, ltcPrice) {
         setTimeout(() => {
             if (this.stopped) {
                 return;
             }
             callback(new LivePrice("BTC-USD", btcPrice));
             callback(new LivePrice("ETH-USD", ethPrice));
-            this.delayAndPublish(callback, btcPrice + .1, ethPrice + .1);
+            callback(new LivePrice("LTC-USD", ltcPrice));
+            this.delayAndPublish(callback, btcPrice + .1, ethPrice + .1, ltcPrice + .01);
         }, 100);
     }
 }

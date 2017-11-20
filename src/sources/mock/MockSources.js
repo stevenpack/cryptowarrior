@@ -26,19 +26,20 @@ class MockLivePriceSource {
     }
     subscribe(opts, callback) {
         this.stopped = false;
-        this.delayAndPublish(callback, 6500, 300);
+        this.delayAndPublish(callback, 6500, 300, 50);
     }
     unsubscribe() {
         this.stopped = true;
     }
-    delayAndPublish(callback, btcPrice, ethPrice) {
+    delayAndPublish(callback, btcPrice, ethPrice, ltcPrice) {
         setTimeout(() => {
             if (this.stopped) {
                 return;
             }
             callback(new LivePrice_1.LivePrice("BTC-USD", btcPrice));
             callback(new LivePrice_1.LivePrice("ETH-USD", ethPrice));
-            this.delayAndPublish(callback, btcPrice + .1, ethPrice + .1);
+            callback(new LivePrice_1.LivePrice("LTC-USD", ltcPrice));
+            this.delayAndPublish(callback, btcPrice + .1, ethPrice + .1, ltcPrice + .01);
         }, 100);
     }
 }

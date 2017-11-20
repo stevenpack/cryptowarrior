@@ -92,6 +92,17 @@ class LayoutBase {
         this.postLoad();
         this.screen.render();
     }
+    async unload() {
+        for (const element of this.elements) {
+            try {
+                await element.component.unload();
+            }
+            catch (e) {
+                this.logger.log(`Failed to unload component ${element.component}. Error: ${e.message}`);
+            }
+        }
+        this.screen.destroy();
+    }
     bindKeys() {
         this.screen.key(["q", "C-c"], (ch, key) => {
             return process.exit(0);

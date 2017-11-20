@@ -18,6 +18,10 @@ export abstract class ComponentBase {
         this.fireUpdated(true);
     }
 
+    public unload() {
+        // Most non-streaming components need do nothing
+    }
+
     protected fireUpdated(force?: boolean) {
         this.eventHub.publish(Events.UIUpdate, force);
     }
@@ -60,4 +64,9 @@ export interface IComponent {
      * Load the (initial) data
      */
     load(opts?: any);
+
+    /**
+     * Unload. (unsubscribe etc.)
+     */
+    unload();
 }

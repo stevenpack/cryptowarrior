@@ -13,6 +13,7 @@ export class LivePriceDashboard extends LayoutBase {
     private screenList: ScreenListComponent;
     private livePriceComponent1: LivePriceComponent;
     private livePriceComponent2: LivePriceComponent;
+    private livePriceComponent3: LivePriceComponent;
     private source: string;
 
     constructor(eventHub: PubSubJS.Base, container: Container) {
@@ -22,6 +23,7 @@ export class LivePriceDashboard extends LayoutBase {
         this.log = new LoggerComponent(this.eventHub);
         this.livePriceComponent1 = new LivePriceComponent(this.eventHub, "BTC-USD", this.container.livePriceSource);
         this.livePriceComponent2 = new LivePriceComponent(this.eventHub, "ETH-USD", this.container.livePriceSource);
+        this.livePriceComponent3 = new LivePriceComponent(this.eventHub, "LTC-USD", this.container.livePriceSource);
         this.screenList = new ScreenListComponent(this.eventHub, container.screenInventory);
     }
 
@@ -30,8 +32,9 @@ export class LivePriceDashboard extends LayoutBase {
             // TODO: have component offer a preferred, overridable size and location
             new Element(this.screenList, new Location(0, 0), new Size(12, 6)),
             new Element(this.log, new Location(9, 0), new Size(3, 12)),
-            new Element(this.livePriceComponent1, new Location(0, 8), new Size(2, 4)),
-            new Element(this.livePriceComponent2, new Location(3, 8), new Size(2, 4)),
+            new Element(this.livePriceComponent1, new Location(0, 0), new Size(2, 4)),
+            new Element(this.livePriceComponent2, new Location(0, 4), new Size(2, 4)),
+            new Element(this.livePriceComponent3, new Location(0, 8), new Size(2, 4)),
         ];
     }
 

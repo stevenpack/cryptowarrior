@@ -23,14 +23,17 @@ class ScreenManager {
         return this.screens[this.currentScreenIndex];
     }
     unload(index) {
-        logger.warn("How to unload...");
         const screen = this.current();
-        screen.screen.destroy();
+        screen.unload();
     }
     onScreenChanged(msg, data) {
         // TODO: destroying flickers screen... is there a detach or similar?
-        this.unload(this.currentScreenIndex);
         const index = data;
+        if (index === this.currentScreenIndex) {
+            logger.info(`Screen selection ignored. Already on screen ${index}`);
+            return;
+        }
+        this.unload(this.currentScreenIndex);
         this.load(index);
     }
 }

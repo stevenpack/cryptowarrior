@@ -16,6 +16,9 @@ class ComponentBase {
         element.focus();
         this.fireUpdated(true);
     }
+    unload() {
+        // Most non-streaming components need do nothing
+    }
     fireUpdated(force) {
         this.eventHub.publish(Events_1.Events.UIUpdate, force);
     }

@@ -95,6 +95,18 @@ export abstract class LayoutBase {
         this.screen.render();
     }
 
+    public async unload() {
+        for (const element of this.elements) {
+            try {
+                await element.component.unload();
+            } catch (e) {
+                this.logger.log(`Failed to unload component ${element.component}. Error: ${e.message}`);
+            }
+        }
+        this.screen.destroy();
+    }
+
+
     protected bindKeys() {
         this.screen.key(["q", "C-c"], (ch, key) => {
             return process.exit(0);
@@ -144,4 +156,5 @@ export abstract class LayoutBase {
     private isLogger(element: any): boolean {
         return element.component.log !== undefined;
     }
+
 }

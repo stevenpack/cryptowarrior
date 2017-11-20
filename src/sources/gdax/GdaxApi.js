@@ -24,6 +24,7 @@ class GdaxApi {
     }
     unsubscribe() {
         if (this.websocketClient) {
+            this.publishEvent("GDAX Websocket: Unsubscribe");
             this.websocketClient.disconnect();
         }
     }

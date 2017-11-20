@@ -15,7 +15,7 @@ class LivePriceComponent extends Component_1.ComponentBase {
     }
     getWidgetOpts(opts) {
         return new Component_1.WidgetOpts(contrib.lcd, {
-            label: "Live price",
+            label: this.tickerId + " (Live)",
             strokeWidth: 2,
             elements: 4,
             display: "0000",
@@ -29,6 +29,9 @@ class LivePriceComponent extends Component_1.ComponentBase {
     }
     async load(opts) {
         this.source.subscribe(null, this.onPriceChanged.bind(this));
+    }
+    async unload() {
+        this.source.unsubscribe();
     }
     reload(ticker) {
         const callback = (data) => this.onPriceChanged(data);
