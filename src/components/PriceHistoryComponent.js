@@ -19,7 +19,6 @@ class PriceHistoryComponent extends Component_1.ComponentBase {
     getWidgetOpts(opts) {
         return new Component_1.WidgetOpts(contrib.table, {
             keys: true,
-            fg: "green",
             label: "Price History",
             columnSpacing: 1,
             columnWidth: [18, 10, 10, 10, 10],

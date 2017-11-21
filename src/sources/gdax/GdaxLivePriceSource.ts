@@ -2,7 +2,9 @@
 import {IStreamingSource} from "../Interfaces";
 import {LivePrice} from "../../types/LivePrice";
 import {GdaxApi} from "./GdaxApi";
+import {Log} from "../../Logger";
 
+const logger = Log.getLogger("GdaxLivePriceSource");
 export class GdaxLivePriceSource implements IStreamingSource<LivePrice> {
 
     constructor(private productIds, private api: GdaxApi) {
@@ -18,8 +20,9 @@ export class GdaxLivePriceSource implements IStreamingSource<LivePrice> {
     }
 
     private onMessage(callback: (livePrice: LivePrice) => void, data: any) {
+        logger.trace(`${data.type}:${data.price}`);
         switch (data.type) {
-            case "open":
+            case "match":
                 const livePrice = new LivePrice(data.product_id, data.price);
                 callback(livePrice);
                 break;

@@ -17,8 +17,8 @@ class LivePriceComponent extends Component_1.ComponentBase {
         return new Component_1.WidgetOpts(contrib.lcd, {
             label: this.tickerId + " (Live)",
             strokeWidth: 2,
-            elements: 4,
-            display: "0000",
+            elements: 7,
+            display: "0000.00",
         });
     }
     setWidget(widget) {

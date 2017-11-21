@@ -1,6 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const LivePrice_1 = require("../../types/LivePrice");
+const Logger_1 = require("../../Logger");
+const logger = Logger_1.Log.getLogger("GdaxLivePriceSource");
 class GdaxLivePriceSource {
     constructor(productIds, api) {
         this.productIds = productIds;
@@ -14,8 +16,9 @@ class GdaxLivePriceSource {
         this.api.unsubscribe();
     }
     onMessage(callback, data) {
+        logger.trace(`${data.type}:${data.price}`);
         switch (data.type) {
-            case "open":
+            case "match":
                 const livePrice = new LivePrice_1.LivePrice(data.product_id, data.price);
                 callback(livePrice);
                 break;

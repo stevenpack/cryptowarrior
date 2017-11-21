@@ -32,7 +32,7 @@ class SingleCurrency extends LayoutBase_1.LayoutBase {
             new LayoutBase_1.Element(this.periodList, new LayoutBase_1.Location(0, 0), new LayoutBase_1.Size(12, 2)),
             new LayoutBase_1.Element(this.screenList, new LayoutBase_1.Location(0, 0), new LayoutBase_1.Size(12, 6)),
             new LayoutBase_1.Element(this.priceHistoryComponent, new LayoutBase_1.Location(2, 7), new LayoutBase_1.Size(10, 5)),
-            new LayoutBase_1.Element(this.livePriceComponent, new LayoutBase_1.Location(0, 8), new LayoutBase_1.Size(2, 4)),
+            new LayoutBase_1.Element(this.livePriceComponent, new LayoutBase_1.Location(0, 6), new LayoutBase_1.Size(2, 6)),
             new LayoutBase_1.Element(this.priceHistoryLineChartComponent, new LayoutBase_1.Location(2, 0), new LayoutBase_1.Size(10, 7)),
         ];
     }

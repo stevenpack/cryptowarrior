@@ -48,7 +48,7 @@ export class SingleCurrency extends LayoutBase {
             new Element(this.periodList, new Location(0, 0), new Size(12, 2)),
             new Element(this.screenList, new Location(0, 0), new Size(12, 6)),
             new Element(this.priceHistoryComponent, new Location(2, 7), new Size(10, 5)),
-            new Element(this.livePriceComponent, new Location(0, 8), new Size(2, 4)),
+            new Element(this.livePriceComponent, new Location(0, 6), new Size(2, 6)),
             new Element(this.priceHistoryLineChartComponent, new Location(2, 0), new Size(10, 7)),
         ];
     }

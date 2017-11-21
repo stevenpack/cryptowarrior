@@ -44,7 +44,6 @@ export abstract class LayoutBase {
     }
 
     public abstract getElements(): Element[];
-    //public abstract getDetails(): LayoutDetails;
 
     public init() {
         this.screen = blessed.screen({});
@@ -67,6 +66,10 @@ export abstract class LayoutBase {
 
             // Create
             const widgetOpts = component.getWidgetOpts();
+
+            // Apply theme
+            // widgetOpts.opts.fg = "green";
+            // widgetOpts.opts.bg = "black";
             const widget = this.grid.set(loc.x, loc.y, size.rows, size.cols , widgetOpts.widgetType, widgetOpts.opts);
 
             // Store reference (because we are creating the actual instance, not the component)
@@ -105,7 +108,6 @@ export abstract class LayoutBase {
         }
         this.screen.destroy();
     }
-
 
     protected bindKeys() {
         this.screen.key(["q", "C-c"], (ch, key) => {
