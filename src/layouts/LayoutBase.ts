@@ -1,10 +1,12 @@
 import * as blessed from "blessed";
 const contrib = require("blessed-contrib");
 
-import { IComponent, ILog, ComponentBase } from "../components/Component";
+import { IComponent, ILog } from "../components/Component";
 import { Events } from "../events/events";
 import {Throttle} from "../events/Throttle";
 import Container from "../Container";
+import {KeyBinding} from "./KeyBinding";
+import {ISource} from "../sources/Interfaces";
 
 export class Location {
     constructor(public x: number, public y: number) {}
@@ -30,13 +32,14 @@ export class LayoutDetails {
     ) {}
 }
 
-export abstract class LayoutBase {
+export abstract class LayoutBase implements ISource<KeyBinding[]>{
     private screen: blessed.Widgets.Screen;
     private elements: Element[];
     private grid: any;
     private logger: ILog;
     private uiThrottle: Throttle;
     private renderCount = 0;
+    private keybindings: KeyBinding[];
 
     constructor(private rows: number, private cols: number, protected eventHub, protected container: Container) {
         this.elements = [];
@@ -48,6 +51,7 @@ export abstract class LayoutBase {
     public init() {
         this.screen = blessed.screen({});
         this.grid = new contrib.grid({rows: this.rows, cols: this.cols, screen: this.screen});
+        this.keybindings = [];
         const elements = this.getElements();
         this.elements.push.apply(this.elements, elements);
         this.build();
@@ -109,14 +113,19 @@ export abstract class LayoutBase {
         this.screen.destroy();
     }
 
+    public getData(opts: any): Promise<KeyBinding[]> {
+        return Promise.resolve(this.keybindings);
+    }
+
     protected bindKeys() {
-        this.screen.key(["q", "C-c"], (ch, key) => {
+        this.attachKeyHandler(new KeyBinding(["q", "C-c"], "[Q]uit"), (ch, key) => {
             return process.exit(0);
         });
     }
 
-    protected attachKeyHandler(keys: string[], handler: (ch, key) => void) {
-        this.screen.key(keys, (ch, key) => handler(ch, key));
+    protected attachKeyHandler(keybinding: KeyBinding, handler: (ch, key) => void) {
+        this.keybindings.push(keybinding);
+        this.screen.key(keybinding.keys, (ch, key) => handler(ch, key));
     }
 
     protected preLoad() {

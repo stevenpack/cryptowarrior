@@ -4,6 +4,7 @@ const blessed = require("blessed");
 const contrib = require("blessed-contrib");
 const events_1 = require("../events/events");
 const Throttle_1 = require("../events/Throttle");
+const KeyBinding_1 = require("./KeyBinding");
 class Location {
     constructor(x, y) {
         this.x = x;
@@ -51,6 +52,7 @@ class LayoutBase {
     init() {
         this.screen = blessed.screen({});
         this.grid = new contrib.grid({ rows: this.rows, cols: this.cols, screen: this.screen });
+        this.keybindings = [];
         const elements = this.getElements();
         this.elements.push.apply(this.elements, elements);
         this.build();
@@ -105,13 +107,17 @@ class LayoutBase {
         }
         this.screen.destroy();
     }
+    getData(opts) {
+        return Promise.resolve(this.keybindings);
+    }
     bindKeys() {
-        this.screen.key(["q", "C-c"], (ch, key) => {
+        this.attachKeyHandler(new KeyBinding_1.KeyBinding(["q", "C-c"], "[Q]uit"), (ch, key) => {
             return process.exit(0);
         });
     }
-    attachKeyHandler(keys, handler) {
-        this.screen.key(keys, (ch, key) => handler(ch, key));
+    attachKeyHandler(keybinding, handler) {
+        this.keybindings.push(keybinding);
+        this.screen.key(keybinding.keys, (ch, key) => handler(ch, key));
     }
     preLoad() {
         /* Optionally overridden by inheritor */

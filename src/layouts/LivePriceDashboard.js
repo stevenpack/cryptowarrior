@@ -4,6 +4,7 @@ const LivePriceComponent_1 = require("../components/LivePriceComponent");
 const LoggerComponent_1 = require("../components/LoggerComponent");
 const LayoutBase_1 = require("./LayoutBase");
 const ScreenListComponent_1 = require("../components/ScreenListComponent");
+const KeyBinding_1 = require("./KeyBinding");
 /**
  * Layout optimized for viewing a single currency
  */
@@ -29,8 +30,8 @@ class LivePriceDashboard extends LayoutBase_1.LayoutBase {
     }
     bindKeys() {
         super.bindKeys();
-        this.attachKeyHandler(["l"], (ch, key) => this.log.toggleVisibility());
-        this.attachKeyHandler(["s"], (ch, key) => this.screenList.toggleVisibility());
+        this.attachKeyHandler(new KeyBinding_1.KeyBinding(["l"], "Show/hide Log panel"), (ch, key) => this.log.toggleVisibility());
+        this.attachKeyHandler(new KeyBinding_1.KeyBinding(["l"], "Show/hide Screen list"), (ch, key) => this.screenList.toggleVisibility());
     }
     postLoad() {
     }

@@ -10,11 +10,14 @@ import {PriceHistoryLineChartComponent} from "../components/PriceHistoryLineChar
 import {PeriodListComponent} from "../components/PeriodListComponent";
 import {ScreenListComponent} from "../components/ScreenListComponent";
 import {BigLabelComponent} from "../components/BigLabelComponent";
+import {KeyBinding} from "./KeyBinding";
+import {KeyHelpComponent} from "../components/KeyHelpComponent";
 /**
  * Layout optimized for viewing a single currency
  */
 export class SingleCurrency extends LayoutBase {
     public log: LoggerComponent;
+    private keyhelpComponent: KeyHelpComponent;
     private bigLabelComponent: BigLabelComponent;
     private tickerList: TickerListComponent;
     private periodList: PeriodListComponent;
@@ -28,6 +31,7 @@ export class SingleCurrency extends LayoutBase {
         super(12, 12, eventHub, container);
         this.source = container.source;
 
+        this.keyhelpComponent = new KeyHelpComponent(this.eventHub, this);
         this.tickerList = new TickerListComponent(this.eventHub, this.container.tickerSource);
         this.periodList = new PeriodListComponent(this.eventHub);
         this.screenList = new ScreenListComponent(this.eventHub, this.container.screenInventory);
@@ -49,6 +53,7 @@ export class SingleCurrency extends LayoutBase {
 
         return [
             new Element(this.log, new Location(9, 0), new Size(3, 12)),
+            new Element(this.keyhelpComponent, new Location(0, 0), new Size(12, 2)),
             new Element(this.tickerList, new Location(0, 0), new Size(12, 2)),
             new Element(this.periodList, new Location(0, 0), new Size(12, 2)),
             new Element(this.screenList, new Location(0, 0), new Size(12, 6)),
@@ -61,15 +66,20 @@ export class SingleCurrency extends LayoutBase {
 
     public bindKeys() {
         super.bindKeys();
-        this.attachKeyHandler(["t"], (ch, key) => this.tickerList.toggleVisibility());
-        this.attachKeyHandler(["p"], (ch, key) => this.periodList.toggleVisibility());
-        this.attachKeyHandler(["l"], (ch, key) => this.log.toggleVisibility());
-        this.attachKeyHandler(["s"], (ch, key) => this.screenList.toggleVisibility());
+        this.attachKeyHandler(new KeyBinding(["h"], "Show/Hide [H]elp"),
+            (ch, key) => this.keyhelpComponent.toggleVisibility());
+        this.attachKeyHandler(new KeyBinding(["t"], "Show/Hide [T]icker List"),
+            (ch, key) => this.tickerList.toggleVisibility());
+        this.attachKeyHandler(new KeyBinding(["p"], "Show/Hide [P]eriod List"),
+            (ch, key) => this.periodList.toggleVisibility());
+        this.attachKeyHandler(new KeyBinding(["l"], "Show/Hide [L]og Panel"),
+            (ch, key) => this.log.toggleVisibility());
+        this.attachKeyHandler(new KeyBinding(["s"], "Show/Hide [S]creen list"),
+            (ch, key) => this.screenList.toggleVisibility());
     }
 
     protected postLoad() {
         this.eventHub.publish(Events.TickerChanged, new Ticker("BTC-USD"));
         this.log.log(`Source: ${this.source}`);
     }
-
 }

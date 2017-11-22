@@ -2,20 +2,22 @@ import * as blessed from "blessed";
 import { Events } from "../events/events";
 import { IComponent, ComponentBase, WidgetOpts } from "./Component";
 import {ISource} from "../sources/Interfaces";
-import {LayoutDetails} from "../layouts/LayoutBase";
+import {Ticker} from "../types/Ticker";
+import {LayoutBase, LayoutDetails} from "../layouts/LayoutBase";
+import {KeyBinding} from "../layouts/KeyBinding";
 
-export class ScreenListComponent extends ComponentBase implements IComponent {
-    public screens: LayoutDetails[];
+export class KeyHelpComponent extends ComponentBase implements IComponent {
+    public keybindings: KeyBinding[];
     public list: blessed.Widgets.ListElement;
 
-    constructor(eventHub: PubSubJS.Base, private source: ISource<LayoutDetails[]>) {
+    constructor(eventHub: PubSubJS.Base, private source: ISource<KeyBinding[]>) {
         super(eventHub);
     }
 
     public getWidgetOpts(opts?: any): WidgetOpts {
         return new WidgetOpts(blessed.list,
             {
-                label: "Screens",
+                label: "Keys",
                 selectedBg: "green",
                 focusable: true,
                 hidden: true,
@@ -35,15 +37,14 @@ export class ScreenListComponent extends ComponentBase implements IComponent {
 
     public onSelected(item: blessed.Widgets.BlessedElement, index: number) {
         this.list.hide();
-        this.eventHub.publish(Events.ScreenChanged, index);
-        this.eventHub.publish(Events.LogEvent, "New Screen: " + this.screens[index].name);
     }
 
     public async load(opts?: any) {
         this.list.clearItems();
-        this.screens = await this.source.getData(null);
-        for (const s of this.screens) {
-            this.list.pushItem(`${s.index + 1}. ${s.name}`);
+        this.keybindings = await this.source.getData(null);
+        const sorted = this.keybindings.sort((a, b) => a.keys[0].localeCompare(b.keys[0]));
+        for (const k of sorted) {
+            this.list.pushItem(`${k.keys}. ${k.description}`);
         }
     }
 

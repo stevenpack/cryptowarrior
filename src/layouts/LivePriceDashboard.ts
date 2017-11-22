@@ -5,6 +5,7 @@ import Container from "../Container";
 import {Events} from "../events/Events";
 import {Ticker} from "../types/Ticker";
 import {ScreenListComponent} from "../components/ScreenListComponent";
+import {KeyBinding} from "./KeyBinding";
 /**
  * Layout optimized for viewing a single currency
  */
@@ -40,8 +41,8 @@ export class LivePriceDashboard extends LayoutBase {
 
     public bindKeys() {
         super.bindKeys();
-        this.attachKeyHandler(["l"], (ch, key) => this.log.toggleVisibility());
-        this.attachKeyHandler(["s"], (ch, key) => this.screenList.toggleVisibility());
+        this.attachKeyHandler(new KeyBinding(["l"], "Show/hide Log panel"), (ch, key) => this.log.toggleVisibility());
+        this.attachKeyHandler(new KeyBinding(["l"], "Show/hide Screen list"), (ch, key) => this.screenList.toggleVisibility());
     }
 
     protected postLoad() {
