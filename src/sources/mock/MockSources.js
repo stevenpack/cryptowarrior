@@ -19,7 +19,6 @@ class MockPriceHistorySource {
     }
 }
 exports.MockPriceHistorySource = MockPriceHistorySource;
-// todo: IStreamingSource<Price>
 class MockLivePriceSource {
     constructor() {
         this.stopped = false;
@@ -27,8 +26,9 @@ class MockLivePriceSource {
     subscribe(opts, callback) {
         this.stopped = false;
         this.delayAndPublish(callback, 6500, 300, 50);
+        return Promise.resolve(1);
     }
-    unsubscribe() {
+    unsubscribe(subscriptionId) {
         this.stopped = true;
     }
     delayAndPublish(callback, btcPrice, ethPrice, ltcPrice) {

@@ -17,7 +17,7 @@ export class ScreenInventory implements ISource<LayoutDetails[]> {
 
         this.layoutDetails.push(new LayoutDetails(
             1,
-            "Multi currency live dashboard",
+            "Multi currency dashboard",
             "Multiple live streaming prices",
         ));
 

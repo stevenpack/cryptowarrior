@@ -27,7 +27,7 @@ class Container {
         this.argv = argv;
         this.eventHub = PubSub;
         this.tickers = ["BTC-USD", "ETH-USD", "LTC-USD"];
-        this.gdaxApi = new GdaxApi_1.GdaxApi(this.eventHub);
+        this.gdaxApi = new GdaxApi_1.GdaxApi();
         this.gdaxPriceHistoryAdapter = new GdaxPriceHistorySource_1.GdaxPriceHistoryAdapter();
         this.screenInventory = new ScreenInventory_1.ScreenInventory();
         switch (argv.source) {
@@ -43,7 +43,7 @@ class Container {
     }
     initGdax() {
         this.priceHistorySource = new GdaxPriceHistorySource_1.GdaxPriceHistorySource(this.gdaxApi, this.gdaxPriceHistoryAdapter);
-        this.livePriceSource = new GdaxLivePriceSource_1.GdaxLivePriceSource(this.tickers, this.gdaxApi);
+        this.livePriceSource = new GdaxLivePriceSource_1.GdaxLivePriceSource(this.tickers);
         this.tickerSource = new GdaxTickerSource_1.GdaxTickerSource(this.gdaxApi);
     }
     initMock() {

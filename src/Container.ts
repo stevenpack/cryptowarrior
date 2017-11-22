@@ -47,7 +47,7 @@ export default class Container {
         this.eventHub = PubSub;
 
         this.tickers = ["BTC-USD", "ETH-USD", "LTC-USD"];
-        this.gdaxApi = new GdaxApi(this.eventHub);
+        this.gdaxApi = new GdaxApi();
         this.gdaxPriceHistoryAdapter = new GdaxPriceHistoryAdapter();
 
         this.screenInventory = new ScreenInventory();
@@ -66,7 +66,7 @@ export default class Container {
 
     private initGdax() {
         this.priceHistorySource = new GdaxPriceHistorySource(this.gdaxApi, this.gdaxPriceHistoryAdapter);
-        this.livePriceSource = new GdaxLivePriceSource(this.tickers, this.gdaxApi);
+        this.livePriceSource = new GdaxLivePriceSource(this.tickers);
         this.tickerSource = new GdaxTickerSource(this.gdaxApi);
     }
 

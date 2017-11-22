@@ -19,7 +19,8 @@ export class LivePriceComponent extends ComponentBase implements IComponent {
     private throttle: Throttle;
     private subscriptionId: number;
 
-    constructor(eventHub, private tickerId: string, private source: IStreamingSource<LivePrice>, private ignoreTickerChange: boolean) {
+    constructor(eventHub, private tickerId: string, private source: IStreamingSource<LivePrice>,
+                private ignoreTickerChange: boolean) {
         super(eventHub);
         this.throttle = new Throttle(200);
     }
@@ -63,7 +64,7 @@ export class LivePriceComponent extends ComponentBase implements IComponent {
         }
 
         this.lcd.setDisplay(livePrice.price);
-        // todo: too heavy-weight? just mark component as dirty?
+        // todo: too heavy-weight for event per UI update? just mark component as dirty? and have a render timer?
         this.eventHub.publish(Events.UIUpdate, null);
     }
 

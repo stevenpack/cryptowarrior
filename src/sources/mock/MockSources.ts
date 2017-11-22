@@ -23,17 +23,17 @@ export class MockPriceHistorySource implements ISource<PriceHistory> {
     }
 }
 
-// todo: IStreamingSource<Price>
 export class MockLivePriceSource implements IStreamingSource<LivePrice> {
 
     private stopped = false;
 
-    public subscribe(opts: any, callback: (data: LivePrice) => void) {
+    public subscribe(opts: any, callback: (data: LivePrice) => void): Promise<number> {
         this.stopped = false;
         this.delayAndPublish(callback, 6500, 300, 50);
+        return Promise.resolve(1);
     }
 
-    public unsubscribe() {
+    public unsubscribe(subscriptionId: number) {
         this.stopped = true;
     }
 

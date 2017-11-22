@@ -39,6 +39,7 @@ export class SingleCurrency extends LayoutBase {
             this.eventHub,
             "BTC-USD",
             this.container.livePriceSource,
+            false,
         );
         this.priceHistoryLineChartComponent = new PriceHistoryLineChartComponent(
             this.eventHub, this.container.priceHistorySource);

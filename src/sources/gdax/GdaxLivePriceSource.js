@@ -3,16 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const LivePrice_1 = require("../../types/LivePrice");
 const Logger_1 = require("../../Logger");
 const GTT = require("gdax-trading-toolkit");
+const GdaxLogger_1 = require("./GdaxLogger");
 const logger = Logger_1.Log.getLogger("GdaxLivePriceSource");
-// TODO: put into container
-class TempLogger {
-    log(level, message, meta) {
-        logger.trace(message);
-    }
-    error(err) {
-        logger.error(err.stack);
-    }
-}
 class GdaxLivePriceSource {
     constructor(productIds) {
         this.productIds = productIds;
@@ -32,9 +24,9 @@ class GdaxLivePriceSource {
         delete this.subscriptions[subscriptionId];
     }
     async init() {
-        const tempLogger = new TempLogger();
         try {
-            this.feed = await GTT.Factories.GDAX.FeedFactory(tempLogger, this.productIds);
+            const gdaxLogger = new GdaxLogger_1.GdaxLogger();
+            this.feed = await GTT.Factories.GDAX.FeedFactory(gdaxLogger, this.productIds);
             this.feed.on("data", this.onMessage.bind(this));
         }
         catch (e) {

@@ -4,7 +4,7 @@ import {GdaxApi} from "../../src/sources/gdax/GdaxApi";
 import {Period} from "../../src/types/Period";
 
 describe("GdaxApi", () => {
-    const api = new GdaxApi({});
+    const api = new GdaxApi();
 
     it("gets ticker list", async (done) => {
         const products = await api.getProducts();
@@ -21,17 +21,4 @@ describe("GdaxApi", () => {
             done(e);
         }
     });
-
-    it("subscribes", (done) => {
-        const callback = (data) => {
-          switch (data.type) {
-            case "open":
-                // console.log("got open: " + data.price);
-                api.unsubscribe();
-                done();
-                break;
-          }
-        };
-        api.subscribe(["BTC-USD"], callback);
-  });
 });

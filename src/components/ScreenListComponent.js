@@ -4,7 +4,6 @@ const blessed = require("blessed");
 const events_1 = require("../events/events");
 const Component_1 = require("./Component");
 class ScreenListComponent extends Component_1.ComponentBase {
-    // TODO: accept the index/name/descrip, not the whole screen
     constructor(eventHub, source) {
         super(eventHub);
         this.source = source;

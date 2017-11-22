@@ -49,7 +49,7 @@ class LivePriceComponent extends Component_1.ComponentBase {
             return;
         }
         this.lcd.setDisplay(livePrice.price);
-        // todo: too heavy-weight? just mark component as dirty?
+        // todo: too heavy-weight for event per UI update? just mark component as dirty? and have a render timer?
         this.eventHub.publish(events_1.Events.UIUpdate, null);
     }
     onTickerChanged(msg, data) {

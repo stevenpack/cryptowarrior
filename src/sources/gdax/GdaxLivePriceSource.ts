@@ -7,19 +7,10 @@ import * as GTT from "gdax-trading-toolkit";
 import {OrderbookMessage} from "gdax-trading-toolkit/build/src/core";
 import {Logger} from "gdax-trading-toolkit/build/src/utils";
 import {GDAXFeed} from "gdax-trading-toolkit/build/src/exchanges";
+import {GdaxLogger} from "./GdaxLogger";
 
 const logger = Log.getLogger("GdaxLivePriceSource");
 
-// TODO: put into container
-class TempLogger implements Logger {
-    public log(level: string, message: string, meta?: any): void {
-        logger.trace(message);
-    }
-
-    public error(err: Error): void {
-        logger.error(err.stack);
-    }
-}
 
 export class GdaxLivePriceSource implements IStreamingSource<LivePrice> {
 
@@ -46,9 +37,9 @@ export class GdaxLivePriceSource implements IStreamingSource<LivePrice> {
     }
 
     private async init() {
-        const tempLogger = new TempLogger();
         try {
-            this.feed = await GTT.Factories.GDAX.FeedFactory(tempLogger, this.productIds);
+            const gdaxLogger = new GdaxLogger();
+            this.feed = await GTT.Factories.GDAX.FeedFactory(gdaxLogger, this.productIds);
             this.feed.on("data", this.onMessage.bind(this));
         } catch (e) {
             logger.error(e);

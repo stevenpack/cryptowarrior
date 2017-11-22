@@ -9,7 +9,6 @@ export class ScreenListComponent extends ComponentBase implements IComponent {
     public screens: LayoutDetails[];
     public list: blessed.Widgets.ListElement;
 
-    // TODO: accept the index/name/descrip, not the whole screen
     constructor(eventHub: PubSubJS.Base, private source: ISource<LayoutDetails[]>) {
         super(eventHub);
     }
