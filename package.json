@@ -35,6 +35,7 @@
     "blessed": "^0.1.81",
     "blessed-contrib": "^4.8.5",
     "gdax": "github:stevenpack/gdax-node",
+    "gdax-trading-toolkit": "^0.2.1",
     "install": "^0.10.2",
     "jest": "^21.2.1",
     "limiter": "^1.1.2",

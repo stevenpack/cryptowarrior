@@ -38,6 +38,7 @@ class PeriodListComponent extends Component_1.ComponentBase {
         this.list.hide();
     }
     async load(opts) {
+        this.list.clearItems();
         this.periods = EnumEx_1.EnumEx.getNames(Period_1.Period);
         for (const p of this.periods) {
             // Works (index.d.ts is wrong)

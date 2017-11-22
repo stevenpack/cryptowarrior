@@ -32,6 +32,7 @@ class TickerListComponent extends Component_1.ComponentBase {
         this.list.hide();
     }
     async load(opts) {
+        this.list.clearItems();
         this.tickers = await this.source.getData(null);
         for (const t of this.tickers) {
             // Works (index.d.ts is wrong)

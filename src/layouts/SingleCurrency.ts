@@ -9,11 +9,13 @@ import {Ticker} from "../types/Ticker";
 import {PriceHistoryLineChartComponent} from "../components/PriceHistoryLineChartComponent";
 import {PeriodListComponent} from "../components/PeriodListComponent";
 import {ScreenListComponent} from "../components/ScreenListComponent";
+import {BigLabelComponent} from "../components/BigLabelComponent";
 /**
  * Layout optimized for viewing a single currency
  */
 export class SingleCurrency extends LayoutBase {
     public log: LoggerComponent;
+    private bigLabelComponent: BigLabelComponent;
     private tickerList: TickerListComponent;
     private periodList: PeriodListComponent;
     private screenList: ScreenListComponent;
@@ -30,6 +32,8 @@ export class SingleCurrency extends LayoutBase {
         this.periodList = new PeriodListComponent(this.eventHub);
         this.screenList = new ScreenListComponent(this.eventHub, this.container.screenInventory);
         this.log = new LoggerComponent(this.eventHub);
+
+        this.bigLabelComponent = new BigLabelComponent(this.eventHub, "BTC-USD");
         this.priceHistoryComponent = new PriceHistoryComponent(this.eventHub, this.container.priceHistorySource);
         this.livePriceComponent = new LivePriceComponent(
             this.eventHub,
@@ -47,9 +51,10 @@ export class SingleCurrency extends LayoutBase {
             new Element(this.tickerList, new Location(0, 0), new Size(12, 2)),
             new Element(this.periodList, new Location(0, 0), new Size(12, 2)),
             new Element(this.screenList, new Location(0, 0), new Size(12, 6)),
-            new Element(this.priceHistoryComponent, new Location(2, 7), new Size(10, 5)),
+            new Element(this.bigLabelComponent, new Location(0, 0), new Size(2, 6)),
             new Element(this.livePriceComponent, new Location(0, 6), new Size(2, 6)),
-            new Element(this.priceHistoryLineChartComponent, new Location(2, 0), new Size(10, 7)),
+            new Element(this.priceHistoryComponent, new Location(2, 6), new Size(10, 6)),
+            new Element(this.priceHistoryLineChartComponent, new Location(2, 0), new Size(10, 6)),
         ];
     }
 

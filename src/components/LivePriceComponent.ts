@@ -7,12 +7,19 @@ import {Log} from "../Logger";
 const contrib = require("blessed-contrib");
 
 const logger = Log.getLogger("LivePriceComponent");
+
+/**
+ * Display live price.
+ *
+ * TODO: Load initial price from ticker/last trade
+ */
 export class LivePriceComponent extends ComponentBase implements IComponent {
+
     public lcd: any;
-
     private throttle: Throttle;
+    private subscriptionId: number;
 
-    constructor(eventHub, private tickerId: string, private source: IStreamingSource<LivePrice>) {
+    constructor(eventHub, private tickerId: string, private source: IStreamingSource<LivePrice>, private ignoreTickerChange: boolean) {
         super(eventHub);
         this.throttle = new Throttle(200);
     }
@@ -20,7 +27,7 @@ export class LivePriceComponent extends ComponentBase implements IComponent {
     public getWidgetOpts(opts?: any): WidgetOpts {
         return new WidgetOpts(contrib.lcd,
             {
-                label: this.tickerId + " (Live)",
+                label: this.ignoreTickerChange ? `Live (${this.tickerId})` : "Live",
                 strokeWidth: 2,
                 elements: 7,
                 display: "0000.00",
@@ -32,21 +39,17 @@ export class LivePriceComponent extends ComponentBase implements IComponent {
     }
 
     public configure(widget: any, opts?: any) {
-        this.eventHub.subscribe(Events.TickerChanged, (msg, data) => this.onTickerChanged(msg, data));
+        if (!this.ignoreTickerChange) {
+            this.eventHub.subscribe(Events.TickerChanged, (msg, data) => this.onTickerChanged(msg, data));
+        }
     }
 
     public async load(opts?: any) {
-        this.source.subscribe(null, this.onPriceChanged.bind(this));
+        this.subscriptionId = await this.source.subscribe(null, this.onPriceChanged.bind(this));
     }
 
     public async unload() {
-        this.source.unsubscribe();
-    }
-
-    public reload(ticker: string) {
-        const callback = (data) => this.onPriceChanged(data);
-        this.source.unsubscribe();
-        this.source.subscribe([ticker], callback);
+        this.source.unsubscribe(this.subscriptionId);
     }
 
     public onPriceChanged(livePrice: LivePrice) {
@@ -66,6 +69,7 @@ export class LivePriceComponent extends ComponentBase implements IComponent {
 
     private onTickerChanged(msg: any, data: any) {
         this.lcd.label = data.id;
-        this.reload(data.id);
+        this.lcd.setDisplay("0000.00");
+        this.tickerId = data.id;
     }
 }

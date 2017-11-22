@@ -1,7 +1,10 @@
+/**
+ * Interfaces to decouple UI from the source
+ */
 
 export interface IStreamingSource<T> {
-    subscribe(opts: any, callback: (t: T) => void);
-    unsubscribe();
+    subscribe(opts: any, callback: (t: T) => void): Promise<number>;
+    unsubscribe(subscriptionId: number);
 }
 
 export interface IDataSource {

@@ -2,26 +2,57 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const LivePrice_1 = require("../../types/LivePrice");
 const Logger_1 = require("../../Logger");
+const GTT = require("gdax-trading-toolkit");
 const logger = Logger_1.Log.getLogger("GdaxLivePriceSource");
+// TODO: put into container
+class TempLogger {
+    log(level, message, meta) {
+        logger.trace(message);
+    }
+    error(err) {
+        logger.error(err.stack);
+    }
+}
 class GdaxLivePriceSource {
-    constructor(productIds, api) {
+    constructor(productIds) {
         this.productIds = productIds;
-        this.api = api;
+        this.subscriptionIdSeed = 0;
+        this.subscriptions = {};
     }
-    subscribe(opts, callback) {
-        const productIds = opts || this.productIds;
-        this.api.subscribe(productIds, (data) => this.onMessage(callback, data));
+    async subscribe(opts, callback) {
+        if (!this.feed) {
+            await this.init();
+        }
+        const id = this.subscriptionIdSeed++;
+        this.subscriptions[id] = callback;
+        return id;
     }
-    unsubscribe() {
-        this.api.unsubscribe();
+    unsubscribe(subscriptionId) {
+        this.subscriptions[subscriptionId] = null;
+        delete this.subscriptions[subscriptionId];
     }
-    onMessage(callback, data) {
-        logger.trace(`${data.type}:${data.price}`);
-        switch (data.type) {
-            case "match":
-                const livePrice = new LivePrice_1.LivePrice(data.product_id, data.price);
-                callback(livePrice);
-                break;
+    async init() {
+        const tempLogger = new TempLogger();
+        try {
+            this.feed = await GTT.Factories.GDAX.FeedFactory(tempLogger, this.productIds);
+            this.feed.on("data", this.onMessage.bind(this));
+        }
+        catch (e) {
+            logger.error(e);
+        }
+    }
+    onMessage(msg) {
+        const priceMsg = msg;
+        if (priceMsg.type === "trade") {
+            const livePrice = new LivePrice_1.LivePrice(msg.productId, priceMsg.price);
+            for (let key in this.subscriptions) {
+                if (this.subscriptions.hasOwnProperty(key)) {
+                    this.subscriptions[key](livePrice);
+                }
+            }
+        }
+        else {
+            // logger.trace(`Ignoring message type: ${msg.type}`);
         }
     }
 }

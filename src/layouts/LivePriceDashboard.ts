@@ -21,9 +21,9 @@ export class LivePriceDashboard extends LayoutBase {
         this.source = container.source;
 
         this.log = new LoggerComponent(this.eventHub);
-        this.livePriceComponent1 = new LivePriceComponent(this.eventHub, "BTC-USD", this.container.livePriceSource);
-        this.livePriceComponent2 = new LivePriceComponent(this.eventHub, "ETH-USD", this.container.livePriceSource);
-        this.livePriceComponent3 = new LivePriceComponent(this.eventHub, "LTC-USD", this.container.livePriceSource);
+        this.livePriceComponent1 = new LivePriceComponent(this.eventHub, "BTC-USD", this.container.livePriceSource, true);
+        this.livePriceComponent2 = new LivePriceComponent(this.eventHub, "ETH-USD", this.container.livePriceSource, true);
+        this.livePriceComponent3 = new LivePriceComponent(this.eventHub, "LTC-USD", this.container.livePriceSource, true);
         this.screenList = new ScreenListComponent(this.eventHub, container.screenInventory);
     }
 
@@ -45,7 +45,5 @@ export class LivePriceDashboard extends LayoutBase {
     }
 
     protected postLoad() {
-        this.eventHub.publish(Events.TickerChanged, new Ticker("BTC-USD"));
-        this.log.log(`Source: ${this.source}`);
     }
 }

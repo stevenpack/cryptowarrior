@@ -3,8 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const LivePriceComponent_1 = require("../components/LivePriceComponent");
 const LoggerComponent_1 = require("../components/LoggerComponent");
 const LayoutBase_1 = require("./LayoutBase");
-const Events_1 = require("../events/Events");
-const Ticker_1 = require("../types/Ticker");
 const ScreenListComponent_1 = require("../components/ScreenListComponent");
 /**
  * Layout optimized for viewing a single currency
@@ -14,9 +12,9 @@ class LivePriceDashboard extends LayoutBase_1.LayoutBase {
         super(12, 12, eventHub, container);
         this.source = container.source;
         this.log = new LoggerComponent_1.LoggerComponent(this.eventHub);
-        this.livePriceComponent1 = new LivePriceComponent_1.LivePriceComponent(this.eventHub, "BTC-USD", this.container.livePriceSource);
-        this.livePriceComponent2 = new LivePriceComponent_1.LivePriceComponent(this.eventHub, "ETH-USD", this.container.livePriceSource);
-        this.livePriceComponent3 = new LivePriceComponent_1.LivePriceComponent(this.eventHub, "LTC-USD", this.container.livePriceSource);
+        this.livePriceComponent1 = new LivePriceComponent_1.LivePriceComponent(this.eventHub, "BTC-USD", this.container.livePriceSource, true);
+        this.livePriceComponent2 = new LivePriceComponent_1.LivePriceComponent(this.eventHub, "ETH-USD", this.container.livePriceSource, true);
+        this.livePriceComponent3 = new LivePriceComponent_1.LivePriceComponent(this.eventHub, "LTC-USD", this.container.livePriceSource, true);
         this.screenList = new ScreenListComponent_1.ScreenListComponent(this.eventHub, container.screenInventory);
     }
     getElements() {
@@ -35,8 +33,6 @@ class LivePriceDashboard extends LayoutBase_1.LayoutBase {
         this.attachKeyHandler(["s"], (ch, key) => this.screenList.toggleVisibility());
     }
     postLoad() {
-        this.eventHub.publish(Events_1.Events.TickerChanged, new Ticker_1.Ticker("BTC-USD"));
-        this.log.log(`Source: ${this.source}`);
     }
 }
 exports.LivePriceDashboard = LivePriceDashboard;

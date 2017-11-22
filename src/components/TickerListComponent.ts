@@ -41,6 +41,7 @@ export class TickerListComponent extends ComponentBase implements IComponent {
     }
 
     public async load(opts?: any) {
+        this.list.clearItems();
         this.tickers = await this.source.getData(null);
         for (const t of this.tickers) {
             // Works (index.d.ts is wrong)

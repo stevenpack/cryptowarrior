@@ -46,6 +46,7 @@ export class PeriodListComponent extends ComponentBase implements IComponent {
     }
 
     public async load(opts?: any) {
+        this.list.clearItems();
         this.periods = EnumEx.getNames(Period);
         for (const p of this.periods) {
             // Works (index.d.ts is wrong)
