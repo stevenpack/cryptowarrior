@@ -1,5 +1,5 @@
 {
-  "name": "packfinance",
+  "name": "cryptowarrior",
   "version": "0.0.1",
   "description": "Text-based crypto dashboard",
   "main": "index.js",
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/stevenpack/packfinance.git"
+    "url": "git+https://github.com/stevenpack/cryptowarrior.git"
   },
   "keywords": [
     "crypto",
@@ -25,9 +25,9 @@
   "author": "Steven Pack <steven.pack.code@gmail.com>",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/stevenpack/packfinance/issues"
+    "url": "https://github.com/stevenpack/cryptowarrior/issues"
   },
-  "homepage": "https://github.com/stevenpack/packfinance#readme",
+  "homepage": "https://github.com/stevenpack/cryptowarrior#readme",
   "dependencies": {
     "@types/pubsub-js": "^1.5.18",
     "@types/request": "^2.0.8",
