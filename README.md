@@ -1,6 +1,7 @@
 # Crypto Avatar
 *Monitor and trade crypto like it's Ultima IV!*
 
+[![asciicast](https://asciinema.org/a/Y6eVsFLJY7JmxC9ONzxyfNKrc.png)](https://asciinema.org/a/Y6eVsFLJY7JmxC9ONzxyfNKrc)
 
 ## Goals
 
@@ -41,4 +42,4 @@
 
 ## TODO
 
-See (here)[TODO.md]
+See [here](TODO.md)
