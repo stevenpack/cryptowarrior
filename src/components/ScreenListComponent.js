@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const blessed = require("blessed");
-const events_1 = require("../events/events");
+const Events_1 = require("../events/Events");
 const Component_1 = require("./Component");
 /**
  * Auto generated screen list based on LayoutDatails.
@@ -32,8 +32,8 @@ class ScreenListComponent extends Component_1.ComponentBase {
     }
     onSelected(item, index) {
         this.list.hide();
-        this.publish(events_1.Events.ScreenChanged, index);
-        this.publish(events_1.Events.LogEvent, "New Screen: " + this.screens[index].name);
+        this.publish(Events_1.Events.ScreenChanged, index);
+        this.publish(Events_1.Events.LogEvent, "New Screen: " + this.screens[index].name);
     }
     async load(opts) {
         this.list.clearItems();
