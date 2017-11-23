@@ -1,5 +1,5 @@
 import * as blessed from "blessed";
-import { Events } from "../events/events";
+import { Events } from "../events/Events";
 import { IComponent, ComponentBase, WidgetOpts } from "./Component";
 import {ISource} from "../sources/Interfaces";
 import {Ticker} from "../types/Ticker";

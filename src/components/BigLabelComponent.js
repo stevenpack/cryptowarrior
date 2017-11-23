@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const events_1 = require("../events/events");
+const Events_1 = require("../events/Events");
 const Component_1 = require("./Component");
 const Logger_1 = require("../Logger");
 const contrib = require("blessed-contrib");
@@ -25,7 +25,7 @@ class BigLabelComponent extends Component_1.ComponentBase {
         this.lcd = widget;
     }
     configure(widget, opts) {
-        this.subscribe(events_1.Events.TickerChanged, this.onTickerChanged.bind(this));
+        this.subscribe(Events_1.Events.TickerChanged, this.onTickerChanged.bind(this));
     }
     async load(opts) {
         this.lcd.setDisplay(this.label);

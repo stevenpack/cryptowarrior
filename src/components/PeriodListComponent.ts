@@ -1,5 +1,5 @@
 import * as blessed from "blessed";
-import { Events } from "../events/events";
+import { Events } from "../events/Events";
 import { IComponent, ComponentBase, WidgetOpts } from "./Component";
 import {EnumEx} from "../types/EnumEx";
 import {Period} from "../types/Period";

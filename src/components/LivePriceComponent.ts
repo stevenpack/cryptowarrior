@@ -1,4 +1,4 @@
-import { Events } from "../events/events";
+import { Events } from "../events/Events";
 import { IComponent, ComponentBase, WidgetOpts } from "./Component";
 import {IStreamingSource} from "../sources/Interfaces";
 import {LivePrice} from "../types/LivePrice";

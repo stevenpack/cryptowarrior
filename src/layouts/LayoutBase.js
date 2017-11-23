@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const blessed = require("blessed");
 const contrib = require("blessed-contrib");
-const events_1 = require("../events/events");
+const Events_1 = require("../events/Events");
 const Throttle_1 = require("../events/Throttle");
 const KeyBinding_1 = require("./KeyBinding");
 class Location {
@@ -116,8 +116,8 @@ class LayoutBase {
         return Promise.resolve(this.keybindings);
     }
     subscribeEvents() {
-        this.subscribe(events_1.Events.UIUpdate, this.onUIUpdate.bind(this));
-        this.subscribe(events_1.Events.LogEvent, this.onLogEvent.bind(this));
+        this.subscribe(Events_1.Events.UIUpdate, this.onUIUpdate.bind(this));
+        this.subscribe(Events_1.Events.LogEvent, this.onLogEvent.bind(this));
     }
     subscribe(event, handler) {
         const token = this.eventHub.subscribe(event, handler);

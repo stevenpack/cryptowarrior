@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const events_1 = require("../events/events");
+const Events_1 = require("../events/Events");
 const Component_1 = require("./Component");
 const Logger_1 = require("../Logger");
 const contrib = require("blessed-contrib");
@@ -28,7 +28,7 @@ class LivePriceComponent extends Component_1.ComponentBase {
     }
     configure(widget, opts) {
         if (!this.ignoreTickerChange) {
-            this.subscribe(events_1.Events.TickerChanged, this.onTickerChanged.bind(this));
+            this.subscribe(Events_1.Events.TickerChanged, this.onTickerChanged.bind(this));
         }
     }
     async load(opts) {
@@ -44,7 +44,7 @@ class LivePriceComponent extends Component_1.ComponentBase {
         }
         this.lcd.setDisplay(livePrice.price);
         // todo: too heavy-weight for event per UI update? just mark component as dirty? and have a render timer?
-        this.publish(events_1.Events.UIUpdate, null);
+        this.publish(Events_1.Events.UIUpdate, null);
     }
     onTickerChanged(msg, data) {
         this.lcd.label = data.id;

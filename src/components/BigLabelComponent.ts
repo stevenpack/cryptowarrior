@@ -1,4 +1,4 @@
-import { Events } from "../events/events";
+import { Events } from "../events/Events";
 import { IComponent, ComponentBase, WidgetOpts } from "./Component";
 import {Log} from "../Logger";
 const contrib = require("blessed-contrib");

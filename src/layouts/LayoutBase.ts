@@ -2,7 +2,7 @@ import * as blessed from "blessed";
 const contrib = require("blessed-contrib");
 
 import { IComponent, ILog } from "../components/Component";
-import { Events } from "../events/events";
+import { Events } from "../events/Events";
 import {Throttle} from "../events/Throttle";
 import Container from "../Container";
 import {KeyBinding} from "./KeyBinding";

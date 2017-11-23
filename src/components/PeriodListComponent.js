@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const blessed = require("blessed");
-const events_1 = require("../events/events");
+const Events_1 = require("../events/Events");
 const Component_1 = require("./Component");
 const EnumEx_1 = require("../types/EnumEx");
 const Period_1 = require("../types/Period");
@@ -35,8 +35,8 @@ class PeriodListComponent extends Component_1.ComponentBase {
     }
     onSelected(item, index) {
         const period = this.periods[index];
-        this.publish(events_1.Events.PeriodChanged, Period_1.Period[period]);
-        this.publish(events_1.Events.LogEvent, `New Period: ${period} (${Period_1.Period[period]} secs)`);
+        this.publish(Events_1.Events.PeriodChanged, Period_1.Period[period]);
+        this.publish(Events_1.Events.LogEvent, `New Period: ${period} (${Period_1.Period[period]} secs)`);
         this.list.hide();
     }
     async load(opts) {
