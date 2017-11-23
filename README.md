@@ -1,7 +1,7 @@
 # Crypto Avatar
 *Monitor and trade crypto like it's Ultima IV!*
 
-[![asciicast](https://asciinema.org/a/6VkLOiAHrQW5uG0E5wfNPr28z.png)](https://asciinema.org/a/6VkLOiAHrQW5uG0E5wfNPr28z)
+[![demo](https://github.com/stevenpack/cryptowarrior/raw/master/res/demo.gif)](https://github.com/stevenpack/cryptowarrior/raw/master/res/demo.gif)
 
 ## Goals
 
