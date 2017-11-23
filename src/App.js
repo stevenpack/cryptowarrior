@@ -19,6 +19,7 @@ class App {
         Logger_1.Log.init(conf.logFile, conf.logLevel);
         const logger = Logger_1.Log.getLogger("InitLogger");
         logger.info("Logger configured");
+        logger.info("Starting...");
         // IoC container and logger
         const container = new Container_1.default(this.argv);
         const exHandler = new UnhandledExceptionHandler_1.UnhandledExceptionHandler(container.eventHub);

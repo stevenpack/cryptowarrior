@@ -42,8 +42,8 @@ export class PriceHistoryComponent extends ComponentBase implements IComponent {
 
     public configure(widget: any, opts?: any) {
         widget.setData({headers: this.headers, data: []});
-        this.eventHub.subscribe(Events.TickerChanged, (msg, data) => this.onTickerChanged(msg, data));
-        this.eventHub.subscribe(Events.PeriodChanged, (msg, data) => this.onPeriodChanged(msg, data));
+        this.subscribe(Events.TickerChanged, this.onTickerChanged.bind(this));
+        this.subscribe(Events.PeriodChanged, this.onPeriodChanged.bind(this));
     }
 
     public async load(opts?: any) {

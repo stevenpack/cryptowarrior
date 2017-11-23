@@ -22,6 +22,10 @@ export class LoggerComponent extends ComponentBase implements IComponent, ILog {
     }
 
     public configure(widget: any, opts?: any) {
+        this.bindKeys();
+    }
+
+    public bindKeys() {
         this.logger.key("up", (ch, key) => {
             this.logger.top -= 1;
             this.logger.height += + 1;
@@ -32,12 +36,17 @@ export class LoggerComponent extends ComponentBase implements IComponent, ILog {
         });
     }
 
+    public unload() {
+        super.unload();
+        this.logger.removeKey("up");
+        this.logger.removeKey("down");
+    }
+
     public toggleVisibility() {
         super.toggleVisibility(this.logger);
     }
 
     public async load(opts?: any) {
-        this.logger.log("Logger created. Up/Down arrow to resize.");
     }
 
     public log(msg: string) {

@@ -6,7 +6,7 @@ class LocalConfig extends CommonConfig_1.default {
     constructor() {
         super(...arguments);
         this.logLevel = "TRACE";
-        this.logFile = "logs/local-finance.log";
+        this.logFile = "logs/local-crypto.log";
     }
 }
 exports.default = LocalConfig;

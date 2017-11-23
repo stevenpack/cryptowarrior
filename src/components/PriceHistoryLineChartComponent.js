@@ -5,7 +5,9 @@ const moment = require("moment");
 const Events_1 = require("../events/Events");
 const Ticker_1 = require("../types/Ticker");
 const Period_1 = require("../types/Period");
+const Logger_1 = require("../Logger");
 const contrib = require("blessed-contrib");
+const logger = Logger_1.Log.getLogger("PriceHistoryLineChartComponent");
 class PriceHistoryLineChartComponent extends Component_1.ComponentBase {
     constructor(eventHub, source) {
         super(eventHub);
@@ -22,8 +24,8 @@ class PriceHistoryLineChartComponent extends Component_1.ComponentBase {
         this.lineChart = widget;
     }
     configure(widget, opts) {
-        this.eventHub.subscribe(Events_1.Events.TickerChanged, (msg, data) => this.onTickerChanged(msg, data));
-        this.eventHub.subscribe(Events_1.Events.PeriodChanged, (msg, data) => this.onPeriodChanged(msg, data));
+        this.subscribe(Events_1.Events.TickerChanged, this.onTickerChanged.bind(this));
+        this.subscribe(Events_1.Events.PeriodChanged, this.onPeriodChanged.bind(this));
     }
     async load(opts) {
     }
@@ -32,6 +34,7 @@ class PriceHistoryLineChartComponent extends Component_1.ComponentBase {
         this.reload();
     }
     onPeriodChanged(msg, data) {
+        logger.info("onPeriodChanged");
         this.state.period = data;
         this.reload();
     }

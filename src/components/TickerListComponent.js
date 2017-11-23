@@ -27,8 +27,8 @@ class TickerListComponent extends Component_1.ComponentBase {
     }
     onSelected(item, index) {
         const ticker = this.tickers[index];
-        this.eventHub.publish(events_1.Events.TickerChanged, ticker);
-        this.eventHub.publish(events_1.Events.LogEvent, "New ticker: " + ticker.id);
+        this.publish(events_1.Events.TickerChanged, ticker);
+        this.publish(events_1.Events.LogEvent, "New ticker: " + ticker.id);
         this.list.hide();
     }
     async load(opts) {
@@ -38,6 +38,9 @@ class TickerListComponent extends Component_1.ComponentBase {
             // Works (index.d.ts is wrong)
             this.list.pushItem(t.id);
         }
+    }
+    unload() {
+        this.list.removeAllListeners("select");
     }
     toggleVisibility() {
         super.toggleVisibility(this.list);

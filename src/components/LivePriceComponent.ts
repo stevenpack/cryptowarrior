@@ -16,13 +16,11 @@ const logger = Log.getLogger("LivePriceComponent");
 export class LivePriceComponent extends ComponentBase implements IComponent {
 
     public lcd: any;
-    private throttle: Throttle;
     private subscriptionId: number;
 
     constructor(eventHub, private tickerId: string, private source: IStreamingSource<LivePrice>,
                 private ignoreTickerChange: boolean) {
         super(eventHub);
-        this.throttle = new Throttle(200);
     }
 
     public getWidgetOpts(opts?: any): WidgetOpts {
@@ -41,7 +39,7 @@ export class LivePriceComponent extends ComponentBase implements IComponent {
 
     public configure(widget: any, opts?: any) {
         if (!this.ignoreTickerChange) {
-            this.eventHub.subscribe(Events.TickerChanged, (msg, data) => this.onTickerChanged(msg, data));
+            this.subscribe(Events.TickerChanged, this.onTickerChanged.bind(this));
         }
     }
 
@@ -50,6 +48,7 @@ export class LivePriceComponent extends ComponentBase implements IComponent {
     }
 
     public async unload() {
+        super.unload();
         this.source.unsubscribe(this.subscriptionId);
     }
 
@@ -59,13 +58,9 @@ export class LivePriceComponent extends ComponentBase implements IComponent {
             return;
         }
 
-        if (!this.throttle.tryRemoveToken()) {
-            return;
-        }
-
         this.lcd.setDisplay(livePrice.price);
         // todo: too heavy-weight for event per UI update? just mark component as dirty? and have a render timer?
-        this.eventHub.publish(Events.UIUpdate, null);
+        this.publish(Events.UIUpdate, null);
     }
 
     private onTickerChanged(msg: any, data: any) {

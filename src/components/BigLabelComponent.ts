@@ -29,15 +29,11 @@ export class BigLabelComponent extends ComponentBase implements IComponent {
     }
 
     public configure(widget: any, opts?: any) {
-        this.eventHub.subscribe(Events.TickerChanged, (msg, data) => this.onTickerChanged(msg, data));
+        this.subscribe(Events.TickerChanged, this.onTickerChanged.bind(this));
     }
 
     public async load(opts?: any) {
         this.lcd.setDisplay(this.label);
-    }
-
-    public async unload() {
-        /* no-op */
     }
 
     private onTickerChanged(msg: any, data: any) {

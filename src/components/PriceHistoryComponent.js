@@ -29,8 +29,8 @@ class PriceHistoryComponent extends Component_1.ComponentBase {
     }
     configure(widget, opts) {
         widget.setData({ headers: this.headers, data: [] });
-        this.eventHub.subscribe(Events_1.Events.TickerChanged, (msg, data) => this.onTickerChanged(msg, data));
-        this.eventHub.subscribe(Events_1.Events.PeriodChanged, (msg, data) => this.onPeriodChanged(msg, data));
+        this.subscribe(Events_1.Events.TickerChanged, this.onTickerChanged.bind(this));
+        this.subscribe(Events_1.Events.PeriodChanged, this.onPeriodChanged.bind(this));
     }
     async load(opts) {
     }

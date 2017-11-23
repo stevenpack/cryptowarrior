@@ -1,10 +1,8 @@
 import * as blessed from "blessed";
-import { Events } from "../events/events";
 import { IComponent, ComponentBase, WidgetOpts } from "./Component";
 import {ISource} from "../sources/Interfaces";
-import {Ticker} from "../types/Ticker";
-import {LayoutBase, LayoutDetails} from "../layouts/LayoutBase";
 import {KeyBinding} from "../layouts/KeyBinding";
+import {Events} from "../events/Events";
 
 export class KeyHelpComponent extends ComponentBase implements IComponent {
     public keybindings: KeyBinding[];
@@ -32,11 +30,12 @@ export class KeyHelpComponent extends ComponentBase implements IComponent {
     }
 
     public configure(widget: any, opts?: any) {
-        this.list.on("select", (item, i) => this.onSelected(item, i));
+        this.list.on("select", this.onSelected.bind(this));
     }
 
     public onSelected(item: blessed.Widgets.BlessedElement, index: number) {
         this.list.hide();
+        // TODO: execute the command selected in the help
     }
 
     public async load(opts?: any) {

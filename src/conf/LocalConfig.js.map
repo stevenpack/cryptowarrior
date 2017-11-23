@@ -1,1 +1,1 @@
-{"version":3,"file":"LocalConfig.js","sourceRoot":"","sources":["LocalConfig.ts"],"names":[],"mappings":";;AAEA,iDAA0C;AAE1C,oCAAoC;AACpC,iBAAiC,SAAQ,sBAAY;IAArD;;QACW,aAAQ,GAAG,OAAO,CAAC;QACnB,YAAO,GAAG,wBAAwB,CAAC;IAC9C,CAAC;CAAA;AAHD,8BAGC"}
+{"version":3,"file":"LocalConfig.js","sourceRoot":"","sources":["LocalConfig.ts"],"names":[],"mappings":";;AAEA,iDAA0C;AAE1C,oCAAoC;AACpC,iBAAiC,SAAQ,sBAAY;IAArD;;QACW,aAAQ,GAAG,OAAO,CAAC;QACnB,YAAO,GAAG,uBAAuB,CAAC;IAC7C,CAAC;CAAA;AAHD,8BAGC"}

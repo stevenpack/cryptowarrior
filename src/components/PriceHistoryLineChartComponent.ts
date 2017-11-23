@@ -5,9 +5,11 @@ import {ISource} from "../sources/Interfaces";
 import {PriceHistory} from "../types/PriceHistory";
 import {Ticker} from "../types/Ticker";
 import {Period} from "../types/Period";
+import {Log} from "../Logger";
 
 const contrib = require("blessed-contrib");
 
+const logger = Log.getLogger("PriceHistoryLineChartComponent");
 export class PriceHistoryLineChartComponent extends ComponentBase implements IComponent {
     public lineChart: any;
     private state: {
@@ -33,8 +35,8 @@ export class PriceHistoryLineChartComponent extends ComponentBase implements ICo
     }
 
     public configure(widget: any, opts?: any) {
-        this.eventHub.subscribe(Events.TickerChanged, (msg, data) => this.onTickerChanged(msg, data));
-        this.eventHub.subscribe(Events.PeriodChanged, (msg, data) => this.onPeriodChanged(msg, data));
+        this.subscribe(Events.TickerChanged, this.onTickerChanged.bind(this));
+        this.subscribe(Events.PeriodChanged, this.onPeriodChanged.bind(this));
     }
 
     public async load(opts?: any) {
@@ -46,6 +48,7 @@ export class PriceHistoryLineChartComponent extends ComponentBase implements ICo
     }
 
     private onPeriodChanged(msg, data) {
+        logger.info("onPeriodChanged");
         this.state.period = data;
         this.reload();
     }

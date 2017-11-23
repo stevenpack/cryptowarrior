@@ -40,6 +40,7 @@ export abstract class LayoutBase implements ISource<KeyBinding[]>{
     private uiThrottle: Throttle;
     private renderCount = 0;
     private keybindings: KeyBinding[];
+    private eventSubscriptionTokens: string[];
 
     constructor(private rows: number, private cols: number, protected eventHub, protected container: Container) {
         this.elements = [];
@@ -52,6 +53,7 @@ export abstract class LayoutBase implements ISource<KeyBinding[]>{
         this.screen = blessed.screen({});
         this.grid = new contrib.grid({rows: this.rows, cols: this.cols, screen: this.screen});
         this.keybindings = [];
+        this.eventSubscriptionTokens = [];
         const elements = this.getElements();
         this.elements.push.apply(this.elements, elements);
         this.build();
@@ -84,11 +86,6 @@ export abstract class LayoutBase implements ISource<KeyBinding[]>{
         }
     }
 
-    public subscribeEvents() {
-        this.eventHub.subscribe(Events.UIUpdate, this.onUIUpdate.bind(this));
-        this.eventHub.subscribe(Events.LogEvent, this.onLogEvent.bind(this));
-    }
-
     public async load() {
         this.preLoad();
         for (const element of this.elements) {
@@ -110,6 +107,9 @@ export abstract class LayoutBase implements ISource<KeyBinding[]>{
                 this.logger.log(`Failed to unload component ${element.component}. Error: ${e.message}`);
             }
         }
+        this.elements = [];
+        this.unsubscribeEvents();
+        this.unbindKeys();
         this.screen.destroy();
     }
 
@@ -117,10 +117,32 @@ export abstract class LayoutBase implements ISource<KeyBinding[]>{
         return Promise.resolve(this.keybindings);
     }
 
+    protected subscribeEvents() {
+        this.subscribe(Events.UIUpdate, this.onUIUpdate.bind(this));
+        this.subscribe(Events.LogEvent, this.onLogEvent.bind(this));
+    }
+
+    protected subscribe(event: string, handler: (msg, data) => void) {
+        const token = this.eventHub.subscribe(event, handler);
+        this.eventSubscriptionTokens.push(token);
+    }
+
+    protected unsubscribeEvents() {
+        for (const token of this.eventSubscriptionTokens) {
+            this.eventHub.unsubscribe(token);
+        }
+    }
+
     protected bindKeys() {
         this.attachKeyHandler(new KeyBinding(["q", "C-c"], "[Q]uit"), (ch, key) => {
             return process.exit(0);
         });
+    }
+
+    protected unbindKeys() {
+        for (const kb of this.keybindings) {
+            this.screen.removeKey(kb.keys);
+        }
     }
 
     protected attachKeyHandler(keybinding: KeyBinding, handler: (ch, key) => void) {

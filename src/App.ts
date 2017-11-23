@@ -24,6 +24,7 @@ export class App {
         Log.init(conf.logFile, conf.logLevel);
         const logger = Log.getLogger("InitLogger");
         logger.info("Logger configured");
+        logger.info("Starting...");
 
         // IoC container and logger
         const container = new Container(this.argv);

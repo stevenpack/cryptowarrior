@@ -12,34 +12,35 @@ export class ScreenManager {
         this.eventHub.subscribe(Events.ScreenChanged, this.onScreenChanged.bind(this));
     }
 
-    public load(index: number) {
+    public async load(index: number) {
         const screen = this.screens[index];
         logger.info(`Loading screen...`);
         screen.init();
         this.currentScreenIndex = index;
-        screen.load()
-            .then(() => logger.info("Screen loaded"))
-            .catch((err) => logger.error(err));
-
+        try {
+            await screen.load();
+            logger.info("Screen loaded");
+        } catch (e) {
+            logger.error(e);
+        }
     }
 
     private current(): LayoutBase {
         return this.screens[this.currentScreenIndex];
     }
 
-    private unload(index: number) {
+    private async unload(index: number) {
         const screen = this.current();
-        screen.unload();
+        await screen.unload();
     }
 
-    private onScreenChanged(msg, data) {
-        // TODO: destroying flickers screen... is there a detach or similar?
+    private async onScreenChanged(msg, data) {
         const index = data as number;
         if (index === this.currentScreenIndex) {
             logger.info(`Screen selection ignored. Already on screen ${index}`);
             return;
         }
-        this.unload(this.currentScreenIndex);
-        this.load(index);
+        await this.unload(this.currentScreenIndex);
+        await this.load(index);
     }
 }

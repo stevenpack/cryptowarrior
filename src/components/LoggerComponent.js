@@ -16,6 +16,9 @@ class LoggerComponent extends Component_1.ComponentBase {
         this.logger = widget;
     }
     configure(widget, opts) {
+        this.bindKeys();
+    }
+    bindKeys() {
         this.logger.key("up", (ch, key) => {
             this.logger.top -= 1;
             this.logger.height += +1;
@@ -25,11 +28,15 @@ class LoggerComponent extends Component_1.ComponentBase {
             this.logger.height -= +1;
         });
     }
+    unload() {
+        super.unload();
+        this.logger.removeKey("up");
+        this.logger.removeKey("down");
+    }
     toggleVisibility() {
         super.toggleVisibility(this.logger);
     }
     async load(opts) {
-        this.logger.log("Logger created. Up/Down arrow to resize.");
     }
     log(msg) {
         this.logger.log(msg);

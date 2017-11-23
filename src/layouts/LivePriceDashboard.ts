@@ -41,8 +41,10 @@ export class LivePriceDashboard extends LayoutBase {
 
     public bindKeys() {
         super.bindKeys();
-        this.attachKeyHandler(new KeyBinding(["l"], "Show/hide Log panel"), (ch, key) => this.log.toggleVisibility());
-        this.attachKeyHandler(new KeyBinding(["l"], "Show/hide Screen list"), (ch, key) => this.screenList.toggleVisibility());
+        this.attachKeyHandler(new KeyBinding(["l"], "Show/hide Log panel"),
+            (ch, key) => this.log.toggleVisibility());
+        this.attachKeyHandler(new KeyBinding(["s"], "Show/hide Screen list"),
+            (ch, key) => this.screenList.toggleVisibility());
     }
 
     protected postLoad() {

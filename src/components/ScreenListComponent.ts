@@ -35,8 +35,8 @@ export class ScreenListComponent extends ComponentBase implements IComponent {
 
     public onSelected(item: blessed.Widgets.BlessedElement, index: number) {
         this.list.hide();
-        this.eventHub.publish(Events.ScreenChanged, index);
-        this.eventHub.publish(Events.LogEvent, "New Screen: " + this.screens[index].name);
+        this.publish(Events.ScreenChanged, index);
+        this.publish(Events.LogEvent, "New Screen: " + this.screens[index].name);
     }
 
     public async load(opts?: any) {
@@ -45,6 +45,11 @@ export class ScreenListComponent extends ComponentBase implements IComponent {
         for (const s of this.screens) {
             this.list.pushItem(`${s.index + 1}. ${s.name}`);
         }
+    }
+
+    public unload() {
+        super.unload();
+        this.list.removeAllListeners("select");
     }
 
     public toggleVisibility() {

@@ -22,13 +22,10 @@ class BigLabelComponent extends Component_1.ComponentBase {
         this.lcd = widget;
     }
     configure(widget, opts) {
-        this.eventHub.subscribe(events_1.Events.TickerChanged, (msg, data) => this.onTickerChanged(msg, data));
+        this.subscribe(events_1.Events.TickerChanged, this.onTickerChanged.bind(this));
     }
     async load(opts) {
         this.lcd.setDisplay(this.label);
-    }
-    async unload() {
-        /* no-op */
     }
     onTickerChanged(msg, data) {
         this.label = data.id;

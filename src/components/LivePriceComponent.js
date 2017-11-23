@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const events_1 = require("../events/events");
 const Component_1 = require("./Component");
-const Throttle_1 = require("../events/Throttle");
 const Logger_1 = require("../Logger");
 const contrib = require("blessed-contrib");
 const logger = Logger_1.Log.getLogger("LivePriceComponent");
@@ -17,7 +16,6 @@ class LivePriceComponent extends Component_1.ComponentBase {
         this.tickerId = tickerId;
         this.source = source;
         this.ignoreTickerChange = ignoreTickerChange;
-        this.throttle = new Throttle_1.Throttle(200);
     }
     getWidgetOpts(opts) {
         return new Component_1.WidgetOpts(contrib.lcd, {
@@ -32,25 +30,23 @@ class LivePriceComponent extends Component_1.ComponentBase {
     }
     configure(widget, opts) {
         if (!this.ignoreTickerChange) {
-            this.eventHub.subscribe(events_1.Events.TickerChanged, (msg, data) => this.onTickerChanged(msg, data));
+            this.subscribe(events_1.Events.TickerChanged, this.onTickerChanged.bind(this));
         }
     }
     async load(opts) {
         this.subscriptionId = await this.source.subscribe(null, this.onPriceChanged.bind(this));
     }
     async unload() {
+        super.unload();
         this.source.unsubscribe(this.subscriptionId);
     }
     onPriceChanged(livePrice) {
         if (livePrice.id !== this.tickerId) {
             return;
         }
-        if (!this.throttle.tryRemoveToken()) {
-            return;
-        }
         this.lcd.setDisplay(livePrice.price);
         // todo: too heavy-weight for event per UI update? just mark component as dirty? and have a render timer?
-        this.eventHub.publish(events_1.Events.UIUpdate, null);
+        this.publish(events_1.Events.UIUpdate, null);
     }
     onTickerChanged(msg, data) {
         this.lcd.label = data.id;

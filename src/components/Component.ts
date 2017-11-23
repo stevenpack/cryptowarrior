@@ -2,10 +2,18 @@
 import * as Blessed from "blessed";
 import {Events} from "../events/Events";
 import BlessedElement = Blessed.Widgets.BlessedElement;
+import {EventEmitter} from "events";
+import {Log} from "../Logger";
 
-export abstract class ComponentBase {
+const logger = Log.getLogger("ComponentBase");
+export abstract class ComponentBase extends EventEmitter {
 
-    constructor(public eventHub: PubSubJS.Base) {}
+    // Event subscriptions
+    protected eventSubscriptionTokens: string[] = [];
+
+    constructor(private eventHub: PubSubJS.Base) {
+        super();
+    }
 
     public toggleVisibility(element: BlessedElement) {
         if (element.hidden) {
@@ -20,6 +28,25 @@ export abstract class ComponentBase {
 
     public unload() {
         // Most non-streaming components need do nothing
+        this.unsubscribeAll();
+    }
+
+    public unsubscribeAll() {
+        for (const token of this.eventSubscriptionTokens) {
+            logger.debug(`Unsubscribe from event ${token}`);
+            this.eventHub.unsubscribe(token);
+        }
+        this.eventSubscriptionTokens = [];
+    }
+
+    protected subscribe(event: string, handler: (msg, data) => void) {
+        const token = this.eventHub.subscribe(event, handler);
+        logger.debug(`Subscribe to event ${event} with ${token}`);
+        this.eventSubscriptionTokens.push(token);
+    }
+
+    protected publish(event: string, data: any) {
+        this.eventHub.publish(event, data);
     }
 
     protected fireUpdated(force?: boolean) {

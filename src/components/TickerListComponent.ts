@@ -35,8 +35,8 @@ export class TickerListComponent extends ComponentBase implements IComponent {
 
     public onSelected(item: blessed.Widgets.BlessedElement, index: number) {
         const ticker = this.tickers[index];
-        this.eventHub.publish(Events.TickerChanged, ticker);
-        this.eventHub.publish(Events.LogEvent, "New ticker: " + ticker.id);
+        this.publish(Events.TickerChanged, ticker);
+        this.publish(Events.LogEvent, "New ticker: " + ticker.id);
         this.list.hide();
     }
 
@@ -47,6 +47,10 @@ export class TickerListComponent extends ComponentBase implements IComponent {
             // Works (index.d.ts is wrong)
             this.list.pushItem(t.id);
         }
+    }
+
+    public unload() {
+        this.list.removeAllListeners("select");
     }
 
     public toggleVisibility() {

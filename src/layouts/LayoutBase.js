@@ -53,6 +53,7 @@ class LayoutBase {
         this.screen = blessed.screen({});
         this.grid = new contrib.grid({ rows: this.rows, cols: this.cols, screen: this.screen });
         this.keybindings = [];
+        this.eventSubscriptionTokens = [];
         const elements = this.getElements();
         this.elements.push.apply(this.elements, elements);
         this.build();
@@ -79,10 +80,6 @@ class LayoutBase {
             component.configure(widget);
         }
     }
-    subscribeEvents() {
-        this.eventHub.subscribe(events_1.Events.UIUpdate, this.onUIUpdate.bind(this));
-        this.eventHub.subscribe(events_1.Events.LogEvent, this.onLogEvent.bind(this));
-    }
     async load() {
         this.preLoad();
         for (const element of this.elements) {
@@ -105,15 +102,36 @@ class LayoutBase {
                 this.logger.log(`Failed to unload component ${element.component}. Error: ${e.message}`);
             }
         }
+        this.elements = [];
+        this.unsubscribeEvents();
+        this.unbindKeys();
         this.screen.destroy();
     }
     getData(opts) {
         return Promise.resolve(this.keybindings);
     }
+    subscribeEvents() {
+        this.subscribe(events_1.Events.UIUpdate, this.onUIUpdate.bind(this));
+        this.subscribe(events_1.Events.LogEvent, this.onLogEvent.bind(this));
+    }
+    subscribe(event, handler) {
+        const token = this.eventHub.subscribe(event, handler);
+        this.eventSubscriptionTokens.push(token);
+    }
+    unsubscribeEvents() {
+        for (const token of this.eventSubscriptionTokens) {
+            this.eventHub.unsubscribe(token);
+        }
+    }
     bindKeys() {
         this.attachKeyHandler(new KeyBinding_1.KeyBinding(["q", "C-c"], "[Q]uit"), (ch, key) => {
             return process.exit(0);
         });
+    }
+    unbindKeys() {
+        for (const kb of this.keybindings) {
+            this.screen.removeKey(kb.keys);
+        }
     }
     attachKeyHandler(keybinding, handler) {
         this.keybindings.push(keybinding);

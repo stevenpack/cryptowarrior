@@ -3,12 +3,14 @@ import { Events } from "../events/events";
 import { IComponent, ComponentBase, WidgetOpts } from "./Component";
 import {EnumEx} from "../types/EnumEx";
 import {Period} from "../types/Period";
+import {Log} from "../Logger";
 
 /**
  * Component to choose a time period (Second, Minute, Hourly, Daily, Weekly etc.)
  *
  * Could be generalized ListPickerbase
  */
+const logger = Log.getLogger("PeriodListComponent");
 export class PeriodListComponent extends ComponentBase implements IComponent {
     public periods: string[];
     public list: blessed.Widgets.ListElement;
@@ -35,13 +37,14 @@ export class PeriodListComponent extends ComponentBase implements IComponent {
     }
 
     public configure(widget: any, opts?: any) {
-        this.list.on("select", (item, i) => this.onSelected(item, i));
+        logger.info("Binding select");
+        this.list.on("select", this.onSelected.bind(this));
     }
 
     public onSelected(item: blessed.Widgets.BlessedElement, index: number) {
         const period = this.periods[index];
-        this.eventHub.publish(Events.PeriodChanged, Period[period]);
-        this.eventHub.publish(Events.LogEvent, `New Period: ${period} (${Period[period]} secs)`);
+        this.publish(Events.PeriodChanged, Period[period]);
+        this.publish(Events.LogEvent, `New Period: ${period} (${Period[period]} secs)`);
         this.list.hide();
     }
 
@@ -52,6 +55,12 @@ export class PeriodListComponent extends ComponentBase implements IComponent {
             // Works (index.d.ts is wrong)
             this.list.pushItem(p);
         }
+    }
+
+    public unload() {
+        super.unload();
+        logger.info("UNBinding select");
+        this.list.removeAllListeners("select");
     }
 
     public toggleVisibility() {

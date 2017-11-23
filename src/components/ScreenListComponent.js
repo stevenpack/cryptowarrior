@@ -27,8 +27,8 @@ class ScreenListComponent extends Component_1.ComponentBase {
     }
     onSelected(item, index) {
         this.list.hide();
-        this.eventHub.publish(events_1.Events.ScreenChanged, index);
-        this.eventHub.publish(events_1.Events.LogEvent, "New Screen: " + this.screens[index].name);
+        this.publish(events_1.Events.ScreenChanged, index);
+        this.publish(events_1.Events.LogEvent, "New Screen: " + this.screens[index].name);
     }
     async load(opts) {
         this.list.clearItems();
@@ -36,6 +36,10 @@ class ScreenListComponent extends Component_1.ComponentBase {
         for (const s of this.screens) {
             this.list.pushItem(`${s.index + 1}. ${s.name}`);
         }
+    }
+    unload() {
+        super.unload();
+        this.list.removeAllListeners("select");
     }
     toggleVisibility() {
         super.toggleVisibility(this.list);

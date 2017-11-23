@@ -22,10 +22,11 @@ class KeyHelpComponent extends Component_1.ComponentBase {
         this.list = widget;
     }
     configure(widget, opts) {
-        this.list.on("select", (item, i) => this.onSelected(item, i));
+        this.list.on("select", this.onSelected.bind(this));
     }
     onSelected(item, index) {
         this.list.hide();
+        // TODO: execute the command selected in the help
     }
     async load(opts) {
         this.list.clearItems();
