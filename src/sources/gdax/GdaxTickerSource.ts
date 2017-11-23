@@ -2,6 +2,9 @@ import {GdaxApi} from "./GdaxApi";
 import {Ticker} from "../../types/Ticker";
 import {ISource} from "../Interfaces";
 
+/**
+ * Source of tickers from GDAX.
+ */
 export class GdaxTickerSource implements ISource<Ticker[]> {
 
     constructor(private api: GdaxApi) {

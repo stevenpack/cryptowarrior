@@ -7,6 +7,9 @@ const ConfigLoader_1 = require("./ConfigLoader");
 const Logger_1 = require("./Logger");
 const LivePriceDashboard_1 = require("./layouts/LivePriceDashboard");
 const ScreenManager_1 = require("./layouts/ScreenManager");
+/**
+ * Main app class
+ */
 class App {
     constructor(argv) {
         this.argv = argv;

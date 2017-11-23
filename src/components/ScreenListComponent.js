@@ -3,6 +3,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const blessed = require("blessed");
 const events_1 = require("../events/events");
 const Component_1 = require("./Component");
+/**
+ * Auto generated screen list based on LayoutDatails.
+ *
+ * Fires ScreenChanged, which ScreenManager listens to to switch screens in and out
+ */
 class ScreenListComponent extends Component_1.ComponentBase {
     constructor(eventHub, source) {
         super(eventHub);

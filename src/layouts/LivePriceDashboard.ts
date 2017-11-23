@@ -2,12 +2,11 @@ import { LivePriceComponent } from "../components/LivePriceComponent";
 import { LoggerComponent } from "../components/LoggerComponent";
 import { Element, LayoutBase, Location, Size } from "./LayoutBase";
 import Container from "../Container";
-import {Events} from "../events/Events";
-import {Ticker} from "../types/Ticker";
 import {ScreenListComponent} from "../components/ScreenListComponent";
 import {KeyBinding} from "./KeyBinding";
+
 /**
- * Layout optimized for viewing a single currency
+ * Displays multiple live prices
  */
 export class LivePriceDashboard extends LayoutBase {
     public log: LoggerComponent;

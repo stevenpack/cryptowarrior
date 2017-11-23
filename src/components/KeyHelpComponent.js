@@ -2,6 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const blessed = require("blessed");
 const Component_1 = require("./Component");
+/**
+ * Auto generate keyboard help based on the keybindings added with `Component.attachKeyHandler`
+ */
 class KeyHelpComponent extends Component_1.ComponentBase {
     constructor(eventHub, source) {
         super(eventHub);

@@ -4,11 +4,14 @@ const Events_1 = require("../events/Events");
 const events_1 = require("events");
 const Logger_1 = require("../Logger");
 const logger = Logger_1.Log.getLogger("ComponentBase");
+/**
+ * Base class for UI components
+ */
 class ComponentBase extends events_1.EventEmitter {
     constructor(eventHub) {
         super();
         this.eventHub = eventHub;
-        // Event subscriptions
+        // Event subscriptions, used to auto unsubscribe
         this.eventSubscriptionTokens = [];
     }
     toggleVisibility(element) {
@@ -23,7 +26,6 @@ class ComponentBase extends events_1.EventEmitter {
         this.fireUpdated(true);
     }
     unload() {
-        // Most non-streaming components need do nothing
         this.unsubscribeAll();
     }
     unsubscribeAll() {

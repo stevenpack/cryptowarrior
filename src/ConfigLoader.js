@@ -1,5 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * Loads an `IConfig` impl based on the argv.env property
+ */
 class ConfigLoader {
     constructor(argv) {
         this.argv = argv;

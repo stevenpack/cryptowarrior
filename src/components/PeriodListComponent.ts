@@ -37,7 +37,6 @@ export class PeriodListComponent extends ComponentBase implements IComponent {
     }
 
     public configure(widget: any, opts?: any) {
-        logger.info("Binding select");
         this.list.on("select", this.onSelected.bind(this));
     }
 
@@ -52,14 +51,12 @@ export class PeriodListComponent extends ComponentBase implements IComponent {
         this.list.clearItems();
         this.periods = EnumEx.getNames(Period);
         for (const p of this.periods) {
-            // Works (index.d.ts is wrong)
             this.list.pushItem(p);
         }
     }
 
     public unload() {
         super.unload();
-        logger.info("UNBinding select");
         this.list.removeAllListeners("select");
     }
 

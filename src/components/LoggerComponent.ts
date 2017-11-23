@@ -1,6 +1,11 @@
 import * as blessed from "blessed";
 import { IComponent, ComponentBase, ILog, WidgetOpts } from "./Component";
 
+/**
+ * Logger panel visible in the UI.
+ *
+ * Growable/shrinkable with up/down arros
+ */
 export class LoggerComponent extends ComponentBase implements IComponent, ILog {
 
     public logger: blessed.Widgets.Log;

@@ -3,6 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const GdaxPriceHistorySource_1 = require("../gdax/GdaxPriceHistorySource");
 const LivePrice_1 = require("../../types/LivePrice");
 const Ticker_1 = require("../../types/Ticker");
+/**
+ * Test the UI on a plane!
+ */
 class MockPriceHistorySource {
     getData(opts) {
         const raw = [

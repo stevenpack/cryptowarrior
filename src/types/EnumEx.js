@@ -1,5 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * Enum extension methods
+ */
 class EnumEx {
     static getNamesAndValues(e) {
         return EnumEx.getNames(e).map((n) => ({ name: n, value: e[n] }));

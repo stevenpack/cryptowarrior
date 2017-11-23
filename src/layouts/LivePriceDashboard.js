@@ -6,7 +6,7 @@ const LayoutBase_1 = require("./LayoutBase");
 const ScreenListComponent_1 = require("../components/ScreenListComponent");
 const KeyBinding_1 = require("./KeyBinding");
 /**
- * Layout optimized for viewing a single currency
+ * Displays multiple live prices
  */
 class LivePriceDashboard extends LayoutBase_1.LayoutBase {
     constructor(eventHub, container) {

@@ -5,6 +5,9 @@ const Component_1 = require("./Component");
 const Logger_1 = require("../Logger");
 const contrib = require("blessed-contrib");
 const logger = Logger_1.Log.getLogger("BigLabelComponent");
+/**
+ * Show the ticker or any arbitrary text
+ */
 class BigLabelComponent extends Component_1.ComponentBase {
     constructor(eventHub, label) {
         super(eventHub);

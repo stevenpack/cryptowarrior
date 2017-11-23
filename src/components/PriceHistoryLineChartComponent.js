@@ -8,6 +8,9 @@ const Period_1 = require("../types/Period");
 const Logger_1 = require("../Logger");
 const contrib = require("blessed-contrib");
 const logger = Logger_1.Log.getLogger("PriceHistoryLineChartComponent");
+/**
+ * Display price history data as a line graph
+ */
 class PriceHistoryLineChartComponent extends Component_1.ComponentBase {
     constructor(eventHub, source) {
         super(eventHub);

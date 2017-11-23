@@ -9,7 +9,7 @@ describe("GdaxApi", () => {
         expect(products.map((pi) => pi.id).includes("BTC-USD")).toBeTruthy();
         done();
     });
-    it("gets", async (done) => {
+    it("gets price data", async (done) => {
         try {
             const data = await api.getPriceHistory({ tickerId: "BTC-USD", period: Period_1.Period.Day });
             expect(data).toBeTruthy();

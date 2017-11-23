@@ -1,8 +1,12 @@
-import {ProductInfo, PublicClient, WebsocketClient} from "gdax";
-import {Events} from "../../events/Events";
+import {ProductInfo, PublicClient} from "gdax";
 import {Log} from "../../Logger";
 
 const logger = Log.getLogger("GdaxApi");
+/**
+ * Wrapper for the GDAX REST API use gdax-node project. Streaming is handled by `GdaxLivePriceSource`
+ *
+ * note: Could migrate most api methods to gdax-tt snapshots, although price history isn't currently available
+ */
 export class GdaxApi {
     public httpClient: PublicClient;
 

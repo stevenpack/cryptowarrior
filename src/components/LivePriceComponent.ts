@@ -1,6 +1,5 @@
 import { Events } from "../events/events";
 import { IComponent, ComponentBase, WidgetOpts } from "./Component";
-import {Throttle} from "../events/Throttle";
 import {IStreamingSource} from "../sources/Interfaces";
 import {LivePrice} from "../types/LivePrice";
 import {Log} from "../Logger";
@@ -10,11 +9,10 @@ const logger = Log.getLogger("LivePriceComponent");
 
 /**
  * Display live price.
- *
- * TODO: Load initial price from ticker/last trade
  */
 export class LivePriceComponent extends ComponentBase implements IComponent {
 
+    // TODO: Load initial price from ticker/last trade
     public lcd: any;
     private subscriptionId: number;
 

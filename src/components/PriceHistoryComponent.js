@@ -6,6 +6,9 @@ const Events_1 = require("../events/Events");
 const Ticker_1 = require("../types/Ticker");
 const Period_1 = require("../types/Period");
 const contrib = require("blessed-contrib");
+/**
+ * Price History in High,Low,Open,Close format
+ */
 class PriceHistoryComponent extends Component_1.ComponentBase {
     constructor(eventHub, source) {
         super(eventHub);
@@ -43,6 +46,7 @@ class PriceHistoryComponent extends Component_1.ComponentBase {
         this.reload();
     }
     async reload() {
+        // Blank the table while we load
         this.table.setData({ headers: this.headers, data: [] });
         this.fireUpdated();
         const priceHistoryData = await this.source.getData({

@@ -1,5 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+/***
+ * Events (topics) for publishing and subscribing
+ */
 class Events {
 }
 Events.LogEvent = "log";

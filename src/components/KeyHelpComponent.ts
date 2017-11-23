@@ -4,6 +4,9 @@ import {ISource} from "../sources/Interfaces";
 import {KeyBinding} from "../layouts/KeyBinding";
 import {Events} from "../events/Events";
 
+/**
+ * Auto generate keyboard help based on the keybindings added with `Component.attachKeyHandler`
+ */
 export class KeyHelpComponent extends ComponentBase implements IComponent {
     public keybindings: KeyBinding[];
     public list: blessed.Widgets.ListElement;

@@ -9,6 +9,9 @@ import {LivePriceDashboard} from "./layouts/LivePriceDashboard";
 import {LayoutBase} from "./layouts/LayoutBase";
 import {ScreenManager} from "./layouts/ScreenManager";
 
+/**
+ * Main app class
+ */
 export class App {
 
     constructor(private argv) {

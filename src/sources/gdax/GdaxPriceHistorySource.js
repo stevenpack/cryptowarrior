@@ -4,6 +4,9 @@ const PriceHistory_1 = require("../../types/PriceHistory");
 const Javascript_1 = require("../../util/Javascript");
 const Logger_1 = require("../../Logger");
 const logger = Logger_1.Log.getLogger("GdaxPriceHistoryAdapter");
+/**
+ * Converts from Gdax rows to `Candle` type
+ */
 class GdaxPriceHistoryAdapter {
     convert(data) {
         try {
@@ -36,6 +39,9 @@ class GdaxPriceHistoryAdapter {
     }
 }
 exports.GdaxPriceHistoryAdapter = GdaxPriceHistoryAdapter;
+/**
+ * Source of `PriceHistory` data, combining the GDaxApi and Adapter
+ */
 class GdaxPriceHistorySource {
     constructor(api, adapter) {
         this.api = api;

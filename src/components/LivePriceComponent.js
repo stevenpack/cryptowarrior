@@ -7,8 +7,6 @@ const contrib = require("blessed-contrib");
 const logger = Logger_1.Log.getLogger("LivePriceComponent");
 /**
  * Display live price.
- *
- * TODO: Load initial price from ticker/last trade
  */
 class LivePriceComponent extends Component_1.ComponentBase {
     constructor(eventHub, tickerId, source, ignoreTickerChange) {

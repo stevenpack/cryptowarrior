@@ -6,6 +6,9 @@ import {GdaxPriceHistoryAdapter} from "../gdax/GdaxPriceHistorySource";
 import {LivePrice} from "../../types/LivePrice";
 import {Ticker} from "../../types/Ticker";
 
+/**
+ * Test the UI on a plane!
+ */
 export class MockPriceHistorySource implements ISource<PriceHistory> {
 
     public getData(opts: any): Promise<PriceHistory> {

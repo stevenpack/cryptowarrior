@@ -6,9 +6,13 @@ import {EventEmitter} from "events";
 import {Log} from "../Logger";
 
 const logger = Log.getLogger("ComponentBase");
+
+/**
+ * Base class for UI components
+ */
 export abstract class ComponentBase extends EventEmitter {
 
-    // Event subscriptions
+    // Event subscriptions, used to auto unsubscribe
     protected eventSubscriptionTokens: string[] = [];
 
     constructor(private eventHub: PubSubJS.Base) {
@@ -27,7 +31,6 @@ export abstract class ComponentBase extends EventEmitter {
     }
 
     public unload() {
-        // Most non-streaming components need do nothing
         this.unsubscribeAll();
     }
 

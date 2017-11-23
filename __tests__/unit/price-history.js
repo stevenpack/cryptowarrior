@@ -10,7 +10,7 @@ describe("Price History", () => {
         expect(h.Items).toBeTruthy();
     });
 });
-describe("Parsed data", () => {
+describe("Parses price history data to candles", () => {
     it("parses", () => {
         const response = "[" +
             "[1510269120,7110.01,7110.02,7110.01,7110.02,3.489994839999999]," +

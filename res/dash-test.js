@@ -1,3 +1,7 @@
+/**
+ * From the blessed.contrib repo. Example of lots of the components.
+ */
+
 const blessed = require('blessed');
 const contrib = require('blessed-contrib')
 
@@ -13,7 +17,7 @@ self.options.radius = options.radius || 14; // how wide is it? over 5 is best
 self.options.arcWidth = options.arcWidth || 4; //width of the donut
 self.options.yPadding = options.yPadding || 2; //padding from the top
 */
-var donut = grid.set(8, 8, 4, 2, contrib.donut, 
+var donut = grid.set(8, 8, 4, 2, contrib.donut,
 {
 label: 'Percent Donut',
 radius: 16,
@@ -22,8 +26,8 @@ yPadding: 2,
 data: [{label: 'Storage', percent: 87}]
 })
 
-// var latencyLine = grid.set(8, 8, 4, 2, contrib.line, 
-//   { style: 
+// var latencyLine = grid.set(8, 8, 4, 2, contrib.line,
+//   { style:
 //     { line: "yellow"
 //     , text: "green"
 //     , baseline: "black"}
@@ -34,19 +38,19 @@ data: [{label: 'Storage', percent: 87}]
 var gauge = grid.set(8, 10, 2, 2, contrib.gauge, {label: 'Storage', percent: [80,20]})
 var gauge_two = grid.set(2, 9, 2, 3, contrib.gauge, {label: 'Deployment Progress', percent: 80})
 
-var sparkline = grid.set(10, 10, 2, 2, contrib.sparkline, 
+var sparkline = grid.set(10, 10, 2, 2, contrib.sparkline,
 { label: 'Throughput (bits/sec)'
 , tags: true
 , style: { fg: 'blue', titleFg: 'white' }})
 
-var bar = grid.set(4, 6, 4, 3, contrib.bar, 
+var bar = grid.set(4, 6, 4, 3, contrib.bar,
 { label: 'Server Utilization (%)'
 , barWidth: 4
 , barSpacing: 6
 , xOffset: 2
 , maxHeight: 9})
 
-var table =  grid.set(4, 9, 4, 3, contrib.table, 
+var table =  grid.set(4, 9, 4, 3, contrib.table,
 { keys: true
 , fg: 'green'
 , label: 'Active Processes'
@@ -81,8 +85,8 @@ var lcdLineOne = grid.set(0,9,2,3, contrib.lcd,
 }
 );
 
-var errorsLine = grid.set(0, 6, 4, 3, contrib.line, 
-{ style: 
+var errorsLine = grid.set(0, 6, 4, 3, contrib.line,
+{ style:
   { line: "red"
   , text: "white"
   , baseline: "black"}
@@ -90,7 +94,7 @@ var errorsLine = grid.set(0, 6, 4, 3, contrib.line,
 , maxY: 60
 , showLegend: true })
 
-var transactionsLine = grid.set(0, 0, 6, 6, contrib.line, 
+var transactionsLine = grid.set(0, 0, 6, 6, contrib.line,
         { showNthLabel: 5
         , maxY: 100
         , label: 'Total Transactions'
@@ -99,7 +103,7 @@ var transactionsLine = grid.set(0, 0, 6, 6, contrib.line,
 
 var map = grid.set(6, 0, 6, 6, contrib.map, {label: 'Servers Location'})
 
-var log = grid.set(8, 6, 4, 2, contrib.log, 
+var log = grid.set(8, 6, 4, 2, contrib.log,
 { fg: "green"
 , selectedFg: "green"
 , label: 'Server Log'})
@@ -115,14 +119,14 @@ var gauge_percent = 0
 setInterval(function() {
 gauge.setData([gauge_percent, 100-gauge_percent]);
 gauge_percent++;
-if (gauge_percent>=100) gauge_percent = 0  
+if (gauge_percent>=100) gauge_percent = 0
 }, 200)
 
 var gauge_percent_two = 0
 setInterval(function() {
 gauge_two.setData(gauge_percent_two);
 gauge_percent_two++;
-if (gauge_percent_two>=100) gauge_percent_two = 0  
+if (gauge_percent_two>=100) gauge_percent_two = 0
 }, 200);
 
 
@@ -143,7 +147,7 @@ function generateTable() {
  var data = []
 
  for (var i=0; i<30; i++) {
-   var row = []          
+   var row = []
    row.push(commands[Math.round(Math.random()*(commands.length-1))])
    row.push(Math.round(Math.random()*5))
    row.push(Math.round(Math.random()*100))
@@ -162,7 +166,7 @@ setInterval(generateTable, 3000)
 //set log dummy data
 setInterval(function() {
  var rnd = Math.round(Math.random()*2)
- if (rnd==0) log.log('starting process ' + commands[Math.round(Math.random()*(commands.length-1))])   
+ if (rnd==0) log.log('starting process ' + commands[Math.round(Math.random()*(commands.length-1))])
  else if (rnd==1) log.log('terminating server ' + servers[Math.round(Math.random()*(servers.length-1))])
  else if (rnd==2) log.log('avg. wait time ' + Math.random().toFixed(2))
  screen.render()
@@ -178,10 +182,10 @@ setInterval(refreshSpark, 1000)
 
 function refreshSpark() {
 spark1.shift()
-spark1.push(Math.random()*5+1)       
+spark1.push(Math.random()*5+1)
 spark2.shift()
-spark2.push(Math.random()*5+1)       
-sparkline.setData(['Server1', 'Server2'], [spark1, spark2])  
+spark2.push(Math.random()*5+1)
+sparkline.setData(['Server1', 'Server2'], [spark1, spark2])
 }
 
 
@@ -238,7 +242,7 @@ setInterval(function() {
  screen.render()
 }, 500)
 
-setInterval(function() {   
+setInterval(function() {
   setLineData([errorsData], errorsLine)
 }, 1500)
 
@@ -262,14 +266,14 @@ if (pct > 0.99) pct = 0.00;
 var color = "green";
 if (pct >= 0.25) color = "cyan";
 if (pct >= 0.5) color = "yellow";
-if (pct >= 0.75) color = "red";  
+if (pct >= 0.75) color = "red";
 donut.setData([
   {percent: parseFloat((pct+0.00) % 1).toFixed(2), label: 'storage', 'color': color}
 ]);
 pct += 0.01;
 }
 
-setInterval(function() {   
+setInterval(function() {
  updateDonut();
  screen.render()
 }, 500)
@@ -278,8 +282,8 @@ function setLineData(mockData, line) {
 for (var i=0; i<mockData.length; i++) {
   var last = mockData[i].y[mockData[i].y.length-1]
   mockData[i].y.shift()
-  var num = Math.max(last + Math.round(Math.random()*10) - 5, 10)    
-  mockData[i].y.push(num)  
+  var num = Math.max(last + Math.round(Math.random()*10) - 5, 10)
+  mockData[i].y.push(num)
 }
 
 line.setData(mockData)

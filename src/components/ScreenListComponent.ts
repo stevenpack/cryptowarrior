@@ -4,6 +4,11 @@ import { IComponent, ComponentBase, WidgetOpts } from "./Component";
 import {ISource} from "../sources/Interfaces";
 import {LayoutDetails} from "../layouts/LayoutBase";
 
+/**
+ * Auto generated screen list based on LayoutDatails.
+ *
+ * Fires ScreenChanged, which ScreenManager listens to to switch screens in and out
+ */
 export class ScreenListComponent extends ComponentBase implements IComponent {
     public screens: LayoutDetails[];
     public list: blessed.Widgets.ListElement;

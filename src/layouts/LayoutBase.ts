@@ -32,6 +32,11 @@ export class LayoutDetails {
     ) {}
 }
 
+/**
+ * Base class for all Layouts.
+ *
+ * Responsible for building its components and making sure everything is subscribed and unsubscribed.
+ */
 export abstract class LayoutBase implements ISource<KeyBinding[]>{
     private screen: blessed.Widgets.Screen;
     private elements: Element[];

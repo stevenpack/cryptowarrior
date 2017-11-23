@@ -1,5 +1,8 @@
 import {IConfig} from "./conf/IConfig";
 
+/**
+ * Loads an `IConfig` impl based on the argv.env property
+ */
 export class ConfigLoader {
 
     constructor(private argv: any) {

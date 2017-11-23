@@ -39,6 +39,11 @@ class LayoutDetails {
     }
 }
 exports.LayoutDetails = LayoutDetails;
+/**
+ * Base class for all Layouts.
+ *
+ * Responsible for building its components and making sure everything is subscribed and unsubscribed.
+ */
 class LayoutBase {
     constructor(rows, cols, eventHub, container) {
         this.rows = rows;

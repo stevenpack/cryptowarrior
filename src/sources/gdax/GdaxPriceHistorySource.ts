@@ -5,6 +5,10 @@ import {Javascript} from "../../util/Javascript";
 import {Log} from "../../Logger";
 
 const logger = Log.getLogger("GdaxPriceHistoryAdapter");
+
+/**
+ * Converts from Gdax rows to `Candle` type
+ */
 export class GdaxPriceHistoryAdapter implements IAdapter<PriceHistory> {
     public convert(data: any): PriceHistory {
         try {
@@ -38,6 +42,9 @@ export class GdaxPriceHistoryAdapter implements IAdapter<PriceHistory> {
     }
 }
 
+/**
+ * Source of `PriceHistory` data, combining the GDaxApi and Adapter
+ */
 export class GdaxPriceHistorySource implements ISource<PriceHistory> {
 
     constructor(private api: GdaxApi, private adapter: IAdapter<PriceHistory>) {

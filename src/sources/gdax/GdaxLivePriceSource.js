@@ -5,6 +5,12 @@ const Logger_1 = require("../../Logger");
 const GTT = require("gdax-trading-toolkit");
 const GdaxLogger_1 = require("./GdaxLogger");
 const logger = Logger_1.Log.getLogger("GdaxLivePriceSource");
+/**
+ * Live prices from GDax using gdax-tt
+ *
+ * Note: converts to LivePrice to enforce interface. Would be simpler to use gdax-tt throughout, given it's purpose is
+ * to abstract over multiple exchanges
+ */
 class GdaxLivePriceSource {
     constructor(productIds) {
         this.productIds = productIds;

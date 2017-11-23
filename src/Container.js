@@ -8,20 +8,11 @@ const MockSources_1 = require("./sources/mock/MockSources");
 const GdaxLivePriceSource_1 = require("./sources/gdax/GdaxLivePriceSource");
 const ScreenInventory_1 = require("./layouts/ScreenInventory");
 /**
- * IoC Container
+ * Simple IoC Container
  *
  * Note: Would love to use the Angular style one where $args are auto-injected. Don't love the existing
  *       solutions on npm
  */
-class Factory {
-    constructor(func) {
-        this.func = func;
-    }
-    create(opts) {
-        return this.func(opts);
-    }
-}
-exports.Factory = Factory;
 class Container {
     constructor(argv) {
         this.argv = argv;

@@ -8,26 +8,14 @@ import {GdaxTickerSource} from "./sources/gdax/GdaxTickerSource";
 import {MockLivePriceSource, MockPriceHistorySource, MockTickerSource} from "./sources/mock/MockSources";
 import {LivePrice} from "./types/LivePrice";
 import {GdaxLivePriceSource} from "./sources/gdax/GdaxLivePriceSource";
-import {LayoutDetails} from "./layouts/LayoutBase";
 import {ScreenInventory} from "./layouts/ScreenInventory";
 
 /**
- * IoC Container
+ * Simple IoC Container
  *
  * Note: Would love to use the Angular style one where $args are auto-injected. Don't love the existing
  *       solutions on npm
  */
-
-export class Factory<T> {
-
-    constructor(private func: (opts) => T) {
-    }
-
-    public create(opts): T {
-        return this.func(opts);
-    }
-}
-
 export default class Container {
 
     public eventHub: PubSubJS.Base;

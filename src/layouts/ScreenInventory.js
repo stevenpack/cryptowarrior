@@ -1,6 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const LayoutBase_1 = require("./LayoutBase");
+/**
+ * Name and descriptions of screens. Used to break dependency of ScreenListComponent on LayoutBase
+ *
+ * Hack: Must match the screens managed by ScreenManager
+ */
 class ScreenInventory {
     constructor() {
         this.layoutDetails = [];

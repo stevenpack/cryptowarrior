@@ -31,7 +31,6 @@ class PeriodListComponent extends Component_1.ComponentBase {
         this.list = widget;
     }
     configure(widget, opts) {
-        logger.info("Binding select");
         this.list.on("select", this.onSelected.bind(this));
     }
     onSelected(item, index) {
@@ -44,13 +43,11 @@ class PeriodListComponent extends Component_1.ComponentBase {
         this.list.clearItems();
         this.periods = EnumEx_1.EnumEx.getNames(Period_1.Period);
         for (const p of this.periods) {
-            // Works (index.d.ts is wrong)
             this.list.pushItem(p);
         }
     }
     unload() {
         super.unload();
-        logger.info("UNBinding select");
         this.list.removeAllListeners("select");
     }
     toggleVisibility() {

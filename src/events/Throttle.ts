@@ -2,7 +2,7 @@
  * Created by steve on 13/11/17.
  */
 
-const RateLimiter = require('limiter').RateLimiter;
+const RateLimiter = require("limiter").RateLimiter;
 
 /**
  * Simple throttle tracking per period actions using tokens;
@@ -25,6 +25,11 @@ export class Throttle {
 
     }
 
+    /**
+     * Test to see if there are tokens available. Returns true if yes.
+     *
+     * @returns {boolean}
+     */
     public tryRemoveToken(): boolean {
         return this.limiter.tryRemoveTokens(1);
     }

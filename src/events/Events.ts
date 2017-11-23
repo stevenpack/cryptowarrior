@@ -1,4 +1,6 @@
-
+/***
+ * Events (topics) for publishing and subscribing
+ */
 export class Events  {
     public static LogEvent = "log";
     public static UIUpdate: string = "ui.updated";

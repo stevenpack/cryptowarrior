@@ -1,6 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const Ticker_1 = require("../../types/Ticker");
+/**
+ * Source of tickers from GDAX.
+ */
 class GdaxTickerSource {
     constructor(api) {
         this.api = api;

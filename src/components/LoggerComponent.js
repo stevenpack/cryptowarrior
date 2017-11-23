@@ -2,6 +2,11 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const blessed = require("blessed");
 const Component_1 = require("./Component");
+/**
+ * Logger panel visible in the UI.
+ *
+ * Growable/shrinkable with up/down arros
+ */
 class LoggerComponent extends Component_1.ComponentBase {
     constructor(eventHub) {
         super(eventHub);

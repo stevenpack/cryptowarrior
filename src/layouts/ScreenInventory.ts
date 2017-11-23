@@ -2,6 +2,11 @@
 import {LayoutDetails} from "./LayoutBase";
 import {ISource} from "../sources/Interfaces";
 
+/**
+ * Name and descriptions of screens. Used to break dependency of ScreenListComponent on LayoutBase
+ *
+ * Hack: Must match the screens managed by ScreenManager
+ */
 export class ScreenInventory implements ISource<LayoutDetails[]> {
 
     private layoutDetails: LayoutDetails[];

@@ -11,7 +11,12 @@ import {GdaxLogger} from "./GdaxLogger";
 
 const logger = Log.getLogger("GdaxLivePriceSource");
 
-
+/**
+ * Live prices from GDax using gdax-tt
+ *
+ * Note: converts to LivePrice to enforce interface. Would be simpler to use gdax-tt throughout, given it's purpose is
+ * to abstract over multiple exchanges
+ */
 export class GdaxLivePriceSource implements IStreamingSource<LivePrice> {
 
     private feed: GDAXFeed;

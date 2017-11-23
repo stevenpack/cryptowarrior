@@ -5,9 +5,11 @@ import {ISource} from "../sources/Interfaces";
 import {PriceHistory} from "../types/PriceHistory";
 import {Ticker} from "../types/Ticker";
 import {Period} from "../types/Period";
-
 const contrib = require("blessed-contrib");
 
+/**
+ * Price History in High,Low,Open,Close format
+ */
 export class PriceHistoryComponent extends ComponentBase implements IComponent {
     public headers: string[];
     public table: any;
@@ -60,6 +62,7 @@ export class PriceHistoryComponent extends ComponentBase implements IComponent {
     }
 
     private async reload() {
+        // Blank the table while we load
         this.table.setData({headers: this.headers, data: []});
         this.fireUpdated();
 

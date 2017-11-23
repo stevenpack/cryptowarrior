@@ -1,12 +1,13 @@
 import { Events } from "../events/events";
 import { IComponent, ComponentBase, WidgetOpts } from "./Component";
-import {Throttle} from "../events/Throttle";
-import {IStreamingSource} from "../sources/Interfaces";
-import {LivePrice} from "../types/LivePrice";
 import {Log} from "../Logger";
 const contrib = require("blessed-contrib");
 
 const logger = Log.getLogger("BigLabelComponent");
+
+/**
+ * Show the ticker or any arbitrary text
+ */
 export class BigLabelComponent extends ComponentBase implements IComponent {
     public lcd: any;
 

@@ -10,6 +10,10 @@ import {Log} from "../Logger";
 const contrib = require("blessed-contrib");
 
 const logger = Log.getLogger("PriceHistoryLineChartComponent");
+
+/**
+ * Display price history data as a line graph
+ */
 export class PriceHistoryLineChartComponent extends ComponentBase implements IComponent {
     public lineChart: any;
     private state: {
