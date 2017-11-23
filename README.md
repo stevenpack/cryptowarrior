@@ -1,4 +1,4 @@
-# Crypto Avatar
+# Crypto Warrior
 *Monitor and trade crypto like it's Ultima IV!*
 
 [![demo](https://github.com/stevenpack/cryptowarrior/raw/master/res/demo.gif)](https://github.com/stevenpack/cryptowarrior/raw/master/res/demo.gif)
