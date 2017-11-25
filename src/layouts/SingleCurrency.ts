@@ -10,8 +10,6 @@ import {BigLabelComponent} from "../components/BigLabelComponent";
 import {KeyBinding} from "./KeyBinding";
 import {KeyHelpComponent} from "../components/KeyHelpComponent";
 import {ListComponent} from "../components/ListComponent";
-import {Period} from "../types/Period";
-import {EnumEx} from "../types/EnumEx";
 /**
  * Layout optimized for viewing a single currency
  */
@@ -31,13 +29,14 @@ export class SingleCurrency extends LayoutBase {
         super(12, 12, eventHub, container);
         this.source = container.source;
 
+        //todo: make common to StandardLayout
         this.keyhelpComponent = new KeyHelpComponent(this.eventHub, this);
+        this.screenList = container.componentFactory.createList("screen", container);
+        this.log = new LoggerComponent(this.eventHub);
 
         this.tickerList = container.componentFactory.createList("ticker", container);
         this.periodList = container.componentFactory.createList("period", container);
-        this.screenList = container.componentFactory.createList("screen", container);
 
-        this.log = new LoggerComponent(this.eventHub);
         this.bigLabelComponent = new BigLabelComponent(this.eventHub, "BTC-USD");
         this.priceHistoryComponent = new PriceHistoryComponent(this.eventHub, this.container.priceHistorySource);
         this.livePriceComponent = new LivePriceComponent(
@@ -54,7 +53,7 @@ export class SingleCurrency extends LayoutBase {
 
         return [
             new Element(this.log, new Location(9, 0), new Size(3, 12)),
-            new Element(this.keyhelpComponent, new Location(0, 0), new Size(12, 2)),
+            new Element(this.keyhelpComponent, new Location(0, 0), new Size(12, 4)),
             new Element(this.tickerList, new Location(0, 0), new Size(12, 2)),
             new Element(this.periodList, new Location(0, 0), new Size(12, 2)),
             new Element(this.screenList, new Location(0, 0), new Size(12, 6)),

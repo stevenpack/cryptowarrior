@@ -4,12 +4,12 @@ const blessed = require("blessed");
 const Events_1 = require("../events/Events");
 const Component_1 = require("./Component");
 const Logger_1 = require("../Logger");
-/**
- * Component to choose a time period (Second, Minute, Hourly, Daily, Weekly etc.)
- *
- * Could be generalized ListPickerbase
- */
 const logger = Logger_1.Log.getLogger("ListComponent");
+/**
+ * Generalized List to display and raise selection event for some type T.
+ *
+ * Well known types creatable through `ComponentFactory.createList`
+ */
 class ListComponent extends Component_1.ComponentBase {
     constructor(eventHub, label, source, event, fnDisplay) {
         super(eventHub);
@@ -49,15 +49,15 @@ class ListComponent extends Component_1.ComponentBase {
             this.list.pushItem(display);
         }
     }
-    format(item) {
-        return this.fnDisplay ? this.fnDisplay(item) : item;
-    }
     unload() {
         super.unload();
         this.list.removeAllListeners("select");
     }
     toggleVisibility() {
         super.toggleVisibility(this.list);
+    }
+    format(item) {
+        return this.fnDisplay ? this.fnDisplay(item) : item;
     }
 }
 exports.ListComponent = ListComponent;

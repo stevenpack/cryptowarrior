@@ -6,12 +6,12 @@ import {Period} from "../types/Period";
 import {Log} from "../Logger";
 import {ISource} from "../sources/Interfaces";
 
-/**
- * Component to choose a time period (Second, Minute, Hourly, Daily, Weekly etc.)
- *
- * Could be generalized ListPickerbase
- */
 const logger = Log.getLogger("ListComponent");
+/**
+ * Generalized List to display and raise selection event for some type T.
+ *
+ * Well known types creatable through `ComponentFactory.createList`
+ */
 export class ListComponent<T> extends ComponentBase implements IComponent {
     public items: T[];
     public list: blessed.Widgets.ListElement;
@@ -61,10 +61,6 @@ export class ListComponent<T> extends ComponentBase implements IComponent {
         }
     }
 
-    private format(item: any) {
-        return this.fnDisplay ? this.fnDisplay(item) : item;
-    }
-
     public unload() {
         super.unload();
         this.list.removeAllListeners("select");
@@ -72,5 +68,9 @@ export class ListComponent<T> extends ComponentBase implements IComponent {
 
     public toggleVisibility() {
         super.toggleVisibility(this.list);
+    }
+
+    private format(item: any) {
+        return this.fnDisplay ? this.fnDisplay(item) : item;
     }
 }

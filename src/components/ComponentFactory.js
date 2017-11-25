@@ -2,6 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const ListComponent_1 = require("./ListComponent");
 const Events_1 = require("../events/Events");
+/**
+ * Creates well known Comoponents given a `Container`
+ */
 class ComponentFactory {
     constructor(eventHub) {
         this.eventHub = eventHub;

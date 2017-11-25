@@ -5,6 +5,9 @@ import {Events} from "../events/Events";
 import Container from "../Container";
 import {Ticker} from "../types/Ticker";
 
+/**
+ * Creates well known Comoponents given a `Container`
+ */
 export class ComponentFactory {
 
     constructor(private eventHub: PubSubJS.Base) {

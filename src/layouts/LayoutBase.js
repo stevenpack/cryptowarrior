@@ -77,9 +77,6 @@ class LayoutBase {
             const size = element.size;
             // Create
             const widgetOpts = component.getWidgetOpts();
-            // Apply theme
-            // widgetOpts.opts.fg = "green";
-            // widgetOpts.opts.bg = "black";
             const widget = this.grid.set(loc.x, loc.y, size.rows, size.cols, widgetOpts.widgetType, widgetOpts.opts);
             // Store reference (because we are creating the actual instance, not the component)
             component.setWidget(widget);

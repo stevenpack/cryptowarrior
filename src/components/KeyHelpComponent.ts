@@ -46,7 +46,7 @@ export class KeyHelpComponent extends ComponentBase implements IComponent {
         this.keybindings = await this.source.getData(null);
         const sorted = this.keybindings.sort((a, b) => a.keys[0].localeCompare(b.keys[0]));
         for (const k of sorted) {
-            this.list.pushItem(`${k.keys}. ${k.description}`);
+            this.list.pushItem(`${k.description}`);
         }
     }
 

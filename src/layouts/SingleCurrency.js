@@ -17,11 +17,12 @@ class SingleCurrency extends LayoutBase_1.LayoutBase {
     constructor(eventHub, container) {
         super(12, 12, eventHub, container);
         this.source = container.source;
+        //todo: make common to StandardLayout
         this.keyhelpComponent = new KeyHelpComponent_1.KeyHelpComponent(this.eventHub, this);
-        this.tickerList = container.componentFactory.createList("ticker", container);
-        this.periodList = container.componentFactory.createList("period", container);
         this.screenList = container.componentFactory.createList("screen", container);
         this.log = new LoggerComponent_1.LoggerComponent(this.eventHub);
+        this.tickerList = container.componentFactory.createList("ticker", container);
+        this.periodList = container.componentFactory.createList("period", container);
         this.bigLabelComponent = new BigLabelComponent_1.BigLabelComponent(this.eventHub, "BTC-USD");
         this.priceHistoryComponent = new PriceHistoryComponent_1.PriceHistoryComponent(this.eventHub, this.container.priceHistorySource);
         this.livePriceComponent = new LivePriceComponent_1.LivePriceComponent(this.eventHub, "BTC-USD", this.container.livePriceSource, false);
@@ -30,7 +31,7 @@ class SingleCurrency extends LayoutBase_1.LayoutBase {
     getElements() {
         return [
             new LayoutBase_1.Element(this.log, new LayoutBase_1.Location(9, 0), new LayoutBase_1.Size(3, 12)),
-            new LayoutBase_1.Element(this.keyhelpComponent, new LayoutBase_1.Location(0, 0), new LayoutBase_1.Size(12, 2)),
+            new LayoutBase_1.Element(this.keyhelpComponent, new LayoutBase_1.Location(0, 0), new LayoutBase_1.Size(12, 4)),
             new LayoutBase_1.Element(this.tickerList, new LayoutBase_1.Location(0, 0), new LayoutBase_1.Size(12, 2)),
             new LayoutBase_1.Element(this.periodList, new LayoutBase_1.Location(0, 0), new LayoutBase_1.Size(12, 2)),
             new LayoutBase_1.Element(this.screenList, new LayoutBase_1.Location(0, 0), new LayoutBase_1.Size(12, 6)),
