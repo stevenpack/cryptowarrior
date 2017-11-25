@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const LivePriceComponent_1 = require("../components/LivePriceComponent");
-const LoggerComponent_1 = require("../components/LoggerComponent");
 const PriceHistoryComponent_1 = require("../components/PriceHistoryComponent");
 const LayoutBase_1 = require("./LayoutBase");
 const Events_1 = require("../events/Events");
@@ -9,18 +8,16 @@ const Ticker_1 = require("../types/Ticker");
 const PriceHistoryLineChartComponent_1 = require("../components/PriceHistoryLineChartComponent");
 const BigLabelComponent_1 = require("../components/BigLabelComponent");
 const KeyBinding_1 = require("./KeyBinding");
-const KeyHelpComponent_1 = require("../components/KeyHelpComponent");
+const StandardLayout_1 = require("./StandardLayout");
+const Logger_1 = require("../Logger");
+const logger = Logger_1.Log.getLogger("SingleCurrency");
 /**
  * Layout optimized for viewing a single currency
  */
-class SingleCurrency extends LayoutBase_1.LayoutBase {
+class SingleCurrency extends StandardLayout_1.StandardLayout {
     constructor(eventHub, container) {
         super(12, 12, eventHub, container);
         this.source = container.source;
-        //todo: make common to StandardLayout
-        this.keyhelpComponent = new KeyHelpComponent_1.KeyHelpComponent(this.eventHub, this);
-        this.screenList = container.componentFactory.createList("screen", container);
-        this.log = new LoggerComponent_1.LoggerComponent(this.eventHub);
         this.tickerList = container.componentFactory.createList("ticker", container);
         this.periodList = container.componentFactory.createList("period", container);
         this.bigLabelComponent = new BigLabelComponent_1.BigLabelComponent(this.eventHub, "BTC-USD");
@@ -29,25 +26,19 @@ class SingleCurrency extends LayoutBase_1.LayoutBase {
         this.priceHistoryLineChartComponent = new PriceHistoryLineChartComponent_1.PriceHistoryLineChartComponent(this.eventHub, this.container.priceHistorySource);
     }
     getElements() {
-        return [
-            new LayoutBase_1.Element(this.log, new LayoutBase_1.Location(9, 0), new LayoutBase_1.Size(3, 12)),
-            new LayoutBase_1.Element(this.keyhelpComponent, new LayoutBase_1.Location(0, 0), new LayoutBase_1.Size(12, 4)),
+        return super.getElements().concat([
             new LayoutBase_1.Element(this.tickerList, new LayoutBase_1.Location(0, 0), new LayoutBase_1.Size(12, 2)),
             new LayoutBase_1.Element(this.periodList, new LayoutBase_1.Location(0, 0), new LayoutBase_1.Size(12, 2)),
-            new LayoutBase_1.Element(this.screenList, new LayoutBase_1.Location(0, 0), new LayoutBase_1.Size(12, 6)),
             new LayoutBase_1.Element(this.bigLabelComponent, new LayoutBase_1.Location(0, 0), new LayoutBase_1.Size(2, 6)),
             new LayoutBase_1.Element(this.livePriceComponent, new LayoutBase_1.Location(0, 6), new LayoutBase_1.Size(2, 6)),
             new LayoutBase_1.Element(this.priceHistoryComponent, new LayoutBase_1.Location(2, 6), new LayoutBase_1.Size(10, 6)),
             new LayoutBase_1.Element(this.priceHistoryLineChartComponent, new LayoutBase_1.Location(2, 0), new LayoutBase_1.Size(10, 6)),
-        ];
+        ]);
     }
     bindKeys() {
         super.bindKeys();
-        this.attachKeyHandler(new KeyBinding_1.KeyBinding(["h"], "Show/Hide [H]elp"), (ch, key) => this.keyhelpComponent.toggleVisibility());
-        this.attachKeyHandler(new KeyBinding_1.KeyBinding(["t"], "Show/Hide [T]icker List"), (ch, key) => this.tickerList.toggleVisibility());
-        this.attachKeyHandler(new KeyBinding_1.KeyBinding(["p"], "Show/Hide [P]eriod List"), (ch, key) => this.periodList.toggleVisibility());
-        this.attachKeyHandler(new KeyBinding_1.KeyBinding(["l"], "Show/Hide [L]og Panel"), (ch, key) => this.log.toggleVisibility());
-        this.attachKeyHandler(new KeyBinding_1.KeyBinding(["s"], "Show/Hide [S]creen list"), (ch, key) => this.screenList.toggleVisibility());
+        this.attachKeyHandler(new KeyBinding_1.KeyBinding(["t"], "[T]icker List"), (ch, key) => this.tickerList.toggleVisibility());
+        this.attachKeyHandler(new KeyBinding_1.KeyBinding(["p"], "[P]eriod List"), (ch, key) => this.periodList.toggleVisibility());
     }
     postLoad() {
         this.eventHub.publish(Events_1.Events.TickerChanged, new Ticker_1.Ticker("BTC-USD"));

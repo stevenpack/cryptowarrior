@@ -57,7 +57,7 @@ export class LivePriceComponent extends ComponentBase implements IComponent {
         }
 
         this.lcd.setDisplay(livePrice.price);
-        // todo: too heavy-weight for event per UI update? just mark component as dirty? and have a render timer?
+        // TODO: too heavy-weight for event per UI update? just mark component as dirty? and have a render timer?
         this.publish(Events.UIUpdate, null);
     }
 
