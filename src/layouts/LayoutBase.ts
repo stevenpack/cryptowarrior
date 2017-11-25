@@ -7,6 +7,7 @@ import {Throttle} from "../events/Throttle";
 import Container from "../Container";
 import {KeyBinding} from "./KeyBinding";
 import {ISource} from "../sources/Interfaces";
+import {Log} from "../Logger";
 
 export class Location {
     constructor(public x: number, public y: number) {}
@@ -37,6 +38,7 @@ export class LayoutDetails {
  *
  * Responsible for building its components and making sure everything is subscribed and unsubscribed.
  */
+const logger = Log.getLogger("LayoutBase");
 export abstract class LayoutBase implements ISource<KeyBinding[]>{
     private screen: blessed.Widgets.Screen;
     private elements: Element[];
@@ -97,7 +99,7 @@ export abstract class LayoutBase implements ISource<KeyBinding[]>{
             try {
                 await element.component.load();
             } catch (e) {
-                this.logger.log(`Failed to load component ${element.component}. Error: ${e.message}`);
+                logger.error(`Failed to load component. Error: ${e.message}`, e);
             }
         }
         this.postLoad();

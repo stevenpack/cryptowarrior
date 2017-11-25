@@ -1,5 +1,5 @@
 
-import {LayoutBase} from "./LayoutBase";
+import {LayoutBase, LayoutDetails} from "./LayoutBase";
 import {Events} from "../events/Events";
 import {Log} from "../Logger";
 
@@ -35,12 +35,13 @@ export class ScreenManager {
     }
 
     private async onScreenChanged(msg, data) {
-        const index = data as number;
-        if (index === this.currentScreenIndex) {
-            logger.info(`Screen selection ignored. Already on screen ${index}`);
+        const layoutDetails = data as LayoutDetails;
+        logger.info(`New screen selected. ${layoutDetails.index}/${layoutDetails.name}`);
+        if (layoutDetails.index === this.currentScreenIndex) {
+            logger.info(`Screen selection ignored. Already on screen ${layoutDetails.name}`);
             return;
         }
         await this.unload(this.currentScreenIndex);
-        await this.load(index);
+        await this.load(layoutDetails.index);
     }
 }

@@ -3,22 +3,24 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const blessed = require("blessed");
 const Events_1 = require("../events/Events");
 const Component_1 = require("./Component");
-const EnumEx_1 = require("../types/EnumEx");
-const Period_1 = require("../types/Period");
 const Logger_1 = require("../Logger");
 /**
  * Component to choose a time period (Second, Minute, Hourly, Daily, Weekly etc.)
  *
  * Could be generalized ListPickerbase
  */
-const logger = Logger_1.Log.getLogger("PeriodListComponent");
-class PeriodListComponent extends Component_1.ComponentBase {
-    constructor(eventHub) {
+const logger = Logger_1.Log.getLogger("ListComponent");
+class ListComponent extends Component_1.ComponentBase {
+    constructor(eventHub, label, source, event, fnDisplay) {
         super(eventHub);
+        this.label = label;
+        this.source = source;
+        this.event = event;
+        this.fnDisplay = fnDisplay;
     }
     getWidgetOpts(opts) {
         return new Component_1.WidgetOpts(blessed.list, {
-            label: "Time Period",
+            label: this.label,
             selectedBg: "green",
             focusable: true,
             hidden: true,
@@ -34,17 +36,21 @@ class PeriodListComponent extends Component_1.ComponentBase {
         this.list.on("select", this.onSelected.bind(this));
     }
     onSelected(item, index) {
-        const period = this.periods[index];
-        this.publish(Events_1.Events.PeriodChanged, Period_1.Period[period]);
-        this.publish(Events_1.Events.LogEvent, `New Period: ${period} (${Period_1.Period[period]} secs)`);
+        const selectedItem = this.items[index];
+        this.publish(this.event, selectedItem);
+        this.publish(Events_1.Events.LogEvent, `New Selection: ${this.format(selectedItem)}`);
         this.list.hide();
     }
     async load(opts) {
         this.list.clearItems();
-        this.periods = EnumEx_1.EnumEx.getNames(Period_1.Period);
-        for (const p of this.periods) {
-            this.list.pushItem(p);
+        this.items = await this.source.getData(opts);
+        for (const item of this.items) {
+            const display = this.format(item);
+            this.list.pushItem(display);
         }
+    }
+    format(item) {
+        return this.fnDisplay ? this.fnDisplay(item) : item;
     }
     unload() {
         super.unload();
@@ -54,5 +60,5 @@ class PeriodListComponent extends Component_1.ComponentBase {
         super.toggleVisibility(this.list);
     }
 }
-exports.PeriodListComponent = PeriodListComponent;
-//# sourceMappingURL=PeriodListComponent.js.map
+exports.ListComponent = ListComponent;
+//# sourceMappingURL=ListComponent.js.map

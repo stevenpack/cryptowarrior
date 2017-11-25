@@ -37,8 +37,9 @@ class PriceHistoryLineChartComponent extends Component_1.ComponentBase {
         this.reload();
     }
     onPeriodChanged(msg, data) {
-        logger.info("onPeriodChanged");
-        this.state.period = data;
+        logger.info(`onPeriodChanged ${data} -> ${Period_1.Period[data]}`);
+        const period = Period_1.Period[data];
+        this.state.period = period;
         this.reload();
     }
     async reload() {

@@ -3,7 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const LivePriceComponent_1 = require("../components/LivePriceComponent");
 const LoggerComponent_1 = require("../components/LoggerComponent");
 const LayoutBase_1 = require("./LayoutBase");
-const ScreenListComponent_1 = require("../components/ScreenListComponent");
 const KeyBinding_1 = require("./KeyBinding");
 /**
  * Displays multiple live prices
@@ -16,7 +15,7 @@ class LivePriceDashboard extends LayoutBase_1.LayoutBase {
         this.livePriceComponent1 = new LivePriceComponent_1.LivePriceComponent(this.eventHub, "BTC-USD", this.container.livePriceSource, true);
         this.livePriceComponent2 = new LivePriceComponent_1.LivePriceComponent(this.eventHub, "ETH-USD", this.container.livePriceSource, true);
         this.livePriceComponent3 = new LivePriceComponent_1.LivePriceComponent(this.eventHub, "LTC-USD", this.container.livePriceSource, true);
-        this.screenList = new ScreenListComponent_1.ScreenListComponent(this.eventHub, container.screenInventory);
+        this.screenList = container.componentFactory.createList("screen", container);
     }
     getElements() {
         return [

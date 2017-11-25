@@ -9,6 +9,9 @@ import {MockLivePriceSource, MockPriceHistorySource, MockTickerSource} from "./s
 import {LivePrice} from "./types/LivePrice";
 import {GdaxLivePriceSource} from "./sources/gdax/GdaxLivePriceSource";
 import {ScreenInventory} from "./layouts/ScreenInventory";
+import {EnumEx} from "./types/EnumEx";
+import {Period} from "./types/Period";
+import {ComponentFactory} from "./components/ComponentFactory";
 
 /**
  * Simple IoC Container
@@ -23,18 +26,26 @@ export default class Container {
     public gdaxApi: GdaxApi;
     public gdaxPriceHistoryAdapter: IAdapter<PriceHistory>;
 
+    public componentFactory: ComponentFactory;
+
     public livePriceSource: IStreamingSource<LivePrice>;
     public priceHistorySource: ISource<PriceHistory>;
     public tickerSource: ISource<Ticker[]>;
-
+    public periodSource: ISource<string[]>;
     public screenInventory: ScreenInventory;
 
     public source: string;
 
     constructor(private argv) {
         this.eventHub = PubSub;
-
+        this.componentFactory = new ComponentFactory(this.eventHub);
         this.tickers = ["BTC-USD", "ETH-USD", "LTC-USD"];
+        this.periodSource = {
+            getData(opts: any): Promise<string[]> {
+                return Promise.resolve(EnumEx.getNames(Period));
+            },
+        };
+
         this.gdaxApi = new GdaxApi();
         this.gdaxPriceHistoryAdapter = new GdaxPriceHistoryAdapter();
 

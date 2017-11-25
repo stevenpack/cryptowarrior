@@ -31,13 +31,14 @@ class ScreenManager {
         await screen.unload();
     }
     async onScreenChanged(msg, data) {
-        const index = data;
-        if (index === this.currentScreenIndex) {
-            logger.info(`Screen selection ignored. Already on screen ${index}`);
+        const layoutDetails = data;
+        logger.info(`New screen selected. ${layoutDetails.index}/${layoutDetails.name}`);
+        if (layoutDetails.index === this.currentScreenIndex) {
+            logger.info(`Screen selection ignored. Already on screen ${layoutDetails.name}`);
             return;
         }
         await this.unload(this.currentScreenIndex);
-        await this.load(index);
+        await this.load(layoutDetails.index);
     }
 }
 exports.ScreenManager = ScreenManager;

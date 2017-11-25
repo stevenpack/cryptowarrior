@@ -52,8 +52,9 @@ export class PriceHistoryLineChartComponent extends ComponentBase implements ICo
     }
 
     private onPeriodChanged(msg, data) {
-        logger.info("onPeriodChanged");
-        this.state.period = data;
+        logger.info(`onPeriodChanged ${data} -> ${Period[data]}`);
+        const period: any = Period[data];
+        this.state.period = period as Period;
         this.reload();
     }
 

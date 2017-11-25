@@ -4,25 +4,30 @@ import { IComponent, ComponentBase, WidgetOpts } from "./Component";
 import {EnumEx} from "../types/EnumEx";
 import {Period} from "../types/Period";
 import {Log} from "../Logger";
+import {ISource} from "../sources/Interfaces";
 
 /**
  * Component to choose a time period (Second, Minute, Hourly, Daily, Weekly etc.)
  *
  * Could be generalized ListPickerbase
  */
-const logger = Log.getLogger("PeriodListComponent");
-export class PeriodListComponent extends ComponentBase implements IComponent {
-    public periods: string[];
+const logger = Log.getLogger("ListComponent");
+export class ListComponent<T> extends ComponentBase implements IComponent {
+    public items: T[];
     public list: blessed.Widgets.ListElement;
 
-    constructor(eventHub: PubSubJS.Base) {
+    constructor(eventHub: PubSubJS.Base,
+                private label: string,
+                private source: ISource<T[]>,
+                private event: string,
+                private fnDisplay?: (T) => string) {
         super(eventHub);
     }
 
     public getWidgetOpts(opts?: any): WidgetOpts {
         return new WidgetOpts(blessed.list,
             {
-                label: "Time Period",
+                label: this.label,
                 selectedBg: "green",
                 focusable: true,
                 hidden: true,
@@ -41,18 +46,23 @@ export class PeriodListComponent extends ComponentBase implements IComponent {
     }
 
     public onSelected(item: blessed.Widgets.BlessedElement, index: number) {
-        const period = this.periods[index];
-        this.publish(Events.PeriodChanged, Period[period]);
-        this.publish(Events.LogEvent, `New Period: ${period} (${Period[period]} secs)`);
+        const selectedItem = this.items[index];
+        this.publish(this.event, selectedItem);
+        this.publish(Events.LogEvent, `New Selection: ${this.format(selectedItem)}`);
         this.list.hide();
     }
 
     public async load(opts?: any) {
         this.list.clearItems();
-        this.periods = EnumEx.getNames(Period);
-        for (const p of this.periods) {
-            this.list.pushItem(p);
+        this.items = await this.source.getData(opts);
+        for (const item of this.items) {
+            const display = this.format(item);
+            this.list.pushItem(display);
         }
+    }
+
+    private format(item: any) {
+        return this.fnDisplay ? this.fnDisplay(item) : item;
     }
 
     public unload() {
@@ -63,5 +73,4 @@ export class PeriodListComponent extends ComponentBase implements IComponent {
     public toggleVisibility() {
         super.toggleVisibility(this.list);
     }
-
 }

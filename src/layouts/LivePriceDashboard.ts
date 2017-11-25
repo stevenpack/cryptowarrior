@@ -1,16 +1,16 @@
 import { LivePriceComponent } from "../components/LivePriceComponent";
 import { LoggerComponent } from "../components/LoggerComponent";
-import { Element, LayoutBase, Location, Size } from "./LayoutBase";
+import {Element, LayoutBase, LayoutDetails, Location, Size} from "./LayoutBase";
 import Container from "../Container";
-import {ScreenListComponent} from "../components/ScreenListComponent";
 import {KeyBinding} from "./KeyBinding";
+import {ListComponent} from "../components/ListComponent";
 
 /**
  * Displays multiple live prices
  */
 export class LivePriceDashboard extends LayoutBase {
     public log: LoggerComponent;
-    private screenList: ScreenListComponent;
+    private screenList: ListComponent<LayoutDetails>;
     private livePriceComponent1: LivePriceComponent;
     private livePriceComponent2: LivePriceComponent;
     private livePriceComponent3: LivePriceComponent;
@@ -24,7 +24,7 @@ export class LivePriceDashboard extends LayoutBase {
         this.livePriceComponent1 = new LivePriceComponent(this.eventHub, "BTC-USD", this.container.livePriceSource, true);
         this.livePriceComponent2 = new LivePriceComponent(this.eventHub, "ETH-USD", this.container.livePriceSource, true);
         this.livePriceComponent3 = new LivePriceComponent(this.eventHub, "LTC-USD", this.container.livePriceSource, true);
-        this.screenList = new ScreenListComponent(this.eventHub, container.screenInventory);
+        this.screenList = container.componentFactory.createList("screen", container);
     }
 
     public getElements(): Element[] {

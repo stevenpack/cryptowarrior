@@ -1,17 +1,17 @@
 import { LivePriceComponent } from "../components/LivePriceComponent";
 import { LoggerComponent } from "../components/LoggerComponent";
 import { PriceHistoryComponent } from "../components/PriceHistoryComponent";
-import { TickerListComponent } from "../components/TickerListComponent";
-import { Element, LayoutBase, Location, Size } from "./LayoutBase";
+import {Element, LayoutBase, LayoutDetails, Location, Size} from "./LayoutBase";
 import Container from "../Container";
 import {Events} from "../events/Events";
 import {Ticker} from "../types/Ticker";
 import {PriceHistoryLineChartComponent} from "../components/PriceHistoryLineChartComponent";
-import {PeriodListComponent} from "../components/PeriodListComponent";
-import {ScreenListComponent} from "../components/ScreenListComponent";
 import {BigLabelComponent} from "../components/BigLabelComponent";
 import {KeyBinding} from "./KeyBinding";
 import {KeyHelpComponent} from "../components/KeyHelpComponent";
+import {ListComponent} from "../components/ListComponent";
+import {Period} from "../types/Period";
+import {EnumEx} from "../types/EnumEx";
 /**
  * Layout optimized for viewing a single currency
  */
@@ -19,9 +19,9 @@ export class SingleCurrency extends LayoutBase {
     public log: LoggerComponent;
     private keyhelpComponent: KeyHelpComponent;
     private bigLabelComponent: BigLabelComponent;
-    private tickerList: TickerListComponent;
-    private periodList: PeriodListComponent;
-    private screenList: ScreenListComponent;
+    private tickerList: ListComponent<Ticker>;
+    private periodList: ListComponent<string>;
+    private screenList: ListComponent<LayoutDetails>;
     private priceHistoryComponent: PriceHistoryComponent;
     private livePriceComponent: LivePriceComponent;
     private priceHistoryLineChartComponent: any;
@@ -32,11 +32,12 @@ export class SingleCurrency extends LayoutBase {
         this.source = container.source;
 
         this.keyhelpComponent = new KeyHelpComponent(this.eventHub, this);
-        this.tickerList = new TickerListComponent(this.eventHub, this.container.tickerSource);
-        this.periodList = new PeriodListComponent(this.eventHub);
-        this.screenList = new ScreenListComponent(this.eventHub, this.container.screenInventory);
-        this.log = new LoggerComponent(this.eventHub);
 
+        this.tickerList = container.componentFactory.createList("ticker", container);
+        this.periodList = container.componentFactory.createList("period", container);
+        this.screenList = container.componentFactory.createList("screen", container);
+
+        this.log = new LoggerComponent(this.eventHub);
         this.bigLabelComponent = new BigLabelComponent(this.eventHub, "BTC-USD");
         this.priceHistoryComponent = new PriceHistoryComponent(this.eventHub, this.container.priceHistorySource);
         this.livePriceComponent = new LivePriceComponent(

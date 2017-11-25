@@ -5,6 +5,7 @@ const contrib = require("blessed-contrib");
 const Events_1 = require("../events/Events");
 const Throttle_1 = require("../events/Throttle");
 const KeyBinding_1 = require("./KeyBinding");
+const Logger_1 = require("../Logger");
 class Location {
     constructor(x, y) {
         this.x = x;
@@ -44,6 +45,7 @@ exports.LayoutDetails = LayoutDetails;
  *
  * Responsible for building its components and making sure everything is subscribed and unsubscribed.
  */
+const logger = Logger_1.Log.getLogger("LayoutBase");
 class LayoutBase {
     constructor(rows, cols, eventHub, container) {
         this.rows = rows;
@@ -92,7 +94,7 @@ class LayoutBase {
                 await element.component.load();
             }
             catch (e) {
-                this.logger.log(`Failed to load component ${element.component}. Error: ${e.message}`);
+                logger.error(`Failed to load component. Error: ${e.message}`, e);
             }
         }
         this.postLoad();

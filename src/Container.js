@@ -7,6 +7,9 @@ const GdaxTickerSource_1 = require("./sources/gdax/GdaxTickerSource");
 const MockSources_1 = require("./sources/mock/MockSources");
 const GdaxLivePriceSource_1 = require("./sources/gdax/GdaxLivePriceSource");
 const ScreenInventory_1 = require("./layouts/ScreenInventory");
+const EnumEx_1 = require("./types/EnumEx");
+const Period_1 = require("./types/Period");
+const ComponentFactory_1 = require("./components/ComponentFactory");
 /**
  * Simple IoC Container
  *
@@ -17,7 +20,13 @@ class Container {
     constructor(argv) {
         this.argv = argv;
         this.eventHub = PubSub;
+        this.componentFactory = new ComponentFactory_1.ComponentFactory(this.eventHub);
         this.tickers = ["BTC-USD", "ETH-USD", "LTC-USD"];
+        this.periodSource = {
+            getData(opts) {
+                return Promise.resolve(EnumEx_1.EnumEx.getNames(Period_1.Period));
+            },
+        };
         this.gdaxApi = new GdaxApi_1.GdaxApi();
         this.gdaxPriceHistoryAdapter = new GdaxPriceHistorySource_1.GdaxPriceHistoryAdapter();
         this.screenInventory = new ScreenInventory_1.ScreenInventory();
