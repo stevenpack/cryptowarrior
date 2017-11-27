@@ -7,7 +7,8 @@
 
 - Have a bit of fun with crypto and gdax
 - Try out the [blessed](https://github.com/chjj/blessed) terminal library
-- Evaluate text-based interfaces as alternatives to web or thick clients 
+- Evaluate text-based interfaces as alternatives to web or thick clients
+- Explode and become new Bloomberg for crypto. :p
 
 ## Pre requisites
 
