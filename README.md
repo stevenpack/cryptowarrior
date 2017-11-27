@@ -44,3 +44,7 @@
 ## TODO
 
 See [here](TODO.md)
+
+## Contributions
+
+Very welcome! Please check out [here](TODO.md) or suggest your own with PRs
