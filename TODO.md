@@ -9,4 +9,3 @@
 ## Code
 - Tests
 - CI
-- More re-use in list components
